@@ -1,0 +1,29 @@
+$LightestGrey1: #F6F6F6
+$LightestGrey: #D1D1D1
+.topInner
+  display: flex
+  align-items: center
+  justify-content: space-between
+  background-color: $LightestGrey1
+  border: solid 1px red
+  padding: 26px 0
+  //width: 100%
+  //box-shadow: 0 0 40px rgba(0, 0, 0, .1) inset
+  &_top
+    display: flex
+    justify-content: space-between
+    &_search
+      position: relative
+      input
+        background: #ffffff
+        border: 0.5px solid $LightestGrey1
+      img
+        position: absolute
+        right: 12px
+        top: 0
+        bottom: 0
+        margin-top: 10px
+  &_btn
+    padding: 8px 24px
+    span:nth-child(2)
+      margin-left: 8px

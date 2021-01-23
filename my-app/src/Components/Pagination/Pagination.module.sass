@@ -1,0 +1,41 @@
+$LightestGrey: #D1D1D1
+$LightRed: #FF5761
+.pagination
+  display: flex
+  justify-content: space-between
+  &_selectCountCard
+    position: relative
+  &_setCountCard
+    display: none
+    flex-direction: column
+    background: #FFFFFF
+    border: 0.5px solid $LightestGrey
+    box-sizing: border-box
+    border-radius: 4px
+    position: absolute
+    bottom: 55px
+    width: 100%
+    a
+      padding: 8px 54px 8px 22px
+      &:hover
+        background-color: $LightRed
+      &:nth-child(even)
+        border-top: 0.5px solid $LightestGrey
+        border-bottom: 0.5px solid $LightestGrey
+  &_currentCard
+    border: 0.5px solid $LightestGrey
+    padding: 8px 12px 8px 20px
+    border-radius: 4px
+    background: #FFFFFF
+    span
+      &:after
+        content: ''
+        border-right: 0.5px solid $LightestGrey
+        margin-left: 20px
+    img
+      margin-left: 12px
+      cursor: pointer
+
+  &_list
+    display: flex
+

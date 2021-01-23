@@ -1,0 +1,56 @@
+//Color
+$DarkGrey: #303030
+$Grey: #707070
+$LightGrey: #9C9C9C
+$LightestGrey: #D1D1D1
+$LightestGrey1: #F6F6F6
+$DarkRed: #C60E2E
+$Red: #E4163A
+$LightRed: #FF5761
+$LightestRed: #FF768E
+$Blue: #344472
+$shadow: #D9D9D9
+//Font
+$Avenir: Avenir
+
+*
+  box-sizing: border-box
+
+body
+  margin: 0
+  font-family: sans-serif
+ul li
+  list-style: none
+
+ul
+  padding: 0
+
+a
+  text-decoration: none
+
+.btn
+  font-family: $Avenir
+  font-style: normal
+  font-weight: 500
+  font-size: 16px
+  line-height: 24px
+  background: $Red
+  border-radius: 4px
+  border: none
+  color: #ffffff
+  outline: none
+  cursor: pointer
+
+  &:hover
+    background-color: $LightRed
+
+input
+  outline: none
+  padding: 8px 12px
+  background: $LightestGrey1
+  border-radius: 4px
+  &:hover
+    background: $LightestGrey
+  &:focus
+    background: $LightestGrey1
+    box-shadow: 0 0 5px $shadow

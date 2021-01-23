@@ -1,0 +1,10 @@
+.teams {
+  padding: 0 80px;
+}
+.teams_card {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/*# sourceMappingURL=Teams.module.css.map */
