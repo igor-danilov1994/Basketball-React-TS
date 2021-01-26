@@ -8,8 +8,8 @@ const CardLayout = (props: any) => {
                 <img src={props.img} alt="img"/>
             </div>
             <div className={s.cardLayout_description}>
-                <span>1</span>
-                <span>2</span>
+                <span>Portland trail blazers</span>
+                <span>Year of foundation: 1970</span>
             </div>
         </div>
     )
