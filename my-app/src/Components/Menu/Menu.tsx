@@ -12,7 +12,7 @@ const Menu = () => {
             <div className={s.nav_header}>
                 <div className={`${s.nav_item} ${s.menu_teams}`}>
 
-                    <NavLink to='/teams' activeClassName={s.activeLink}>
+                    <NavLink to='/teams_E' activeClassName={s.activeLink}>
                         <img src={teamsImg} alt="img"/>
                         Teams
                     </NavLink>

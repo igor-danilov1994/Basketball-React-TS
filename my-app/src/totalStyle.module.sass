@@ -19,6 +19,7 @@ $Avenir: Avenir
 body
   margin: 0
   font-family: sans-serif
+
 ul li
   list-style: none
 
@@ -34,23 +35,37 @@ a
   font-weight: 500
   font-size: 16px
   line-height: 24px
-  background: $Red
   border-radius: 4px
-  border: none
-  color: #ffffff
   outline: none
   cursor: pointer
+  &_cancel
+    color: $LightGrey
+    background: #ffffff
+    border: 1px solid #9C9C9C
+    &:hover
+      background: $LightestGrey
+  &_add
+    padding: 8px 0
+    color: #ffffff
+    background: $Red
+    border: none
+    &:hover
+      background-color: $LightRed
 
-  &:hover
-    background-color: $LightRed
-
-input
+input, select
   outline: none
   padding: 8px 12px
   background: $LightestGrey1
   border-radius: 4px
+  border: none
   &:hover
     background: $LightestGrey
   &:focus
     background: $LightestGrey1
     box-shadow: 0 0 5px $shadow
+.breadCrumbs
+  padding: 26px 0
+  background: #FFFFFF
+  border-radius: 10px 10px 0 0
+  color: $Red
+

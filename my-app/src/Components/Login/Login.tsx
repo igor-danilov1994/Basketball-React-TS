@@ -3,6 +3,7 @@ import s from './Login.module.css'
 import img from './images/loginImg.png'
 import passShow from './images/passShow.png'
 import passHidden from './images/passHidden.png'
+import total from '../../totalStyle.module.css'
 
 
 const Login = () => {
@@ -23,12 +24,12 @@ const Login = () => {
                             <img alt='imgHidden' src={passHidden}/>
                             <img alt='img' src={passShow}/>
                     </div>
-                    <button>Sign In</button>
+                    <button className={`${total.btn} ${total.btn_add}`}>Sign In</button>
 
                 </form>
                 <div>
                 <span>Not a member yet?
-                   <a href="#">Sign up</a>
+                   <a href="#" >Sign up</a>
                 </span>
                 </div>
             </div>

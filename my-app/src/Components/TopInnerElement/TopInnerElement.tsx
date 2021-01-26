@@ -3,14 +3,24 @@ import s from './TopInnerElement.module.css'
 import searchIcon from "../../assets/images/search.png";
 import total from "../../totalStyle.module.css";
 
-const TopInnerElement = () => {
+const TopInnerElement = (props: any) => {
     return (
         <div className={s.topInner}>
             <div className={s.topInner_top_search}>
                 <input type="text" placeholder='Search...'/>
                 <img src={searchIcon} alt="search"/>
             </div>
-            <button className={`${total.btn} ${s.topInner_btn}`}>
+
+            <select>
+                <option disabled value="">Select...</option>
+                <option value="">1</option>
+                <option value="">2</option>
+                <option value="">3</option>
+                <option value="">4</option>
+                <option value="">5</option>
+            </select>
+
+            <button className={`${total.btn} ${total.btn_add} ${s.topInner_btn}`}>
                 <span>Add</span>
                 <span>+</span>
             </button>
