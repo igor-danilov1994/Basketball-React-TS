@@ -7,17 +7,14 @@ import {NavLink} from "react-router-dom";
 function CardEmpty(props: any) {
     return (
         <div className={s.card}>
-            <div className={s.card_notification}>
-                <img src={props.img} alt="img"/>
-                <h1>Empty here</h1>
-                <span>Add new players to continue</span>
+            <img src={props.img} alt="img"/>
+            <h1>Empty here</h1>
+            <span>Add new players to continue</span>
 
-                <NavLink to={props.patch}
-                         className={`${total.btn} ${total.btn_add}`}>
-                    Add +
-                </NavLink>
-
-            </div>
+            <NavLink to={props.patch}
+                     className={`${total.btn} ${total.btn_add}`}>
+                Add +
+            </NavLink>
         </div>
     )
 }
