@@ -3,5 +3,8 @@
   justify-content: space-between;
   flex-wrap: wrap;
 }
+.teams_card a {
+  width: 32%;
+}
 
 /*# sourceMappingURL=Teams.module.css.map */

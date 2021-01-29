@@ -19,6 +19,8 @@ const Add_Players_Teams = (props: any) => {
 
                 <form className={s.blockAdding_form}>
                     <Block_Form
+                        nameChange={props.nameChange}
+                        name={props.name}
                         blockFormLabel={props.blockFormLabel}/>
 
                     {props.teamsInput &&

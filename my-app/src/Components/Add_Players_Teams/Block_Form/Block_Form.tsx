@@ -6,7 +6,7 @@ const Block_Form = (props: any) => {
         <div className={s.blockForm}>
             <div className={s.blockForm_data}>
                 <label htmlFor="">{props.blockFormLabel[0]}</label>
-                <input type="text"/>
+                <input value={props.name} onChange={ (e) => {props.nameChange(e)} } type="text"/>
             </div>
             <div className={s.blockForm_data}>
                 <label htmlFor="">{props.blockFormLabel[1]}</label>

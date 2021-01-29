@@ -3,10 +3,10 @@ import img from '../images/face.png'
 import CardDetails from "../../CardDetails/CardDetails";
 
 
-const CardDetailsPlayers = (props: any) => {
+const PlayersCardDetails = (props: any) => {
     return (
         <CardDetails img={img}/>
     )
 }
 
-export default CardDetailsPlayers;
+export default PlayersCardDetails;
