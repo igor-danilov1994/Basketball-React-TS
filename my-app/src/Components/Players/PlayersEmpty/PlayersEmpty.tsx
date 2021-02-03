@@ -3,10 +3,11 @@ import img from "../images/PlayersEmpty.png";
 import CardEmpty from "../../CardEmpty/CardEmpty";
 
 let patch = '/addPlayer'
+let players = 'players'
 
 const PlayersEmpty = (props: any) => {
     return (
-        <CardEmpty patch={patch} img={img} />
+        <CardEmpty descr={players} patch={patch} img={img} />
     )
 }
 

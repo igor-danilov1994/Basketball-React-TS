@@ -2,11 +2,12 @@ import React from 'react';
 import CardEmpty from "../../CardEmpty/CardEmpty";
 import img from '../images/TeamsEmpty.png';
 
-let patch = '/addTeams';
+let patch = '/addTeams'
+let teams = 'teams'
 
 const TeamsEmpty = (props: any) => {
     return (
-        <CardEmpty patch={patch} img={img} />
+        <CardEmpty descr={teams} patch={patch} img={img} />
     )
 }
 

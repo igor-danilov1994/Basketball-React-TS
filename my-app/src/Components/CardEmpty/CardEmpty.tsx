@@ -9,7 +9,7 @@ function CardEmpty(props: any) {
         <div className={s.card}>
             <img src={props.img} alt="img"/>
             <h1>Empty here</h1>
-            <span>Add new players to continue</span>
+            <span>Add new {props.descr} to continue</span>
 
             <NavLink to={props.patch}
                      className={`${total.btn} ${total.btn_add}`}>

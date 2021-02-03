@@ -13,6 +13,9 @@ $shadow: #D9D9D9
 //Font
 $Avenir: Avenir
 
+//img
+$imgPath: '/src/assets/images/link.png'
+
 *
   box-sizing: border-box
 
@@ -52,12 +55,43 @@ a
     &:hover
       background-color: $LightRed
 
+
+select
+  -webkit-appearance: none
+  -moz-appearance: none
+  appearance: none
+  width: 100%
+  border: none
+  outline: none
+  cursor: pointer
+  option
+    border: 0.5px solid #D1D1D1
+    border-radius: 4px
+.select
+  position: relative
+  width: 100%
+  display: flex
+  align-items: center
+  select
+    height: 40px
+  &_imgRotateOn
+    transform: rotate(180deg)
+  &_imgRotateOff
+    transform: rotate(90deg)
+  img
+    right: 8px
+    position: absolute
+    cursor: pointer
+
+
+
 input, select
   outline: none
   padding: 8px 12px
   background: $LightestGrey1
   border-radius: 4px
-  border: solid 1px red
+  border: none
+  //border: solid 1px red
   &:hover
     background: $LightestGrey
   &:focus
@@ -68,9 +102,9 @@ input, select
   background: #FFFFFF
   border-radius: 10px 10px 0 0
   color: $Red
-
+  text-align: left
 .text
-  font-family: $Avenir
+  //font-family: $Avenir
   font-style: normal
   font-weight: normal
   font-size: 36px

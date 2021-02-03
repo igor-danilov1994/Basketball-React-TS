@@ -1,7 +1,7 @@
 import {createAction, createReducer} from "@reduxjs/toolkit";
 import {authAPI} from "../../API/api";
 
-import {setAuthUserData} from "../authReducer";
+import {getAuth} from "../authReducer";
 
 const initialState = {
     isAuth: false,

@@ -7,13 +7,16 @@ import total from '../../totalStyle.module.css'
 import {useForm} from 'react-hook-form'
 import {NavLink} from "react-router-dom";
 import {authAPI} from "../../API/api";
+import {connect} from "react-redux";
+import {getConfirmationAuthUser} from "../../Redux/authReducer";
 
 
 const Registration = (props: any) => {
+
     const {register, handleSubmit} = useForm();
 
     const onSubmit = (data: object) => {
-        authAPI.signUp(data)
+        props.getConfirmationAuthUser(data)
     }
 
     return (
@@ -60,5 +63,10 @@ const Registration = (props: any) => {
         </div>
     )
 }
+const mapStateToProps = (state: any) => ({
+    signUp: state
+})
 
-export default Registration
+const RegistrationContainer = connect(mapStateToProps,{getConfirmationAuthUser})(Registration);
+
+export default RegistrationContainer

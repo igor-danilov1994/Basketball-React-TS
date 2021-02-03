@@ -6,15 +6,15 @@ import passHidden from './images/passHidden.png'
 import total from '../../totalStyle.module.css'
 import {NavLink} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
-import {getAuthUserData, setAuthUserData} from '../../Redux/authReducer'
+import {getAuthUserData, getAuth} from '../../Redux/authReducer'
 import {connect} from 'react-redux'
 
 
 const Login = (props: any) => {
-
     const onSubmit = (data: object) => {
         props.getAuthUserData(data)
     }
+
     const {register, handleSubmit} = useForm()
 
     return (
@@ -57,14 +57,6 @@ const Login = (props: any) => {
 const mapStateToProps = (state: any) => ({
     signIn: state
 })
-
-/*const mapDispatchToProps = (dispatch: any) => {
-    return {
-        getAuthUserData: (signIn: any) => {
-            dispatch(setAuthUserData(signIn));
-        }
-    }
-}*/
 
 const LoginContainer = connect(mapStateToProps,{getAuthUserData})(Login);
 
