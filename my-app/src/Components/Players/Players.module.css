@@ -1,0 +1,10 @@
+.players_card {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.players_card a {
+  width: 32%;
+}
+
+/*# sourceMappingURL=Players.module.css.map */

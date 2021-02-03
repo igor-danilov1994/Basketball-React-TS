@@ -1,0 +1,21 @@
+.app {
+  text-align: center;
+  height: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  border: solid 1px red;
+}
+.app-content {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 32px 80px;
+  background-color: #F6F6F6;
+}

@@ -1,0 +1,40 @@
+.cardLayout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(121.57deg, #707070 1.62%, #393939 81.02%);
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+.cardLayout_image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cardLayout_image img {
+  padding: 65px 0;
+}
+.cardLayout_description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 17px 60px;
+  background: #303030;
+  border-radius: 0 0 4px 4px;
+  color: #ffffff;
+  width: 100%;
+}
+.cardLayout_description span {
+  margin: 6px 0;
+}
+.cardLayout_description span span {
+  color: red;
+  margin-left: 5px;
+}
+.cardLayout_face img {
+  padding: 95px 0 0 0;
+}
+
+/*# sourceMappingURL=CardLayout.module.css.map */

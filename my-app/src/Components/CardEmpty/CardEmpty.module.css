@@ -1,0 +1,28 @@
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: #FFFFFF;
+  border-radius: 15px;
+  padding: 48px 95px;
+  width: 556px;
+}
+.card h1 {
+  color: #FF5761;
+}
+.card span {
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 33px;
+  color: #707070;
+  transform: rotate(0.4deg);
+  margin-bottom: 45px;
+}
+.card a {
+  width: 100%;
+}
+
+/*# sourceMappingURL=CardEmpty.module.css.map */

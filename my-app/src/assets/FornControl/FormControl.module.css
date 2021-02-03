@@ -1,0 +1,45 @@
+.add {
+  margin-top: 32px;
+  align-self: flex-start;
+  width: 100%;
+  background: #FFFFFF;
+  border-radius: 10px;
+}
+.add_form {
+  display: flex;
+  padding: 48px 73px;
+}
+.add_form form {
+  margin-left: 136px;
+  width: 37%;
+}
+.add_form_data {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 26px;
+}
+.add_form_data input {
+  margin-top: 8px;
+  width: 100%;
+  height: 40px;
+}
+.add_form_data label {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.properties {
+  display: flex;
+  flex-direction: column;
+}
+.properties_options {
+  display: flex;
+  justify-content: space-between;
+}
+.properties_data {
+  width: 45%;
+}
+
+/*# sourceMappingURL=FormControl.module.css.map */

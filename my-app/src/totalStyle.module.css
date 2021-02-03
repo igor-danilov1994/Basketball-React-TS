@@ -1,0 +1,115 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+ul li {
+  list-style: none;
+}
+
+ul {
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.btn {
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+.btn_cancel {
+  color: #9C9C9C;
+  background: #ffffff;
+  border: 1px solid #9C9C9C;
+}
+.btn_cancel:hover {
+  background: #D1D1D1;
+}
+.btn_add {
+  padding: 8px 0;
+  color: #ffffff;
+  background: #E4163A;
+  border: none;
+}
+.btn_add:hover {
+  background-color: #FF5761;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+select option {
+  border: 0.5px solid #D1D1D1;
+  border-radius: 4px;
+}
+
+.select {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.select select {
+  height: 40px;
+}
+.select_imgRotateOn {
+  transform: rotate(180deg);
+}
+.select_imgRotateOff {
+  transform: rotate(90deg);
+}
+.select img {
+  right: 8px;
+  position: absolute;
+  cursor: pointer;
+}
+
+input, select {
+  outline: none;
+  padding: 8px 12px;
+  background: #F6F6F6;
+  border-radius: 4px;
+  border: none;
+}
+input:hover, select:hover {
+  background: #D1D1D1;
+}
+input:focus, select:focus {
+  background: #F6F6F6;
+  box-shadow: 0 0 5px #D9D9D9;
+}
+
+.breadCrumbs {
+  padding: 26px 0;
+  background: #FFFFFF;
+  border-radius: 10px 10px 0 0;
+  color: #E4163A;
+  text-align: left;
+}
+
+.text {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 49px;
+}
+
+/*# sourceMappingURL=totalStyle.module.css.map */

@@ -1,0 +1,10 @@
+.block_buttons {
+  display: flex;
+  justify-content: space-between;
+}
+.block_buttons button {
+  width: 45%;
+  padding: 8px 0;
+}
+
+/*# sourceMappingURL=Block_Buttons.module.css.map */

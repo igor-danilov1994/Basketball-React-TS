@@ -1,0 +1,30 @@
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.players_E_notification {
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  border-radius: 15px;
+  padding: 48px 95px;
+}
+.players_E_notification h1 {
+  color: #FF5761;
+}
+.players_E_notification span {
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 33px;
+  color: #707070;
+  transform: rotate(0.4deg);
+  margin-bottom: 45px;
+}
+.players_E_btn {
+  padding: 9px 0;
+}
+
+/*# sourceMappingURL=CardEmpty.module.sass.map */

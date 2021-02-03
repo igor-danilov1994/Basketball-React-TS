@@ -1,0 +1,34 @@
+.cardDetails {
+  display: flex;
+  background: linear-gradient(276.45deg, #707070 0%, #393939 100.28%);
+  border-radius: 10px;
+  width: 100%;
+  color: #ffffff;
+}
+.cardDetails_info {
+  padding: 65px 0;
+  margin-left: 56px;
+}
+.cardDetails_info h1 {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 36px;
+  line-height: 49px;
+}
+.cardDetails_img {
+  display: flex;
+  align-items: flex-end;
+}
+.cardDetails_description {
+  display: flex;
+  flex-direction: column;
+}
+.cardDetails_description_main {
+  display: flex;
+  justify-content: space-between;
+}
+.cardDetails_skill {
+  width: 40%;
+}
+
+/*# sourceMappingURL=CardDetails.module.css.map */

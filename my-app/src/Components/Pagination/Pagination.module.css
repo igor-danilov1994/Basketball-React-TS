@@ -1,0 +1,48 @@
+.pagination {
+  display: flex;
+  justify-content: space-between;
+}
+.pagination_selectCountCard {
+  position: relative;
+}
+.pagination_setCountCard {
+  display: none;
+  flex-direction: column;
+  background: #FFFFFF;
+  border: 0.5px solid #D1D1D1;
+  box-sizing: border-box;
+  border-radius: 4px;
+  position: absolute;
+  bottom: 55px;
+  width: 100%;
+}
+.pagination_setCountCard a {
+  padding: 8px 54px 8px 22px;
+}
+.pagination_setCountCard a:hover {
+  background-color: #FF5761;
+}
+.pagination_setCountCard a:nth-child(even) {
+  border-top: 0.5px solid #D1D1D1;
+  border-bottom: 0.5px solid #D1D1D1;
+}
+.pagination_currentCard {
+  border: 0.5px solid #D1D1D1;
+  padding: 8px 12px 8px 20px;
+  border-radius: 4px;
+  background: #FFFFFF;
+}
+.pagination_currentCard span:after {
+  content: "";
+  border-right: 0.5px solid #D1D1D1;
+  margin-left: 20px;
+}
+.pagination_currentCard img {
+  margin-left: 12px;
+  cursor: pointer;
+}
+.pagination_list {
+  display: flex;
+}
+
+/*# sourceMappingURL=Pagination.module.css.map */

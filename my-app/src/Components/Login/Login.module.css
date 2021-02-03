@@ -1,0 +1,25 @@
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login_formItem {
+  display: flex;
+  flex-direction: column;
+}
+.login form button {
+  width: 100%;
+}
+
+.passInput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.passInput img {
+  position: absolute;
+  right: 5px;
+}
+
+/*# sourceMappingURL=Login.module.css.map */

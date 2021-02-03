@@ -1,0 +1,16 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 51px;
+  box-shadow: 0 6px 4px -4px rgba(0, 0, 0, 0.1);
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+}
+.userInfoInfo span {
+  margin-right: 3px;
+}
+
+/*# sourceMappingURL=Header.module.css.map */
