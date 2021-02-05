@@ -6,9 +6,8 @@ import s from './Registration.module.css'
 import total from '../../totalStyle.module.css'
 import {useForm} from 'react-hook-form'
 import {NavLink} from "react-router-dom";
-import {authAPI} from "../../API/api";
 import {connect} from "react-redux";
-import {getConfirmationAuthUser} from "../../Redux/authReducer";
+import {getConfirmationAuthUser} from "../../Redux/toolkit/authReducer";
 
 
 const Registration = (props: any) => {

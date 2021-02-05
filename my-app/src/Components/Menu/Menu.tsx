@@ -5,7 +5,7 @@ import playersImg from './images/menu_players.png'
 import inputIcon from '../../assets/images/inputIcon.png'
 import { NavLink } from 'react-router-dom';
 import {connect} from "react-redux";
-import {exitUser} from "../../Redux/authReducer";
+import {SIGN_OUT} from "../../Redux/toolkit/authReducer";
 
 const Menu = (props: any) => {
     return (
@@ -15,17 +15,17 @@ const Menu = (props: any) => {
 
                     <NavLink to='/teams_E' >
                         <img src={teamsImg} alt="img"/>
-                        TeamsEmpty
+                        TeamsE
                     </NavLink>
                 </div>
 
                 <div className={`${s.nav_item} ${s.menu_players}`}>
                     <NavLink to='/players_E' >
                         <img src={playersImg} alt="img"/>
-                        PlayersEmpty
+                        PlayersE
                     </NavLink>
                 </div>
-                {/*<div className={`${s.nav_item} ${s.menu_players}`}>
+                <div className={`${s.nav_item} ${s.menu_players}`}>
                     <NavLink to='/players' >
                         <img src={playersImg} alt="img"/>
                         Players
@@ -36,11 +36,11 @@ const Menu = (props: any) => {
                         <img src={playersImg} alt="img"/>
                         Teams
                     </NavLink>
-                </div>*/}
+                </div>
             </div>
 
             <div className={s.nav_footer}>
-                <NavLink to='/signIn' onClick={ () => {props.exitUser(props.name)} } >
+                <NavLink to='/signIn' onClick={ () => {props.SIGN_OUT()} } >
                     <img src={inputIcon} alt="iconImg"/>
                     <span>Sign out</span>
                 </NavLink>
@@ -50,12 +50,10 @@ const Menu = (props: any) => {
     )
 }
 
-
-
 const mapStateToProps = (state: any) => ({
     name: state.auth.name
 })
 
-const MenuContainer = connect(mapStateToProps, {exitUser})(Menu);
+const MenuContainer = connect(mapStateToProps,{SIGN_OUT})(Menu);
 
 export default MenuContainer

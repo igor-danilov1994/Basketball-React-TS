@@ -6,8 +6,8 @@ import passHidden from './images/passHidden.png'
 import total from '../../totalStyle.module.css'
 import {NavLink} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
-import {getAuthUserData, getAuth} from '../../Redux/authReducer'
 import {connect} from 'react-redux'
+import {getAuthUserData} from "../../Redux/toolkit/authReducer";
 
 
 const Login = (props: any) => {

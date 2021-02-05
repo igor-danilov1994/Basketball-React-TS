@@ -19,6 +19,7 @@ import MenuContainer from "./Components/Menu/Menu";
 
 
 function App(props: any) {
+    //debugger
     return (
         <div className="app">
             {props.state.auth.isAuth ?

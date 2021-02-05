@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './AddPlayer.module.css'
 import f from "../../../assets/FornControl/FormControl.module.css";
 import total from "../../../totalStyle.module.css";
@@ -6,24 +6,23 @@ import AddImages from "../../../assets/FornControl/AddImages/AddImages";
 import Block_Buttons from "../../../assets/FornControl/Blocl_Buttons/Blocl_Buttons";
 import {useForm} from "react-hook-form";
 import {connect} from "react-redux";
-import {getPosition} from "../../../Redux/playersReducer";
 import arrowImg from '../../../assets/images/link.png'
+import {getPosition, setPlayers} from '../../../Redux/toolkit/playersReducer';
 
 const AddPlayer = (props: any) => {
-    //debugger
-    if (props.position.length === 0) {
-        props.getPosition()
-    }
     const onSubmit = (data: object) => {
-        console.log(data)
+        props.setPlayers(data)
     }
     const [activeRotate, setActiveRotate] = useState(false)
 
     const {register, handleSubmit} = useForm()
 
-    const toggleRotateImg = () => {
+    let toggleRotateImg = () => {
         setActiveRotate(!activeRotate)
     }
+    useEffect(() => {
+        props.getPosition(props.token)
+    }, [])
 
     return (
         <div className={f.add}>
@@ -46,7 +45,7 @@ const AddPlayer = (props: any) => {
                                     className={activeRotate ? `${total.select_imgRotateOn}` : `${total.select_imgRotateOff}`}
                                     src={arrowImg} alt="arrow"/>
                                 <select name="position" ref={register}>
-                                    {props.position.map((p: any) =>
+                                    {props.positions.map((p: any) =>
                                         <option key={p} value={p}>{p}</option>
                                     )}
                                 </select>
@@ -89,8 +88,10 @@ const AddPlayer = (props: any) => {
 }
 
 const mapStateToProps = (state: any) => ({
-    position: state.players.position
+    state: state,
+    positions: state.players.positions,
+    token: state.auth.token
 })
 
 
-export default connect(mapStateToProps, {getPosition})(AddPlayer);
+export default connect(mapStateToProps, {getPosition, setPlayers})(AddPlayer);

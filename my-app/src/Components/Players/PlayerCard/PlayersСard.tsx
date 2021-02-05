@@ -5,18 +5,18 @@ import {NavLink} from "react-router-dom";
 
 
 const PlayersCard = (props: any) => {
-    //debugger
+   //debugger
     return (
         <NavLink to='/playersCardDetails'>
             <div className={s.cardLayout}>
                 <div className={`${s.cardLayout_image} ${s.cardLayout_face}`}>
-                    <img src={props.img} alt="img"/>
+                    <img src={props.avatar[2]} alt="avatar"/>
                 </div>
                 <div className={s.cardLayout_description}>
-                    <span>{}
-                        <span>#{}</span>
+                    <span>{props.players.name}
+                        <span>#{props.players.number}</span>
                     </span>
-                    <span></span>
+                    <span>{props.players.team}</span>
                 </div>
             </div>
         </NavLink>
