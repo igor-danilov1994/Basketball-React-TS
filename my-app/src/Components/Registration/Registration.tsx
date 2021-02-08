@@ -1,21 +1,23 @@
 import React from 'react'
 import img from '../Login/images/reg.png'
-import passShow from '../Login/images/passShow.png'
-import passHidden from '../Login/images/passHidden.png'
 import s from './Registration.module.css'
 import total from '../../totalStyle.module.css'
 import {useForm} from 'react-hook-form'
 import {NavLink} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import {getConfirmationAuthUser} from "../../Redux/toolkit/authReducer";
 
 
 const Registration = (props: any) => {
-
     const {register, handleSubmit} = useForm();
 
     const onSubmit = (data: object) => {
         props.getConfirmationAuthUser(data)
+    }
+
+    if (props.isRegistered) {
+        return <Redirect to="/signIn"/>
     }
 
     return (
@@ -62,10 +64,11 @@ const Registration = (props: any) => {
         </div>
     )
 }
+
 const mapStateToProps = (state: any) => ({
-    signUp: state
+    isRegistered: state.auth.isRegistered,
+    state: state
 })
 
-const RegistrationContainer = connect(mapStateToProps,{getConfirmationAuthUser})(Registration);
+export default connect(mapStateToProps, {getConfirmationAuthUser})(Registration)
 
-export default RegistrationContainer

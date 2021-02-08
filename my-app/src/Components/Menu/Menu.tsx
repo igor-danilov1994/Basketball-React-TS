@@ -13,26 +13,26 @@ const Menu = (props: any) => {
             <div className={s.nav_header}>
                 <div className={`${s.nav_item} ${s.menu_teams}`}>
 
-                    <NavLink to='/teams_E' >
+                    <NavLink to='/main/teams_E' >
                         <img src={teamsImg} alt="img"/>
                         TeamsE
                     </NavLink>
                 </div>
 
                 <div className={`${s.nav_item} ${s.menu_players}`}>
-                    <NavLink to='/players_E' >
+                    <NavLink to='/main/players_E' >
                         <img src={playersImg} alt="img"/>
                         PlayersE
                     </NavLink>
                 </div>
                 <div className={`${s.nav_item} ${s.menu_players}`}>
-                    <NavLink to='/players' >
+                    <NavLink to='/main/players' >
                         <img src={playersImg} alt="img"/>
                         Players
                     </NavLink>
                 </div>
                 <div className={`${s.nav_item} ${s.menu_players}`}>
-                    <NavLink to='/teams' >
+                    <NavLink to='/main/teams' >
                         <img src={playersImg} alt="img"/>
                         Teams
                     </NavLink>

@@ -8,18 +8,21 @@ import avatar5 from "../../Components/Players/images/photo5.png";
 import avatar6 from "../../Components/Players/images/photo6.png";
 
 
+
+export type InitialStateType = typeof initialState
+
 const initialState = {
-    name: '',
-    age: '',
-    weight: '',
-    height: '',
-    number: '',
-    team: '',
-    position: '',
-    positions: [],
+    name: null as string | null,
+    age: null as number | null,
+    weight: null as number | null,
+    height: null as number | null,
+    number: null as number | null,
+    team: null as string | null,
+    position: null as string | null,
+    positions: Array,
     avatarUrl: [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6],
-    birthday: "2021-02-01T07:39:06.825Z",
-    id: '',
+    birthday: null as number | null,
+    id: null as number | null,
 };
 
 
@@ -28,20 +31,20 @@ const GET_PLAYERS: any = createAction('APP/SRC/REDUX/PLAYERS/GET_PLAYERS')
 const SET_PLAYERS: any = createAction('APP/SRC/REDUX/PLAYERS/SET_PLAYERS')
 
 //Thunk
-export const getPosition = (token: any) => async (dispatch: any) => {
+export const getPosition = (token: string) => async (dispatch: any) => {
     const promise = await playersAPI.getPositions(token)
     if (promise.status === 200) {
         dispatch(GET_POSITIONS(promise.data));
     }
 };
 
-export const getPlayer = (token: any) => async (dispatch: any) => {
+export const getPlayer = (token: string) => async (dispatch: any) => {
     const promise = await playersAPI.getPlayers(token)
     if (promise.status === 200) {
         dispatch(GET_PLAYERS(promise.data));
     }
 };
-export const setPlayers = (data: any) => async (dispatch: any) => {
+export const setPlayers = (data: object) => async (dispatch: any) => {
     dispatch(SET_PLAYERS(data));
 };
 
