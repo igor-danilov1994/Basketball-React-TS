@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import s from './Login.module.css'
 import img from './images/loginImg.png'
 import passShow from './images/passShow.png'
@@ -16,6 +16,7 @@ const Login = (props: any) => {
     }
 
     const {register, handleSubmit} = useForm()
+
 
     return (
         <div className={s.login}>
@@ -53,12 +54,16 @@ const Login = (props: any) => {
     )
 }
 
+/*export let getToken = (token: string) => {
+    debugger
+    return token
+}*/
 
 const mapStateToProps = (state: any) => ({
-    signIn: state
+    token: state.auth.token
 })
 
-const LoginContainer = connect(mapStateToProps,{getAuthUserData})(Login);
+const LoginContainer = connect(mapStateToProps, {getAuthUserData})(Login);
 
 export default LoginContainer
 

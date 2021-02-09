@@ -29,6 +29,20 @@
   font-size: 14px;
   line-height: 24px;
 }
+.add_form_img {
+  display: flex;
+  flex-direction: column;
+}
+.add_form_img .active {
+  display: block;
+}
+.add_form_img input {
+  display: none;
+  background: #ffffff;
+}
+.add_form_img input:hover {
+  background-color: #ffffff;
+}
 
 .properties {
   display: flex;

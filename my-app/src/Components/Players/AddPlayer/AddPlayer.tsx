@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import s from './AddPlayer.module.css'
 import f from "../../../assets/FornControl/FormControl.module.css";
 import total from "../../../totalStyle.module.css";
 import AddImages from "../../../assets/FornControl/AddImages/AddImages";
@@ -10,15 +9,20 @@ import arrowImg from '../../../assets/images/link.png'
 import {getPosition, setPlayers} from '../../../Redux/toolkit/playersReducer';
 
 const AddPlayer = (props: any) => {
-    const onSubmit = (data: object) => {
+
+    const onSubmit = async (data: any) => {
         props.setPlayers(data)
     }
     const [activeRotate, setActiveRotate] = useState(false)
+    const [activeImgLoading, setActiveImgLoading] = useState(false)
 
     const {register, handleSubmit} = useForm()
 
     let toggleRotateImg = () => {
         setActiveRotate(!activeRotate)
+    }
+    let toggleShowImgLoading = () => {
+        setActiveImgLoading(!activeImgLoading)
     }
     useEffect(() => {
         props.getPosition(props.token)
@@ -30,7 +34,13 @@ const AddPlayer = (props: any) => {
                 Main/Players/NamePlayers
             </div>
             <div className={f.add_form}>
-                <AddImages/>
+                <div className={f.add_form_img} onClick={toggleShowImgLoading}>
+                    <AddImages/>
+                    <input className={activeImgLoading ? `${f.active}` : ""}
+                           name='img' ref={register}
+                           accept="image/*"
+                           type="file"/>
+                </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div>
                         <div className={f.add_form_data}>
@@ -59,21 +69,21 @@ const AddPlayer = (props: any) => {
                         <div className={f.properties}>
                             <div className={f.properties_options}>
                                 <div className={`${f.properties_data} ${f.add_form_data}`}>
-                                    <label htmlFor="">Height</label>
+                                    <label>Height</label>
                                     <input name='height' ref={register} type="text"/>
                                 </div>
                                 <div className={`${f.properties_data} ${f.add_form_data}`}>
-                                    <label htmlFor="">Weight</label>
+                                    <label>Weight</label>
                                     <input name='weight' ref={register} type="text"/>
                                 </div>
                             </div>
                             <div className={f.properties_options}>
                                 <div className={`${f.properties_data} ${f.add_form_data}`}>
-                                    <label htmlFor="">Age</label>
+                                    <label>Age</label>
                                     <input name='age' ref={register} type="text"/>
                                 </div>
                                 <div className={`${f.properties_data} ${f.add_form_data}`}>
-                                    <label htmlFor="">Number</label>
+                                    <label>Number</label>
                                     <input name='number' ref={register} type="text"/>
                                 </div>
                             </div>
@@ -83,9 +93,9 @@ const AddPlayer = (props: any) => {
                 </ form>
             </div>
         </div>
-
     )
 }
+
 
 const mapStateToProps = (state: any) => ({
     state: state,
