@@ -5,11 +5,12 @@ import PlayersCard from "./PlayerCard/PlayersСard";
 import Pagination from "../Pagination/Pagiation";
 import {connect} from "react-redux";
 import {getPlayer} from "../../Redux/toolkit/playersReducer";
+import {getAvatarUrl, getCurrentPlayers, getPlayersID} from '../../Redux/toolkit/selectors';
 
 const Players = (props: any) => {
-
+debugger
     useEffect(() => {
-        props.getPlayer(props.state.auth.token)
+        props.getPlayer(props.playersID)
     }, [])
 
 
@@ -20,7 +21,7 @@ const Players = (props: any) => {
 
                 {props.players.avatarUrl.map((P: any) =>
                     <PlayersCard key={P} avatar={props.avatar} players={props.players}/>
-                )} Вывод списка игроков
+                )}
 
 
             </div>
@@ -30,8 +31,9 @@ const Players = (props: any) => {
 }
 
 const mapStateToProps = (state: any) => ({
-    players: state.players,
-    avatar: state.players.avatarUrl,
+    players: getCurrentPlayers(state),
+    avatar: getAvatarUrl(state),
+    playersID: getPlayersID(state),
     state: state
 })
 export default connect(mapStateToProps, {getPlayer})(Players)

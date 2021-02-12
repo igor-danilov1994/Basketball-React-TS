@@ -7,10 +7,16 @@ import {useForm} from "react-hook-form";
 import {connect} from "react-redux";
 import arrowImg from '../../../assets/images/link.png'
 import {getPosition, setPlayers} from '../../../Redux/toolkit/playersReducer';
+import {getTeams} from "../../../Redux/toolkit/teamsReducer.ts";
+import {getCurrentPosition, getTeamsId, getTeamsNames} from '../../../Redux/toolkit/selectors';
 
 const AddPlayer = (props: any) => {
-
-    const onSubmit = async (data: any) => {
+    const onSubmit = (data: any) => {
+        data.birthday = Number(data.birthday)
+        data.height = Number(data.height)
+        data.number = Number(data.number)
+        data.weight = Number(data.weight)
+        data.team = Number(data.team)
         props.setPlayers(data)
     }
     const [activeRotate, setActiveRotate] = useState(false)
@@ -25,8 +31,10 @@ const AddPlayer = (props: any) => {
         setActiveImgLoading(!activeImgLoading)
     }
     useEffect(() => {
-        props.getPosition(props.token)
+        props.getTeams(props.teamsName)
+        props.getPosition()
     }, [])
+
 
     return (
         <div className={f.add}>
@@ -37,7 +45,7 @@ const AddPlayer = (props: any) => {
                 <div className={f.add_form_img} onClick={toggleShowImgLoading}>
                     <AddImages/>
                     <input className={activeImgLoading ? `${f.active}` : ""}
-                           name='img' ref={register}
+                           name='avatarUrl' ref={register}
                            accept="image/*"
                            type="file"/>
                 </div>
@@ -63,24 +71,33 @@ const AddPlayer = (props: any) => {
                         </div>
                         <div className={f.add_form_data}>
                             <label className={total.text}>Team</label>
-                            <input name='team' ref={register} type="text"/>
+                            <div className={total.select}
+                                 onClick={toggleRotateImg}>
+                                <img
+                                    className={activeRotate ? `${total.select_imgRotateOn}` : `${total.select_imgRotateOff}`}
+                                    src={arrowImg} alt="arrow"/>
+                                <select name="team" ref={register}>
+                                    {props.teamsName.map((names: any, id: number) =>
+                                        <option key={props.teamsId[id]} value={props.teamsId[id]}>{names}</option>
+                                    )}
+                                </select>
+                            </div>
                         </div>
-
                         <div className={f.properties}>
                             <div className={f.properties_options}>
                                 <div className={`${f.properties_data} ${f.add_form_data}`}>
-                                    <label>Height</label>
+                                    <label>Height (cm)</label>
                                     <input name='height' ref={register} type="text"/>
                                 </div>
                                 <div className={`${f.properties_data} ${f.add_form_data}`}>
-                                    <label>Weight</label>
+                                    <label>Weight (kg)</label>
                                     <input name='weight' ref={register} type="text"/>
                                 </div>
                             </div>
                             <div className={f.properties_options}>
                                 <div className={`${f.properties_data} ${f.add_form_data}`}>
-                                    <label>Age</label>
-                                    <input name='age' ref={register} type="text"/>
+                                    <label>Birthday</label>
+                                    <input name='birthday' ref={register} type="text"/>
                                 </div>
                                 <div className={`${f.properties_data} ${f.add_form_data}`}>
                                     <label>Number</label>
@@ -98,10 +115,16 @@ const AddPlayer = (props: any) => {
 
 
 const mapStateToProps = (state: any) => ({
-    state: state,
-    positions: state.players.positions,
-    token: state.auth.token
-})
+        state: state,
+        positions: getCurrentPosition(state),
+        teamsName: getTeamsNames(state),
+        teamsId: getTeamsId(state)
+    }
+)
 
 
-export default connect(mapStateToProps, {getPosition, setPlayers})(AddPlayer);
+export default connect(mapStateToProps,
+    {
+        getPosition, setPlayers, getTeams
+    }
+)(AddPlayer);

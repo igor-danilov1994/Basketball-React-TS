@@ -18,6 +18,7 @@ const initialState = {
 
 const GET_POSITIONS: any = createAction('APP/SRC/REDUX/PLAYERS/GET_POSITIONS')
 const GET_PLAYERS: any = createAction('APP/SRC/REDUX/PLAYERS/GET_PLAYERS')
+const ADD_PLAYER: any = createAction('APP/SRC/REDUX/PLAYERS/ADD_PLAYER')
 const SET_PLAYERS: any = createAction('APP/SRC/REDUX/PLAYERS/SET_PLAYERS')
 const SAVE_IMAGE: any = createAction('APP/SRC/REDUX/PLAYERS/SAVE_IMAGE')
 
@@ -29,30 +30,41 @@ export const getPosition = (token: string) => async (dispatch: any) => {
     }
 };
 
-export const getPlayer = (token: string) => async (dispatch: any) => {
-    const promise = await playersAPI.getPlayers(token)
+export const getPlayer = (playersID: number) => async (dispatch: any) => {
+    debugger
+    const promise = await playersAPI.getPlayers(playersID)
     if (promise.status === 200) {
+        debugger
         dispatch(GET_PLAYERS(promise.data));
     }
 };
 
-const getBirthday = (age: number) => {
+const getBirthday = (birthday: string) => {
     let month = (new Date().getMonth() + 1)
-    let FullYear = (new Date().getFullYear() - age)
+    let FullYear = (new Date().getFullYear() - (+birthday))
     let dayLast = new Date().getDate()
-    let birthday = `${FullYear}` + "-" + "0" + `${month}` + "-" + "0" + `${dayLast}`
-    return birthday
+    birthday = `${FullYear}` + "-" + "0" + `${month}` + "-" + "0" + `${dayLast}`
+    let dayLast2 = new Date()
+    return dayLast2
 }
 
 export const setPlayers = (data: any) => async (dispatch: any) => {
-    data.age = getBirthday(data.age)
-    dispatch(SET_PLAYERS(data))
-    const promise = await imageAPI.saveImage(data.img[0])
+    data.birthday = getBirthday(data.birthday)
+    //dispatch(SET_PLAYERS(data))
 
+    const promise = await imageAPI.saveImage(data.avatarUrl[0])
     if (promise.status === 200) {
-        dispatch(SAVE_IMAGE(promise.data));
+        dispatch(SAVE_IMAGE(promise.data))
+        data.avatarUrl = promise.data
     }
+    dispatch(addPlayer(data))
+};
 
+const addPlayer = (data: any) => async (dispatch: any) => {
+    const promise = await playersAPI.addPlayers(data)
+    if (promise.status === 200) {
+        dispatch(ADD_PLAYER(promise.data));
+    }
 };
 
 export default createReducer(initialState, {
@@ -60,19 +72,16 @@ export default createReducer(initialState, {
         state.positions = action.payload
     },
     [GET_PLAYERS]: (state, action) => {
+        debugger
     },
-    [SET_PLAYERS]: (state, action) => {
-        state.name = action.payload.name
-        state.birthday = action.payload.age
-        state.height = action.payload.height
-        state.name = action.payload.name
-        state.number = action.payload.number
-        state.position = action.payload.position
-        state.team = action.payload.team
-        state.weight = action.payload.weight
+    [ADD_PLAYER]: (state, action) => {
+        state = action.payload.data
+        debugger
     },
     [SAVE_IMAGE]: (state, action) => {
         state.avatarUrl = action.payload
+    },
+    [ADD_PLAYER]: (state, action) => {
     }
 })
 

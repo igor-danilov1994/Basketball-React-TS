@@ -7,6 +7,7 @@ const instance = axios.create({
     headers: {
         "Authorization": `Bearer ${token}`,
         'Content-Type': 'application/json',
+        'accept': 'application/json',
     },
 });
 
@@ -35,14 +36,50 @@ export const Echo: any = {
 
 export const playersAPI: any = {
     async getPositions() {
-        const promise = await instance.get('/api/Player/GetPositions', {})
+        const promise = await instance.get('/api/Player/GetPositions')
         return promise
     },
-    async getPlayers(token: any) {
+    async getPlayers(name: string) {
         const promise = await instance.get('/api/Player/GetPlayers', {
             params: {
-                Name: 'name',
-                TeamIds: [2],
+                Name: name,
+                Page: 2,
+                PageSize: 2
+            },
+        })
+        debugger
+        return promise
+    },
+    async addPlayers(data: any) {
+        const promise = await instance.post('/api/Player/Add', {
+            "name": data.name,
+            "number": data.number,
+            "position": data.position,
+            "team": data.team,
+            "birthday": data.birthday,
+            "height": data.height,
+            "weight": data.weight,
+            "avatarUrl": data.avatarUrl
+        })
+        return promise
+    },
+}
+
+export const teamsAPI: any = {
+    async addTeam(data: any) {
+        const promise = await instance.post('/api/Team/Add', {
+            "name": data.name,
+            "foundationYear": data.foundationYear,
+            "division": data.division,
+            "conference": data.conference,
+            "imageUrl": data.imageUrl,
+        })
+        return promise
+    },
+    async getTeams(name: string) {
+        const promise = await instance.get('/api/Team/GetTeams', {
+            params: {
+                Name: name,
                 Page: 2,
                 PageSize: 2
             },
@@ -50,6 +87,7 @@ export const playersAPI: any = {
         return promise
     },
 }
+
 
 export const imageAPI: any = {
     async saveImage(img: any) {
