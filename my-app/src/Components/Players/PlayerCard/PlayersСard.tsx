@@ -1,27 +1,30 @@
 import React from 'react'
-import f from "../Players.module.css";
-import s from "../../../assets/Style/CardLayout.module.css";
-import {NavLink} from "react-router-dom";
+import s from "../../../assets/Style/CardLayout/CardLayout.module.css";
+import {connect} from "react-redux";
+import {setSerialPlayersID} from "../../../Redux/toolkit/playersReducer";
 
+const ROOT_IMAGES: string = 'http://dev.trainee.dex-it.ru'
 
-const PlayersCard = (props: any) => {
-   //debugger
+const PlayerCard = (props: any) => {
+
+    let setPlayersId = (id: number) => {
+        props.setSerialPlayersID(id)
+    }
+
     return (
-        <NavLink to='/playersCardDetails'>
-            <div className={s.cardLayout}>
-                <div className={`${s.cardLayout_image} ${s.cardLayout_face}`}>
-                    <img src={props.avatar[2]} alt="avatar"/>
-                </div>
-                <div className={s.cardLayout_description}>
-                    <span>{props.players.name}
-                        <span>#{props.players.number}</span>
-                    </span>
-                    <span>{props.players.team}</span>
-                </div>
+        <div onClick={() => setPlayersId(props.id)} className={s.cardLayout}>
+            <div className={`${s.cardLayout_image} ${s.cardLayout_face}`}>
+                <img src={` ${ROOT_IMAGES}${props.avatarUrl}`} alt="avatar"/>
             </div>
-        </NavLink>
-
+            <div className={s.cardLayout_description}>
+                    <span>{props.playerName}
+                        <span>#{props.playersNumber}</span>
+                    </span>
+                <span>{props.teams}</span>
+            </div>
+        </div>
     )
 }
 
-export default PlayersCard
+
+export default connect(null, {setSerialPlayersID})(PlayerCard)

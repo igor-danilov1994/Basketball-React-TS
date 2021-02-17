@@ -15,10 +15,12 @@ const initialState = {
     count: null as number | null,
     page: null as number | null,
     size: null as number | null,
+    serialTeamID: null as number | null,
 };
 
 const GET_TEAM: any = createAction('APP/SRC/REDUX/PLAYERS/GET_TEAMS')
 const ADD_TEAM: any = createAction('APP/SRC/REDUX/PLAYERS/ADD_TEAM')
+export const SET_SERIAL_TEAM_ID: any = createAction('APP/SRC/REDUX/PLAYERS/SET_SERIAL_TEAM_ID')
 
 //Thunk
 export const setTeam = (data: any) => async (dispatch: any) => {
@@ -35,6 +37,11 @@ export const addTeam = (data: any) => async (dispatch: any) => {
         dispatch(ADD_TEAM(promise.data))
     }
 };
+
+export const setTeamSerialId = (serialTeamsID: any) => (dispatch: any) => {
+    dispatch(SET_SERIAL_TEAM_ID(serialTeamsID))
+};
+
 export const getTeams = (name: string) => async (dispatch: any) => {
     const promise = await teamsAPI.getTeams(name)
     if (promise.status === 200) {
@@ -48,7 +55,10 @@ export default createReducer(initialState, {
         state.data = action.payload.data
     },
     [ADD_TEAM]: (state, action) => {
-        debugger
+        state.data.push(action.payload)
+    },
+    [SET_SERIAL_TEAM_ID]: (state, action) => {
+        state.serialTeamID = action.payload
     }
 })
 

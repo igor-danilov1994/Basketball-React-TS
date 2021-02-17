@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import '../../App.css'
 import {Route} from "react-router-dom";
 import Header from '../Header/Header';
@@ -6,13 +6,24 @@ import MenuContainer from "../Menu/Menu";
 import Teams from "../Teams/Teams";
 import TeamsEmpty from '../Teams/TeamsEmpty/TeamsEmpty';
 import TeamsCardDetails from "../Teams/TeamsCardDetails/TeamsCardDetails";
-import PlayersCardDetails from "../Players/PlayersCardDetails/PlayersCardDetails";
 import Players from '../Players/Players';
 import PlayersEmpty from "../Players/PlayersEmpty/PlayersEmpty";
 import AddPlayer from '../Players/AddPlayer/AddPlayer';
 import AddTeams from '../Teams/AddTeams/AddTeams';
+import PlayersCardDetails from '../Players/PlayersCardDetails/PlayersCardDetails';
+import {connect} from "react-redux";
+import {getTeams} from "../../Redux/toolkit/teamsReducer.ts";
+import {getPlayer, getPlayers, getPosition} from "../../Redux/toolkit/playersReducer";
 
-const Main = () => {
+const Main = (props: any) => {
+    //debugger
+    useEffect(() => {
+        props.getTeams(props.playersName)
+        props.getPlayers(props.playersName)
+        props.getPosition()
+        props.getPlayer(props.id)
+    }, [])
+
     return (
         <div>
             <Header/>
@@ -32,7 +43,10 @@ const Main = () => {
         </div>
     )
 }
+let mapStateToProps = (state: any) => ({
 
-export default Main
+})
+
+export default connect(mapStateToProps, {getTeams, getPlayers, getPosition, getPlayer})(Main)
 
 

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import s from "./AddTeams.module.css";
 import f from "../../../assets/FornControl/FormControl.module.css";
 import total from "../../../totalStyle.module.css";
@@ -59,8 +59,6 @@ const AddTeams = (props: any) => {
         </div>
     )
 }
-
-
 
 const mapStateToProps = (state: any) => ({
     teams: state.teams

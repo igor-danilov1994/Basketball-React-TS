@@ -1,25 +1,28 @@
 import React from 'react'
-import {NavLink} from "react-router-dom";
-import s from "../../../assets/Style/CardLayout.module.css";
+import s from "../../../assets/Style/CardLayout/CardLayout.module.css";
+import {setTeamSerialId} from '../../../Redux/toolkit/teamsReducer.ts';
+import {connect} from "react-redux";
 
+const ROOT_IMAGES: string = 'http://dev.trainee.dex-it.ru'
 
 const TeamsCard = (props: any) => {
+
+    let setTeamsId = (id: number) => {
+        props.setTeamSerialId(id)
+    }
+
     return (
-        <NavLink to='/teamsCardDetails' >
-            <div className={s.cardLayout}>
-                <div className={`${s.cardLayout_image} ${props.face}`}>
-                    <img src={props.img} alt="img"/>
-                </div>
-                <div className={s.cardLayout_description}>
-                    <span>Portland trail blazers</span>
-                    <span>Year of foundation: 1970</span>
-                </div>
+        <div onClick={() => setTeamsId(props.id)} className={s.cardLayout}>
+            <div className={`${s.cardLayout_image} ${props.face}`}>
+                <img src={`${ROOT_IMAGES}${props.imageUrl}`} alt="img"/>
             </div>
-            {/*<CardLayout img={props.img} />*/}
-        </NavLink>
+            <div className={s.cardLayout_description}>
+                <span> {props.name} </span>
+                <span>Year of foundation: {props.foundationYear}</span>
+            </div>
+        </div>
 
     )
 }
 
-
-export default TeamsCard
+export default connect(null, {setTeamSerialId})(TeamsCard)

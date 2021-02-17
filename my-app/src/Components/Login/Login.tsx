@@ -11,6 +11,7 @@ import {getAuthUserData} from "../../Redux/toolkit/authReducer";
 
 
 const Login = (props: any) => {
+
     const onSubmit = (data: object) => {
         props.getAuthUserData(data)
     }
@@ -53,11 +54,6 @@ const Login = (props: any) => {
 
     )
 }
-
-/*export let getToken = (token: string) => {
-    debugger
-    return token
-}*/
 
 const mapStateToProps = (state: any) => ({
     token: state.auth.token

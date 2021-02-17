@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import f from "../../../assets/FornControl/FormControl.module.css";
 import total from "../../../totalStyle.module.css";
 import AddImages from "../../../assets/FornControl/AddImages/AddImages";
@@ -6,17 +6,16 @@ import Block_Buttons from "../../../assets/FornControl/Blocl_Buttons/Blocl_Butto
 import {useForm} from "react-hook-form";
 import {connect} from "react-redux";
 import arrowImg from '../../../assets/images/link.png'
-import {getPosition, setPlayers} from '../../../Redux/toolkit/playersReducer';
-import {getTeams} from "../../../Redux/toolkit/teamsReducer.ts";
-import {getCurrentPosition, getTeamsId, getTeamsNames} from '../../../Redux/toolkit/selectors';
+import {setPlayers} from '../../../Redux/toolkit/playersReducer';
+import {
+    getCurrentPosition,
+    getPlayerName,
+    getTeamsId,
+    getTeamsNames
+} from '../../../Redux/toolkit/selectors';
 
 const AddPlayer = (props: any) => {
     const onSubmit = (data: any) => {
-        data.birthday = Number(data.birthday)
-        data.height = Number(data.height)
-        data.number = Number(data.number)
-        data.weight = Number(data.weight)
-        data.team = Number(data.team)
         props.setPlayers(data)
     }
     const [activeRotate, setActiveRotate] = useState(false)
@@ -30,11 +29,6 @@ const AddPlayer = (props: any) => {
     let toggleShowImgLoading = () => {
         setActiveImgLoading(!activeImgLoading)
     }
-    useEffect(() => {
-        props.getTeams(props.teamsName)
-        props.getPosition()
-    }, [])
-
 
     return (
         <div className={f.add}>
@@ -78,7 +72,10 @@ const AddPlayer = (props: any) => {
                                     src={arrowImg} alt="arrow"/>
                                 <select name="team" ref={register}>
                                     {props.teamsName.map((names: any, id: number) =>
-                                        <option key={props.teamsId[id]} value={props.teamsId[id]}>{names}</option>
+                                        <option key={props.teamsId[id]}
+                                                value={props.teamsId[id]}>
+                                            {names}
+                                        </option>
                                     )}
                                 </select>
                             </div>
@@ -113,18 +110,13 @@ const AddPlayer = (props: any) => {
     )
 }
 
-
 const mapStateToProps = (state: any) => ({
         state: state,
         positions: getCurrentPosition(state),
         teamsName: getTeamsNames(state),
-        teamsId: getTeamsId(state)
+        teamsId: getTeamsId(state),
+        playersName: getPlayerName(state)
     }
 )
 
-
-export default connect(mapStateToProps,
-    {
-        getPosition, setPlayers, getTeams
-    }
-)(AddPlayer);
+export default connect(mapStateToProps, {setPlayers})(AddPlayer);

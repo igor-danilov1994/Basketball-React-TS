@@ -39,15 +39,24 @@ export const playersAPI: any = {
         const promise = await instance.get('/api/Player/GetPositions')
         return promise
     },
+    async getPlayer(id: number) {
+
+        const promise = await instance.get('/api/Player/Get', {
+            params: {
+                id: id
+            }
+        })
+
+        return promise
+    },
     async getPlayers(name: string) {
         const promise = await instance.get('/api/Player/GetPlayers', {
             params: {
                 Name: name,
-                Page: 2,
-                PageSize: 2
+                Page: 1,
+                PageSize: 10
             },
         })
-        debugger
         return promise
     },
     async addPlayers(data: any) {
@@ -61,6 +70,7 @@ export const playersAPI: any = {
             "weight": data.weight,
             "avatarUrl": data.avatarUrl
         })
+
         return promise
     },
 }
@@ -80,8 +90,8 @@ export const teamsAPI: any = {
         const promise = await instance.get('/api/Team/GetTeams', {
             params: {
                 Name: name,
-                Page: 2,
-                PageSize: 2
+                Page: 1,
+                PageSize: 6
             },
         })
         return promise
