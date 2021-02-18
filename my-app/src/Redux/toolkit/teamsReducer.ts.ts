@@ -23,11 +23,15 @@ const ADD_TEAM: any = createAction('APP/SRC/REDUX/PLAYERS/ADD_TEAM')
 export const SET_SERIAL_TEAM_ID: any = createAction('APP/SRC/REDUX/PLAYERS/SET_SERIAL_TEAM_ID')
 
 //Thunk
-export const setTeam = (data: any) => async (dispatch: any) => {
+export const setTeam = (data: any, getCurrentTeamID: number) => async (dispatch: any) => {
     const promise = await imageAPI.saveImage(data.imageUrl[0])
     if (promise.status === 200) {
         data.imageUrl = promise.data
-        dispatch(addTeam(data))
+        if (getCurrentTeamID) {
+            dispatch(updateTeam(data, getCurrentTeamID))
+        } else {
+            dispatch(addTeam(data))
+        }
     }
 };
 
@@ -35,6 +39,19 @@ export const addTeam = (data: any) => async (dispatch: any) => {
     const promise = await teamsAPI.addTeam(data)
     if (promise.status === 200) {
         dispatch(ADD_TEAM(promise.data))
+    }
+};
+
+export const updateTeam = (data: any, getCurrentTeamID: number) => async (dispatch: any) => {
+    const promise = await teamsAPI.updateTeam(data, getCurrentTeamID)
+    if (promise.status === 200) {
+        dispatch(addTeam(promise.data))
+    }
+};
+export const deleteTeam = (getCurrentTeamID: number) => async (dispatch: any) => {
+    const promise = await teamsAPI.deleteTeam(getCurrentTeamID)
+    if (promise.status === 200) {
+        //dispatch(ADD_TEAM(promise.data))
     }
 };
 

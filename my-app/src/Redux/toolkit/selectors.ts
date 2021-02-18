@@ -42,6 +42,10 @@ export const getPlayersID = (state: any) => {
     let playersID = state.players.data.id
     return playersID
 }
+export const getTeamID = (state: any) => {
+    let teamID = state.teams.data.id
+    return teamID
+}
 
 export const getSerialPlayerID = (state: any) => {
     let serialPlayerID = state.players.serialPlayerID

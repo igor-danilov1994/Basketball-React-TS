@@ -86,6 +86,25 @@ export const teamsAPI: any = {
         })
         return promise
     },
+    async updateTeam(data: any, getCurrentTeamID: number) {
+        const promise = await instance.put('/api/Team/Update', {
+            "name": data.name,
+            "foundationYear": data.foundationYear,
+            "division": data.division,
+            "conference": data.conference,
+            "imageUrl": data.imageUrl,
+            "id": getCurrentTeamID
+        })
+        return promise
+    },
+    async deleteTeam(getCurrentTeamID: number) {
+        const promise = await instance.delete ('/api/Team/Delete', {
+            params: {
+                "id": getCurrentTeamID
+            }
+        })
+        return promise
+    },
     async getTeams(name: string) {
         const promise = await instance.get('/api/Team/GetTeams', {
             params: {

@@ -14,9 +14,14 @@ import PlayersCardDetails from '../Players/PlayersCardDetails/PlayersCardDetails
 import {connect} from "react-redux";
 import {getTeams} from "../../Redux/toolkit/teamsReducer.ts";
 import {getPlayer, getPlayers, getPosition} from "../../Redux/toolkit/playersReducer";
+import {
+    getPlayersData,
+    getSerialPlayerID,
+    getSerialTeamID,
+    getTeamsData
+} from "../../Redux/toolkit/selectors";
 
 const Main = (props: any) => {
-    //debugger
     useEffect(() => {
         props.getTeams(props.playersName)
         props.getPlayers(props.playersName)
@@ -34,8 +39,10 @@ const Main = (props: any) => {
                     <Route path='/main/teams_E' render={() => <TeamsEmpty/>}/>
                     <Route path='/main/players' render={() => <Players/>}/>
                     <Route path='/main/players_E' render={() => <PlayersEmpty/>}/>
-                    <Route path='/main/addPlayer' render={() => <AddPlayer/>}/>
-                    <Route path='/main/addTeams' render={() => < AddTeams/>}/>
+                    <Route path='/main/addPlayer' render={() => <AddPlayer players={props.players}/>}/>
+                    <Route path='/main/addTeams' render={() => < AddTeams teams={props.teams}
+                                                                          serialTeamID={props.serialTeamID}
+                    />}/>
                     <Route path='/main/playersCardDetails' render={() => < PlayersCardDetails/>}/>
                     <Route path='/main/teamsCardDetails' render={() => < TeamsCardDetails/>}/>
                 </div>
@@ -44,7 +51,10 @@ const Main = (props: any) => {
     )
 }
 let mapStateToProps = (state: any) => ({
-
+    players: getPlayersData(state),
+    teams: getTeamsData(state),
+    serialTeamID: getSerialTeamID(state),
+    serialPlayerID: getSerialPlayerID(state),
 })
 
 export default connect(mapStateToProps, {getTeams, getPlayers, getPosition, getPlayer})(Main)

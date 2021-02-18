@@ -1,18 +1,23 @@
 import React, {useState} from 'react';
-import s from "./AddTeams.module.css";
 import f from "../../../assets/FornControl/FormControl.module.css";
 import total from "../../../totalStyle.module.css";
 import AddImages from "../../../assets/FornControl/AddImages/AddImages";
 import Block_Buttons from "../../../assets/FornControl/Blocl_Buttons/Blocl_Buttons";
 import {useForm} from "react-hook-form";
 import {connect} from "react-redux";
-import {setTeam} from "../../../Redux/toolkit/teamsReducer.ts";
+import {setTeam, updateTeam} from "../../../Redux/toolkit/teamsReducer.ts";
 
 
 const AddTeams = (props: any) => {
+
     const onSubmit = (data: any) => {
         data.foundationYear = Number(data.foundationYear)
-        props.setTeam(data)
+        let getCurrentTeamID = null
+
+        if (props.serialTeamID) {
+            getCurrentTeamID = props.teams[props.serialTeamID].id
+        }
+        props.setTeam(data, getCurrentTeamID)
     }
     const {register, handleSubmit} = useForm()
     const [activeImgLoading, setActiveImgLoading] = useState(false)
@@ -24,17 +29,17 @@ const AddTeams = (props: any) => {
     return (
         <div className={f.add}>
             <div className={total.breadCrumbs}>
-                Main/Players/NamePlayers
+                Main/Teams/{props.serialTeamID ? props.teamsName : 'NewTeam'}
             </div>
             <div className={f.add_form}>
                 <div className={f.add_form_img} onClick={toggleShowImgLoading}>
-                <AddImages/>
-                <input className={activeImgLoading ? `${f.active}` : ""}
-                       name='imageUrl' ref={register}
-                       accept="image/*"
-                       type="file"/>
+                    <AddImages/>
+                    <input className={activeImgLoading ? `${f.active}` : ""}
+                           name='imageUrl' ref={register}
+                           accept="image/*"
+                           type="file"/>
                 </div>
-                <form onSubmit={handleSubmit(onSubmit)} >
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <div>
                         <div className={f.add_form_data}>
                             <label className={total.text}>Name</label>
@@ -53,7 +58,7 @@ const AddTeams = (props: any) => {
                             <input name='foundationYear' ref={register} type="text"/>
                         </div>
                     </div>
-                    <Block_Buttons />
+                    <Block_Buttons/>
                 </ form>
             </div>
         </div>
@@ -61,8 +66,8 @@ const AddTeams = (props: any) => {
 }
 
 const mapStateToProps = (state: any) => ({
-    teams: state.teams
+    //teams: state.teams
 })
 
 
-export default connect(mapStateToProps, {setTeam})(AddTeams);
+export default connect(mapStateToProps, {setTeam, updateTeam})(AddTeams);

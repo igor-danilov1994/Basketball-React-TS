@@ -98,11 +98,20 @@ input:focus, select:focus {
 }
 
 .breadCrumbs {
-  padding: 26px 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #E4163A;
+  display: flex;
+  justify-content: space-between;
+  padding: 26px 32px;
   background: #FFFFFF;
   border-radius: 10px 10px 0 0;
-  color: #E4163A;
   text-align: left;
+}
+.breadCrumbs_img a:nth-child(2) {
+  margin-left: 16px;
 }
 
 .text {
@@ -122,6 +131,11 @@ input:focus, select:focus {
   font-weight: 500;
   font-size: 18px;
   line-height: 25px;
+}
+.text_extraSmall {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 150%;
 }
 
 /*# sourceMappingURL=totalStyle.module.css.map */

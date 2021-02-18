@@ -41,17 +41,21 @@ a
   border-radius: 4px
   outline: none
   cursor: pointer
+
   &_cancel
     color: $LightGrey
     background: #ffffff
     border: 1px solid #9C9C9C
+
     &:hover
       background: $LightestGrey
+
   &_add
     padding: 8px 0
     color: #ffffff
     background: $Red
     border: none
+
     &:hover
       background-color: $LightRed
 
@@ -64,25 +68,30 @@ select
   border: none
   outline: none
   cursor: pointer
+
   option
     border: 0.5px solid #D1D1D1
     border-radius: 4px
+
 .select
   position: relative
   width: 100%
   display: flex
   align-items: center
+
   select
     height: 40px
+
   &_imgRotateOn
     transform: rotate(180deg)
+
   &_imgRotateOff
     transform: rotate(90deg)
+
   img
     right: 8px
     position: absolute
     cursor: pointer
-
 
 
 input, select
@@ -94,31 +103,51 @@ input, select
   //border: solid 1px red
   &:hover
     background: $LightestGrey
+
   &:focus
     background: $LightestGrey1
     box-shadow: 0 0 5px $shadow
+
 .breadCrumbs
-  padding: 26px 0
+  //font-family: $Avenir
+  font-style: normal
+  font-weight: 500
+  font-size: 14px
+  line-height: 24px
+  color: $Red
+  display: flex
+  justify-content: space-between
+  padding: 26px 32px
   background: #FFFFFF
   border-radius: 10px 10px 0 0
-  color: $Red
   text-align: left
+
+  &_img
+    a:nth-child(2)
+      margin-left: 16px
 
 .text
   //font-family: $Avenir
   font-style: normal
   font-weight: normal
+
   &_big
     font-size: 36px
     line-height: 49px
+
   &_middle
     font-weight: 800
     font-size: 24px
     line-height: 33px
+
   &_small
     font-weight: 500
     font-size: 18px
     line-height: 25px
 
+  &_extraSmall
+    font-weight: 500
+    font-size: 12px
+    line-height: 150%
 
 
