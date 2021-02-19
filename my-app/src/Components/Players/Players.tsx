@@ -6,38 +6,43 @@ import Pagination from "../Pagination/Pagiation";
 import {connect} from "react-redux";
 import {
     getAvatarUrl,
-    getCurrentPlayers, getPlayerName,
+    getCurrentPlayers, getPlayerName, getPlayersCount,
     getPlayersID,
     getPlayersNames,
     getPlayersNumber, getTeamsNames
 } from '../../Redux/toolkit/selectors';
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 
 const Players = (props: any) => {
 
     return (
-        <div className={s.players}>
-            <TopInnerElement/>
-            <div className={s.players_card}>
-                {props.players.map((players: any, id: number) =>
-                    <NavLink to='/main/playersCardDetails'>
-                        <PlayerCard key={players.id} playerName={players.name}
-                                    avatarUrl={players.avatarUrl}
-                                    playersNumber={players.number}
-                                    teams={props.teams[id]}
-                                    id={id}
-                        />
-                    </NavLink>
-                )}
-            </div>
-            <Pagination/>
+        <div>
+            {props.playersCount !== 0 ?
+                <div className={s.players}>
+                    <TopInnerElement/>
+                    <div className={s.players_card}>
+                        {props.players.map((players: any, id: number) =>
+                            <NavLink key={players.id} to='/main/playersCardDetails'>
+                                <PlayerCard key={players.id} playerName={players.name}
+                                            avatarUrl={players.avatarUrl}
+                                            playersNumber={players.number}
+                                            teams={props.teams[id]}
+                                            id={id}
+                                />
+                            </NavLink>
+                        )}
+                    </div>
+                    <Pagination/>
+                </div>
+                : <Redirect to="/main/players_E"/>
+            }
         </div>
     )
 }
 
 
 const mapStateToProps = (state: any) => ({
-    players: getCurrentPlayers(state),
+    playersCount: getPlayersCount(state),
     avatar: getAvatarUrl(state),
     playersID: getPlayersID(state),
     number: getPlayersNumber(state),

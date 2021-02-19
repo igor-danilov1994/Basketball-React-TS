@@ -15,6 +15,9 @@ const initialState = {
         birthday: null as string | null,
         id: null as number | null,
     }],
+    count: null as number | null,
+    pagePlayer: 1,
+    pageSizePlayer: 6,
     positions: [],
     serialPlayerID: null as number | null,
 };
@@ -34,8 +37,8 @@ export const getPosition = () => async (dispatch: any) => {
     }
 };
 
-export const getPlayers = (name: string) => async (dispatch: any) => {
-    const promise = await playersAPI.getPlayers(name)
+export const getPlayers = (name: string, pagePlayer: number, pageSizePlayer: number) => async (dispatch: any) => {
+    const promise = await playersAPI.getPlayers(name, pagePlayer, pageSizePlayer)
     if (promise.status === 200) {
         dispatch(GET_PLAYERS(promise.data));
     }
@@ -82,6 +85,14 @@ const addPlayer = (data: any) => async (dispatch: any) => {
         dispatch(ADD_PLAYER(promise.data));
     }
 };
+export const deletePlayer = (getCurrentPlayersID: number) => async (dispatch: any) => {
+
+    const promise = await playersAPI.deletePlayers(getCurrentPlayersID)
+    if (promise.status === 200) {
+
+        //dispatch(ADD_PLAYER(promise.data));
+    }
+};
 
 export const setSerialPlayersID = (serialPlayersID: number) => async (dispatch: any) => {
     dispatch(SET_SERIAL_PLAYER_ID(serialPlayersID))
@@ -93,6 +104,8 @@ export default createReducer(initialState, {
     },
     [GET_PLAYERS]: (state, action) => {
         state.data = action.payload.data
+        state.count = action.payload.count
+        state.pageSizePlayer = action.payload.size
 
     },
     [ADD_PLAYER]: (state, action) => {

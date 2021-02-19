@@ -28,6 +28,7 @@ export const authAPI: any = {
         return promise
     }
 }
+
 export const Echo: any = {
     echo() {
         return instance.get("/api/Echo/Ping")
@@ -49,12 +50,12 @@ export const playersAPI: any = {
 
         return promise
     },
-    async getPlayers(name: string) {
+    async getPlayers(name: string, pagePlayer: number, pageSizePlayer: number) {
         const promise = await instance.get('/api/Player/GetPlayers', {
             params: {
                 Name: name,
-                Page: 1,
-                PageSize: 10
+                Page: pagePlayer,
+                PageSize: pageSizePlayer
             },
         })
         return promise
@@ -70,9 +71,16 @@ export const playersAPI: any = {
             "weight": data.weight,
             "avatarUrl": data.avatarUrl
         })
-
         return promise
     },
+    async deletePlayers(getCurrentPlayersID: number) {
+        const promise = await instance.delete('/api/Player/Delete', {
+            params: {
+                'id': getCurrentPlayersID
+            }
+        })
+        return promise
+    }
 }
 
 export const teamsAPI: any = {
@@ -98,19 +106,20 @@ export const teamsAPI: any = {
         return promise
     },
     async deleteTeam(getCurrentTeamID: number) {
-        const promise = await instance.delete ('/api/Team/Delete', {
+        const promise = await instance.delete('/api/Team/Delete', {
             params: {
-                "id": getCurrentTeamID
+                'id': getCurrentTeamID
             }
+
         })
         return promise
     },
-    async getTeams(name: string) {
+    async getTeams(name: string, pageTeam: number, pageSizeTeam: number) {
         const promise = await instance.get('/api/Team/GetTeams', {
             params: {
                 Name: name,
-                Page: 1,
-                PageSize: 6
+                Page: pageTeam,
+                PageSize: pageSizeTeam
             },
         })
         return promise

@@ -13,8 +13,8 @@ const initialState = {
         name: null as string | null,
     }],
     count: null as number | null,
-    page: null as number | null,
-    size: null as number | null,
+    pageTeam: 1,
+    pageSizeTeam: 6,
     serialTeamID: null as number | null,
 };
 
@@ -59,8 +59,8 @@ export const setTeamSerialId = (serialTeamsID: any) => (dispatch: any) => {
     dispatch(SET_SERIAL_TEAM_ID(serialTeamsID))
 };
 
-export const getTeams = (name: string) => async (dispatch: any) => {
-    const promise = await teamsAPI.getTeams(name)
+export const getTeams = (name: string, pageTeam: number, pageSizeTeam: number ) => async (dispatch: any) => {
+    const promise = await teamsAPI.getTeams(name, pageTeam, pageSizeTeam)
     if (promise.status === 200) {
         dispatch(GET_TEAM(promise.data))
     }
@@ -69,7 +69,10 @@ export const getTeams = (name: string) => async (dispatch: any) => {
 
 export default createReducer(initialState, {
     [GET_TEAM]: (state, action) => {
+
         state.data = action.payload.data
+        state.count = action.payload.count
+        state.pageSizeTeam = action.payload.size
     },
     [ADD_TEAM]: (state, action) => {
         state.data.push(action.payload)

@@ -4,6 +4,8 @@ import s from '../../../assets/Style/CardDetails/CardDetails.module.css'
 import total from '../../../totalStyle.module.css'
 import {connect} from "react-redux";
 import BreadCrumbs from "../../BreadCrumbs/BreadCrumbs";
+import {deletePlayer} from "../../../Redux/toolkit/playersReducer";
+
 
 const PlayersCardDetails = (props: any) => {
 
@@ -11,10 +13,15 @@ const PlayersCardDetails = (props: any) => {
     let currentTeamName = props.teams[props.serialPlayerID]
     let ROOT_IMAGES: string = 'http://dev.trainee.dex-it.ru'
 
+    let deletePlayers = () => {
+        props.deletePlayer(dataPlayers.id)
+    }
     return (
         <div className={s.cardDetails_wrapper}>
 
-            <BreadCrumbs katigories={'Players'} name={dataPlayers.name} />
+            <BreadCrumbs katigories={'Players'}
+                         delete={deletePlayers}
+                         pathAfterDeletion={'players'} name={dataPlayers.name}/>
 
             <div className={s.cardDetails}>
                 <div className={s.cardDetails_img}>
@@ -74,4 +81,4 @@ let mapStateToProps = (state: any) => ({
     serialPlayerID: getSerialPlayerID(state)
 })
 
-export default connect(mapStateToProps)(PlayersCardDetails)
+export default connect(mapStateToProps, {deletePlayer})(PlayersCardDetails)

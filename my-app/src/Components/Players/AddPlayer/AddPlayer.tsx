@@ -29,7 +29,6 @@ const AddPlayer = (props: any) => {
     let toggleShowImgLoading = () => {
         setActiveImgLoading(!activeImgLoading)
     }
-
     return (
         <div className={f.add}>
             <div className={total.breadCrumbs}>
@@ -112,10 +111,9 @@ const AddPlayer = (props: any) => {
 
 const mapStateToProps = (state: any) => ({
         state: state,
-        positions: getCurrentPosition(state),
-        teamsName: getTeamsNames(state),
         teamsId: getTeamsId(state),
-        playersName: getPlayerName(state)
+        playersName: getPlayerName(state),
+        teamsName: getTeamsNames(state)
     }
 )
 
