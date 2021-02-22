@@ -1,5 +1,13 @@
 import {createSelector} from "reselect"
 
+
+export const getToken = (state: any) => {
+
+    return state.auth.token
+}
+
+
+
 export const getUserName = (state: any) => {
     let userName = state.auth.name
     return userName
@@ -20,8 +28,6 @@ export const getPageTeam = (state: any) => {
 export const getPageSizeTeam = (state: any) => {
     return state.teams.pageSizeTeam
 }
-
-
 
 export const getTeamsNames = createSelector(getTeamsData, (data) => {
     let names: Array<string> = []

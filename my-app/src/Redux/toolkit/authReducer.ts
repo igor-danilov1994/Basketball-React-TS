@@ -25,21 +25,30 @@ export const getConfirmationAuthUser = (data: object) => async (dispatch: any) =
 export const getAuthUserData = (data: object) => async (dispatch: any) => {
     let response = await authAPI.signIn(data)
     if (response.status === 200) {
+        localStorage.removeItem(('token'))
+        localStorage.setItem('token', response.data.token )
         dispatch(SIGN_IN(response.data))
     }
+};
+
+export const signOut = () => async (dispatch: any) => {
+    //localStorage.removeItem(('token'))
+    dispatch(SIGN_OUT())
 };
 
 export default createReducer(initialState, {
     [SIGN_IN]: (state, action) => {
         state.isAuth = true
         state.name = action.payload.name
-        localStorage.setItem('token', action.payload.token)
+        state.token = action.payload.token
     },
     [SIGN_UP]: (state, action) => {
         state.isRegistered = true
     },
     [SIGN_OUT]: (state) => {
         state.isAuth = false
+        state.token = null
+        state.name = null
     },
 })
 

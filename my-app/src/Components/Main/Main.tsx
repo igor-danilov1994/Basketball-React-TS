@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import '../../App.css'
 import {Redirect, Route} from "react-router-dom";
 import Header from '../Header/Header';
-import MenuContainer from "../Menu/Menu";
+import Menu from "../Menu/Menu";
 import Teams from "../Teams/Teams";
 import TeamsEmpty from '../Teams/TeamsEmpty/TeamsEmpty';
 import TeamsCardDetails from "../Teams/TeamsCardDetails/TeamsCardDetails";
@@ -13,7 +13,7 @@ import AddTeams from '../Teams/AddTeams/AddTeams';
 import PlayersCardDetails from '../Players/PlayersCardDetails/PlayersCardDetails';
 import {connect} from "react-redux";
 import {getTeams} from "../../Redux/toolkit/teamsReducer.ts";
-import {getPlayer, getPlayers, getPosition} from "../../Redux/toolkit/playersReducer";
+import {getPlayers, getPosition} from "../../Redux/toolkit/playersReducer";
 import {
     getCurrentPosition,
     getPageSizeTeam, getPageTeam,
@@ -29,22 +29,21 @@ const Main = (props: any) => {
 
     useEffect(() => {
         props.getTeams(null, props.pageTeam, props.pageSizeTeam)
-        props.getPlayers(null,props.pagePlayer, props.pageSizePlayer)
+        props.getPlayers(null, props.pagePlayer, props.pageSizePlayer)
         props.getPosition()
-        props.getPlayer()
+        //props.getPlayer()
     }, [])
 //debugger
     return (
-        <div>
+        <>
             <Header/>
             <div className="app-content">
-                <MenuContainer/>
+                <Menu/>
                 <div className="main">
+                    {props.teamsCount !== 0 && <Redirect to="/main/players"/> }
 
-                    <Redirect to="/main/teams"/>
-
-                    <Route path='/main/teams_E' render={() => <TeamsEmpty/>}/>
                     <Route path='/main/teams' render={() => <Teams/>}/>
+                    <Route path='/main/teams_E' render={() => <TeamsEmpty/>}/>
                     <Route path='/main/teamsCardDetails' render={() => < TeamsCardDetails/>}/>
                     <Route path='/main/addTeams' render={() => < AddTeams teams={props.teamsData}
                                                                           serialTeamID={props.serialTeamID}/>}/>
@@ -57,7 +56,7 @@ const Main = (props: any) => {
 
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 let mapStateToProps = (state: any) => ({
@@ -74,8 +73,12 @@ let mapStateToProps = (state: any) => ({
     teamsData: getTeamsData(state),
     serialTeamID: getSerialTeamID(state),
     serialPlayerID: getSerialPlayerID(state),
+
+    teamsCount: state.teams.count,
+
+
 })
 
-export default connect(mapStateToProps, {getTeams, getPlayers, getPosition, getPlayer})(Main)
+export default connect(mapStateToProps, {getTeams, getPlayers, getPosition})(Main)
 
 

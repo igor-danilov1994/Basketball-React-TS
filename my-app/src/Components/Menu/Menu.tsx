@@ -3,12 +3,14 @@ import s from './menu.module.css'
 import teamsImg from './images/menu_teams.png'
 import playersImg from './images/menu_players.png'
 import inputIcon from '../../assets/images/inputIcon.png'
-import {NavLink} from 'react-router-dom';
+import {NavLink, Redirect} from 'react-router-dom';
 import {connect} from "react-redux";
 import total from '../../totalStyle.module.css'
-import {SIGN_OUT} from "../../Redux/toolkit/authReducer";
+import {signOut} from "../../Redux/toolkit/authReducer";
+
 
 const Menu = (props: any) => {
+
     return (
         <nav className={s.nav}>
             <div className={s.nav_header}>
@@ -30,9 +32,7 @@ const Menu = (props: any) => {
 
 
             <div className={s.nav_footer}>
-                <NavLink to='/signIn' onClick={() => {
-                    props.SIGN_OUT()
-                }}>
+                <NavLink to='/signIn' onClick={() => props.signOut() }>
                     <img src={inputIcon} alt="iconImg"/>
                     <span className={total.text_extraSmall}>Sign out</span>
                 </NavLink>
@@ -42,10 +42,11 @@ const Menu = (props: any) => {
     )
 }
 
+
 const mapStateToProps = (state: any) => ({
     name: state.auth.name
 })
 
-const MenuContainer = connect(mapStateToProps, {SIGN_OUT})(Menu);
+export default connect(mapStateToProps, {signOut})(Menu);
 
-export default MenuContainer
+

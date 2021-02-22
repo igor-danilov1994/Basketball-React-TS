@@ -6,7 +6,7 @@ import Block_Buttons from "../../../assets/FornControl/Blocl_Buttons/Blocl_Butto
 import {useForm} from "react-hook-form";
 import {connect} from "react-redux";
 import arrowImg from '../../../assets/images/link.png'
-import {setPlayers} from '../../../Redux/toolkit/playersReducer';
+import {savePlayers} from '../../../Redux/toolkit/playersReducer';
 import {
     getCurrentPosition,
     getPlayerName,
@@ -16,7 +16,7 @@ import {
 
 const AddPlayer = (props: any) => {
     const onSubmit = (data: any) => {
-        props.setPlayers(data)
+        props.savePlayers(data)
     }
     const [activeRotate, setActiveRotate] = useState(false)
     const [activeImgLoading, setActiveImgLoading] = useState(false)
@@ -117,4 +117,4 @@ const mapStateToProps = (state: any) => ({
     }
 )
 
-export default connect(mapStateToProps, {setPlayers})(AddPlayer);
+export default connect(mapStateToProps, {savePlayers})(AddPlayer);

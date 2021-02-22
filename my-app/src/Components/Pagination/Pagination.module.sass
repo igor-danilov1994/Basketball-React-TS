@@ -2,21 +2,47 @@ $LightestGrey: #D1D1D1
 $LightRed: #FF5761
 .pagination
   display: flex
-  justify-content: space-between
+  align-items: center
+  &_wrapper
+    display: flex
+    align-items: center
+    justify-content: space-between
+  .active
+    background: #E4163A
+    border-radius: 4px
+    color: #ffffff
+    text-align: center
+    a
+      outline: none
+      text-align: center
+  li
+    padding: 10px 15px
+    cursor: pointer
+    &:first-child, &:last-child
+      border: none
+      background-image: url("/src/assets/images/link.png")
+      background-position: center
+      background-repeat: no-repeat
+      transform: rotate(-90deg)
+      margin-right: 33px
+      margin-left: 20px
+    &:last-child
+      transform: rotate(90deg)
   &_selectCountCard
     position: relative
   &_setCountCard
-    display: none
     flex-direction: column
     background: #FFFFFF
     border: 0.5px solid $LightestGrey
     box-sizing: border-box
     border-radius: 4px
     position: absolute
-    bottom: 55px
+    bottom: calc(100% + 4px)
+    margin: 0
     width: 100%
-    a
+    li
       padding: 8px 54px 8px 22px
+      cursor: pointer
       &:hover
         background-color: $LightRed
       &:nth-child(even)
@@ -35,7 +61,7 @@ $LightRed: #FF5761
     img
       margin-left: 12px
       cursor: pointer
-
-  &_list
-    display: flex
+      transform: rotate(90deg)
+    &_rotate
+      transform: rotate(0deg) !important
 

@@ -12,7 +12,8 @@ function App(props: any) {
     return (
         <div className="app">
             {
-                props.isAuth ? <Redirect to="/main/"/> : <Route exact path='/signIn' render={() => <LoginContainer/>}/>
+                props.isAuth ? <Redirect to="/main/"/>
+                : <Route exact path='/signIn' render={() => <LoginContainer/>}/>
             }
             <Route exact path='/signUp' render={() => <Registration/>}/>
 

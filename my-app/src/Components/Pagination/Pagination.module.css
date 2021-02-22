@@ -1,28 +1,60 @@
 .pagination {
   display: flex;
+  align-items: center;
+}
+.pagination_wrapper {
+  display: flex;
+  align-items: center;
   justify-content: space-between;
+}
+.pagination .active {
+  background: #E4163A;
+  border-radius: 4px;
+  color: #ffffff;
+  text-align: center;
+}
+.pagination .active a {
+  outline: none;
+  text-align: center;
+}
+.pagination li {
+  padding: 10px 15px;
+  cursor: pointer;
+}
+.pagination li:first-child, .pagination li:last-child {
+  border: none;
+  background-image: url("/src/assets/images/link.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: rotate(-90deg);
+  margin-right: 33px;
+  margin-left: 20px;
+}
+.pagination li:last-child {
+  transform: rotate(90deg);
 }
 .pagination_selectCountCard {
   position: relative;
 }
 .pagination_setCountCard {
-  display: none;
   flex-direction: column;
   background: #FFFFFF;
   border: 0.5px solid #D1D1D1;
   box-sizing: border-box;
   border-radius: 4px;
   position: absolute;
-  bottom: 55px;
+  bottom: calc(100% + 4px);
+  margin: 0;
   width: 100%;
 }
-.pagination_setCountCard a {
+.pagination_setCountCard li {
   padding: 8px 54px 8px 22px;
+  cursor: pointer;
 }
-.pagination_setCountCard a:hover {
+.pagination_setCountCard li:hover {
   background-color: #FF5761;
 }
-.pagination_setCountCard a:nth-child(even) {
+.pagination_setCountCard li:nth-child(even) {
   border-top: 0.5px solid #D1D1D1;
   border-bottom: 0.5px solid #D1D1D1;
 }
@@ -40,9 +72,10 @@
 .pagination_currentCard img {
   margin-left: 12px;
   cursor: pointer;
+  transform: rotate(90deg);
 }
-.pagination_list {
-  display: flex;
+.pagination_currentCard_rotate {
+  transform: rotate(0deg) !important;
 }
 
 /*# sourceMappingURL=Pagination.module.css.map */

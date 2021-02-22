@@ -1,3 +1,6 @@
+.teams {
+  width: 100%;
+}
 .teams_card {
   display: flex;
   justify-content: space-between;

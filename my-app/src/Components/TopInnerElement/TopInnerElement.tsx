@@ -2,6 +2,7 @@ import React from 'react';
 import s from './TopInnerElement.module.css'
 import searchIcon from "../../assets/images/search.png";
 import total from "../../totalStyle.module.css";
+import { NavLink } from 'react-router-dom';
 
 const TopInnerElement = (props: any) => {
     return (
@@ -20,10 +21,10 @@ const TopInnerElement = (props: any) => {
                 <option value="">5</option>
             </select>
 
-            <button className={`${total.btn} ${total.btn_add} ${s.topInner_btn}`}>
+            <NavLink to='/main/addTeams' className={`${total.btn} ${total.btn_add} ${s.topInner_btn}`}>
                 <span>Add</span>
                 <span>+</span>
-            </button>
+            </NavLink>
         </div>
     )
 }

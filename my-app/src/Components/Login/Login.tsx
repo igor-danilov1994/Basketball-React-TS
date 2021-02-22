@@ -1,13 +1,12 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import s from './Login.module.css'
 import img from './images/loginImg.png'
-import passShow from './images/passShow.png'
-import passHidden from './images/passHidden.png'
 import total from '../../totalStyle.module.css'
 import {NavLink} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
 import {connect} from 'react-redux'
 import {getAuthUserData} from "../../Redux/toolkit/authReducer";
+import {getToken} from "../../Redux/toolkit/selectors";
 
 
 const Login = (props: any) => {
@@ -56,7 +55,7 @@ const Login = (props: any) => {
 }
 
 const mapStateToProps = (state: any) => ({
-    token: state.auth.token
+    //token: getToken(state)
 })
 
 const LoginContainer = connect(mapStateToProps, {getAuthUserData})(Login);
