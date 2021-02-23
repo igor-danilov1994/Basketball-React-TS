@@ -1,5 +1,6 @@
 import {createAction, createReducer} from "@reduxjs/toolkit";
 import {authAPI} from "../../API/api";
+import {isBoolean} from "util";
 
 export type InitialStateType = typeof initialState
 
@@ -7,7 +8,7 @@ const initialState = {
     isAuth: false as boolean,
     isRegistered: false as boolean,
     name: null as string | null,
-    token: null as string | null
+    token: null as string | null,
 };
 
 const SIGN_IN: any = createAction('APP/SRC/REDUX/AUTH/SIGN_IN')

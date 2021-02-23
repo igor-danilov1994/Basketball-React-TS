@@ -1,25 +1,58 @@
 .login {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  background: #F5FBFF;
+  height: 100vh;
+  width: 100%;
+}
+.login_form {
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 120px;
+  height: 100%;
+  width: 100%;
+}
+.login_form h1 {
+  text-align: left;
+}
+.login_form button {
+  width: 100%;
+  margin-bottom: 24px;
+}
+.login_form span {
+  color: #303030;
+}
+.login_form span a {
+  color: #E4163A;
+  margin-left: 5px;
 }
 .login_formItem {
   display: flex;
   flex-direction: column;
-}
-.login form button {
-  width: 100%;
-}
-
-.passInput {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
+  text-align: left;
+  margin-bottom: 24px;
 }
-.passInput img {
+.login_formItem label {
+  margin-bottom: 8px;
+}
+.login_formItem span {
+  position: absolute;
+  bottom: -22px;
+  color: red;
+}
+.login_formItem img {
   position: absolute;
   right: 5px;
+  bottom: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+.login_img {
+  padding: 0 114px;
 }
 
 /*# sourceMappingURL=Login.module.css.map */

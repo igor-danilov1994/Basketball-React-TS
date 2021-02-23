@@ -1,52 +1,49 @@
-import React from 'react'
+import React, {useState} from 'react'
 import s from './Login.module.css'
 import img from './images/loginImg.png'
+import passHidden from './images/passHidden.png'
+import passShow from './images/passShow.png'
 import total from '../../totalStyle.module.css'
 import {NavLink} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
 import {connect} from 'react-redux'
 import {getAuthUserData} from "../../Redux/toolkit/authReducer";
-import {getToken} from "../../Redux/toolkit/selectors";
 
 
 const Login = (props: any) => {
+
+    const {register, handleSubmit, errors} = useForm()
+    const [show, toggleShowPass] = useState(false)
 
     const onSubmit = (data: object) => {
         props.getAuthUserData(data)
     }
 
-    const {register, handleSubmit} = useForm()
-
 
     return (
         <div className={s.login}>
-            <div>
-                <div>
-                    <h1>Sign In</h1>
-                </div>
+            <div className={s.login_form}>
+                <h1>Sign In</h1>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className={s.login_formItem}>
-                        <label>Login</label>
+                        <label className={`${total.text_middle14} ${total.text}`}>Login</label>
                         <input name='login' ref={register} type="text"/>
+                        {errors.login && <span>First name is required</span>}
                     </div>
                     <div className={s.login_formItem}>
-                        <label>Password</label>
+                        <label className={`${total.text_middle14} ${total.text}`}>Password</label>
                         <input name='password' ref={register} type="text"/>
-                        {/*<img alt='imgHidden' src={passHidden}/>
-                        <img alt='img' src={passShow}/>*/}
+                        {errors.password && <span>First name is required</span>}
+                        <img onClick={() => toggleShowPass(!show)}
+                             src={show ? passShow : passHidden} alt='showPass'/>
                     </div>
                     <button className={`${total.btn} ${total.btn_add}`}>Sign In</button>
-
+                    <span className={`${total.text_middle14} ${total.text}`}> Not a member yet?
+                        <NavLink to='/signUp'>Sign up</NavLink>
+                    </span>
                 </form>
-                <div>
-                <span>Not a member yet?
-                    <NavLink to='/signUp'>
-                        Sign up
-                    </NavLink>
-                </span>
-                </div>
             </div>
-            <div>
+            <div className={s.login_img}>
                 <img alt='img' src={img}/>
             </div>
         </div>
@@ -55,7 +52,7 @@ const Login = (props: any) => {
 }
 
 const mapStateToProps = (state: any) => ({
-    //token: getToken(state)
+    showPass: state.auth.showPass
 })
 
 const LoginContainer = connect(mapStateToProps, {getAuthUserData})(Login);

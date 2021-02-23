@@ -1,20 +1,47 @@
 .login
   display: flex
-  justify-content: center
+  justify-content: space-between
   align-items: center
+  background: #F5FBFF
+  height: 100vh
+  width: 100%
+  &_form
+    background: #ffffff
+    display: flex
+    flex-direction: column
+    justify-content: center
+    padding: 0 120px
+    height: 100%
+    width: 100%
+    h1
+      text-align: left
+    button
+      width: 100%
+      margin-bottom: 24px
+    span
+      color: #303030
+      a
+        color: #E4163A
+        margin-left: 5px
   &_formItem
     display: flex
     flex-direction: column
-  form
-    button
-      width: 100%
+    position: relative
+    text-align: left
+    margin-bottom: 24px
+    label
+      margin-bottom: 8px
+    span
+      position: absolute
+      bottom: -22px
+      color: red
+    img
+      position: absolute
+      right: 5px
+      bottom: 5px
+      padding: 5px
+      cursor: pointer
+  &_img
+    padding: 0 114px
 
-.passInput
-  display: flex
-  justify-content: center
-  align-items: center
-  position: relative
 
-  img
-    position: absolute
-    right: 5px

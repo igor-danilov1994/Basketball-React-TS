@@ -1,14 +1,15 @@
 .app {
   text-align: center;
-  height: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  border: solid 1px red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: solid 2px #F6F6F6
 }
 .app-content {
   display: flex;
   justify-content: space-between;
-
 }
 
 .main {
