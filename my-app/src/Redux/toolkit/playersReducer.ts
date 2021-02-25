@@ -25,8 +25,6 @@ const initialState = {
 const GET_POSITIONS: any = createAction('APP/SRC/REDUX/PLAYERS/GET_POSITIONS')
 const GET_PLAYERS: any = createAction('APP/SRC/REDUX/PLAYERS/GET_PLAYERS')
 const ADD_PLAYER: any = createAction('APP/SRC/REDUX/PLAYERS/ADD_PLAYER')
-const SET_AGE: any = createAction('APP/SRC/REDUX/PLAYERS/SET_AGE')
-const SAVE_IMAGE: any = createAction('APP/SRC/REDUX/PLAYERS/SAVE_IMAGE')
 const SET_SERIAL_PLAYER_ID: any = createAction('APP/SRC/REDUX/PLAYERS/SET_SERIAL_PLAYER_ID')
 
 //Thunk
@@ -60,7 +58,7 @@ export const getAge = (birthday: any) => (dispatch: any) => {
     const FullYear = (birthday.getFullYear())
     const currentYear = new Date().getFullYear()
     const age = currentYear - FullYear
-    dispatch(SET_AGE(age))
+
 }
 
 export const savePlayers = (data: any) => async (dispatch: any) => {
@@ -107,10 +105,6 @@ export default createReducer(initialState, {
     [ADD_PLAYER]: (state, action) => {
         debugger
         state.data.push(action.payload)
-    },
-    [SET_AGE]: (state, action) => {
-        debugger
-        state.age = action.payload
     },
     [SET_SERIAL_PLAYER_ID]: (state, action) => {
         state.serialPlayerID = action.payload

@@ -1,0 +1,9 @@
+.select {
+  max-width: 364px;
+  width: 100%;
+}
+.select__control {
+  border: solid 1px red;
+}
+
+/*# sourceMappingURL=Select.module.css.map */
