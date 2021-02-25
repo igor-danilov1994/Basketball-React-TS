@@ -22,14 +22,14 @@ import {
     getSerialPlayerID,
     getSerialTeamID,
     getTeamsData,
-    getPagePlayer,
+    getPagePlayer, getUserName,
 } from "../../Redux/toolkit/selectors";
 
 const Main = (props: any) => {
-
+    //debugger
     useEffect(() => {
-        props.getTeams(null, props.pageTeam, props.pageSizeTeam)
-        props.getPlayers(null, props.pagePlayer, props.pageSizePlayer)
+        props.getTeams(props.name, props.pageTeam, props.pageSizeTeam)
+        props.getPlayers(props.name, props.pagePlayer, props.pageSizePlayer)
         props.getPosition()
         //props.getPlayer()
     }, [])
@@ -40,7 +40,7 @@ const Main = (props: any) => {
             <div className="app-content">
                 <Menu/>
                 <div className="main">
-                    {props.teamsCount !== 0 && <Redirect to="/main/players"/> }
+                    {props.teamsCount !== 0 && <Redirect to="/main/players"/>}
 
                     <Route path='/main/teams' render={() => <Teams/>}/>
                     <Route path='/main/teams_E' render={() => <TeamsEmpty/>}/>
@@ -73,11 +73,12 @@ let mapStateToProps = (state: any) => ({
     teamsData: getTeamsData(state),
     serialTeamID: getSerialTeamID(state),
     serialPlayerID: getSerialPlayerID(state),
-
+    name: getUserName(state),
     teamsCount: state.teams.count,
 
-
 })
+
+
 
 export default connect(mapStateToProps, {getTeams, getPlayers, getPosition})(Main)
 

@@ -1,13 +1,5 @@
 import {createSelector} from "reselect"
 
-
-export const getToken = (state: any) => {
-
-    return state.auth.token
-}
-
-
-
 export const getUserName = (state: any) => {
     let userName = state.auth.name
     return userName

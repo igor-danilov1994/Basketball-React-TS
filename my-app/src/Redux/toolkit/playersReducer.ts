@@ -25,7 +25,7 @@ const initialState = {
 const GET_POSITIONS: any = createAction('APP/SRC/REDUX/PLAYERS/GET_POSITIONS')
 const GET_PLAYERS: any = createAction('APP/SRC/REDUX/PLAYERS/GET_PLAYERS')
 const ADD_PLAYER: any = createAction('APP/SRC/REDUX/PLAYERS/ADD_PLAYER')
-const SET_NEW_PLAYER: any = createAction('APP/SRC/REDUX/PLAYERS/SET_PLAYER')
+const SET_AGE: any = createAction('APP/SRC/REDUX/PLAYERS/SET_AGE')
 const SAVE_IMAGE: any = createAction('APP/SRC/REDUX/PLAYERS/SAVE_IMAGE')
 const SET_SERIAL_PLAYER_ID: any = createAction('APP/SRC/REDUX/PLAYERS/SET_SERIAL_PLAYER_ID')
 
@@ -55,36 +55,32 @@ export const setPagePlayers = (name: string, pagePlayer: number, pageSizePlayer:
     }
 };*/
 
-const getBirthday = (birthday: string) => {
-    let month = (new Date().getMonth() + 1)
-    let FullYear = (new Date().getFullYear() - (+birthday))
-    let dayLast = new Date().getDate()
-    birthday = `${FullYear}` + "-" + "0" + `${month}` + "-" + "0" + `${dayLast}`
-    let dayLast2 = new Date()
-    return dayLast2
+export const getAge = (birthday: any) => (dispatch: any) => {
+    debugger
+    const FullYear = (birthday.getFullYear())
+    const currentYear = new Date().getFullYear()
+    const age = currentYear - FullYear
+    dispatch(SET_AGE(age))
 }
 
 export const savePlayers = (data: any) => async (dispatch: any) => {
-    data.birthday = Number(data.birthday)
     data.height = Number(data.height)
     data.number = Number(data.number)
     data.weight = Number(data.weight)
     data.team = Number(data.team)
 
-    data.birthday = getBirthday(data.birthday)
-
     const promise = await imageAPI.saveImage(data.avatarUrl[0])
     if (promise.status === 200) {
         data.avatarUrl = promise.data
-        dispatch(addPlayer(data))
+        dispatch(addPlayer(data, data.birthday))
     }
 };
 
-const addPlayer = (data: any) => async (dispatch: any) => {
-    debugger
+const addPlayer = (data: any, birthday: any) => async (dispatch: any) => {
     const promise = await playersAPI.addPlayers(data)
     if (promise.status === 200) {
-        debugger
+        dispatch(getAge(birthday))
+
         dispatch(ADD_PLAYER(promise.data));
     }
 };
@@ -111,6 +107,10 @@ export default createReducer(initialState, {
     [ADD_PLAYER]: (state, action) => {
         debugger
         state.data.push(action.payload)
+    },
+    [SET_AGE]: (state, action) => {
+        debugger
+        state.age = action.payload
     },
     [SET_SERIAL_PLAYER_ID]: (state, action) => {
         state.serialPlayerID = action.payload

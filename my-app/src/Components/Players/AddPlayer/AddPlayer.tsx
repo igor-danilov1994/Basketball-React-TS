@@ -6,36 +6,51 @@ import Block_Buttons from "../../../assets/FornControl/Blocl_Buttons/Blocl_Butto
 import {useForm} from "react-hook-form";
 import {connect} from "react-redux";
 import arrowImg from '../../../assets/images/link.png'
+import calendar from '../images/calendar.png'
 import {savePlayers} from '../../../Redux/toolkit/playersReducer';
-import {
-    getCurrentPosition,
-    getPlayerName,
-    getTeamsId,
-    getTeamsNames
-} from '../../../Redux/toolkit/selectors';
+import {getPlayerName, getTeamsId, getTeamsNames} from '../../../Redux/toolkit/selectors';
+import CalendarComponent from './Calendar/CalendarComponent';
+
+//let birthday: string
 
 const AddPlayer = (props: any) => {
-    const onSubmit = (data: any) => {
-        props.savePlayers(data)
-    }
-    const [activeRotate, setActiveRotate] = useState(false)
-    const [activeImgLoading, setActiveImgLoading] = useState(false)
 
     const {register, handleSubmit} = useForm()
+    const [activeRotatePosition, setActiveRotatePosition] = useState(false)
+    const [activeRotateTeam, setActiveRotateTeam] = useState(false)
+    const [activeImgLoading, setActiveImgLoading] = useState(false)
+    const [showCalendar, setShowCalendar] = useState(false)
+    const [birthday, onChangeBirthday] = useState('');
+    const [birthdayData, onChangeBirthdayData] = useState('');
 
-    let toggleRotateImg = () => {
-        setActiveRotate(!activeRotate)
+    let getBirthday = (date: any) => {
+        let month = (date.getMonth() + 1)
+        let FullYear = (date.getFullYear())
+        let dayLast = date.getDate()
+
+        let birthday: string = `${dayLast}.${month}.${FullYear}`
+
+        onChangeBirthday(birthday)
+        onChangeBirthdayData(date)
     }
-    let toggleShowImgLoading = () => {
-        setActiveImgLoading(!activeImgLoading)
+
+    const onSubmit = (data: any) => {
+        data.birthday = birthdayData
+        props.savePlayers(data)
     }
+
+    let setBirthday = (e: any) => {
+        onChangeBirthday(e.target.value)
+    }
+
+
     return (
         <div className={f.add}>
             <div className={total.breadCrumbs}>
                 Main/Players/NamePlayers
             </div>
             <div className={f.add_form}>
-                <div className={f.add_form_img} onClick={toggleShowImgLoading}>
+                <div className={f.add_form_img} onClick={() => setActiveImgLoading(!activeImgLoading)}>
                     <AddImages/>
                     <input className={activeImgLoading ? `${f.active}` : ""}
                            name='avatarUrl' ref={register}
@@ -51,10 +66,16 @@ const AddPlayer = (props: any) => {
                         <div className={f.add_form_data}>
                             <label className={total.text}>Position</label>
                             <div className={total.select}
-                                 onClick={toggleRotateImg}>
+                                 onClick={() => setActiveRotatePosition(!activeRotatePosition)}>
                                 <img
-                                    className={activeRotate ? `${total.select_imgRotateOn}` : `${total.select_imgRotateOff}`}
+                                    className={activeRotatePosition ? `${total.select_imgRotateOn}` : `${total.select_imgRotateOff}`}
                                     src={arrowImg} alt="arrow"/>
+
+                                {/* <SelectComponent name="position" ref={register}
+                                                 options={props.positions} isMulti={false}
+                                                 closeMenuOnSelect={true}
+                                />
+*/}
                                 <select name="position" ref={register}>
                                     {props.positions.map((p: any) =>
                                         <option key={p} value={p}>{p}</option>
@@ -64,10 +85,9 @@ const AddPlayer = (props: any) => {
                         </div>
                         <div className={f.add_form_data}>
                             <label className={total.text}>Team</label>
-                            <div className={total.select}
-                                 onClick={toggleRotateImg}>
+                            <div className={total.select} onClick={() => setActiveRotateTeam(!activeRotateTeam)}>
                                 <img
-                                    className={activeRotate ? `${total.select_imgRotateOn}` : `${total.select_imgRotateOff}`}
+                                    className={activeRotateTeam ? `${total.select_imgRotateOn}` : `${total.select_imgRotateOff}`}
                                     src={arrowImg} alt="arrow"/>
                                 <select name="team" ref={register}>
                                     {props.teamsName.map((names: any, id: number) =>
@@ -93,7 +113,16 @@ const AddPlayer = (props: any) => {
                             <div className={f.properties_options}>
                                 <div className={`${f.properties_data} ${f.add_form_data}`}>
                                     <label>Birthday</label>
-                                    <input name='birthday' ref={register} type="text"/>
+                                    <div className={`${f.properties_data_calendar}`}>
+                                        <input placeholder='dd.mm.yy' value={birthday} onChange={setBirthday}
+                                               name='birthday' ref={register} type="text"/>
+
+                                        <img onClick={() => setShowCalendar(!showCalendar)} src={calendar}
+                                             alt="calendar"/>
+
+                                        {showCalendar && <CalendarComponent getBirthday={getBirthday}/>}
+
+                                    </div>
                                 </div>
                                 <div className={`${f.properties_data} ${f.add_form_data}`}>
                                     <label>Number</label>

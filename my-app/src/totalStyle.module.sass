@@ -147,17 +147,18 @@ input, select
   justify-content: space-between
   background-color: $LightestGrey1
   padding: 26px 0
-  select
-    background: #ffffff
-    border: 0.5px solid $LightestGrey1
-    -webkit-appearance: none
-    -moz-appearance: none
-    appearance: none
+  &_options
+    display: flex
+    justify-content: space-between
+    width: 66%
   &_search
     position: relative
+    max-width: 364px
+    width: 364px
     input
       background: #ffffff
       border: 0.5px solid $LightestGrey1
+      width: 100%
     img
       cursor: pointer
       position: absolute

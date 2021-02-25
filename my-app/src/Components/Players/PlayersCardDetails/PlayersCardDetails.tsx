@@ -1,5 +1,5 @@
 import React from 'react';
-import {getPlayersData, getSerialPlayerID, getTeamsNames} from '../../../Redux/toolkit/selectors';
+import { getPlayersData, getSerialPlayerID, getTeamsNames} from '../../../Redux/toolkit/selectors';
 import s from '../../../assets/Style/CardDetails/CardDetails.module.css'
 import total from '../../../totalStyle.module.css'
 import {connect} from "react-redux";
@@ -16,6 +16,7 @@ const PlayersCardDetails = (props: any) => {
     let deletePlayers = () => {
         props.deletePlayer(dataPlayers.id)
     }
+
     return (
         <div className={s.cardDetails_wrapper}>
 

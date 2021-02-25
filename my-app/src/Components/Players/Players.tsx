@@ -1,4 +1,5 @@
 import React from 'react'
+
 import s from './Players.module.css'
 import PlayerCard from "./PlayerCard/PlayersСard";
 import Pagination from "../Pagination/Pagiation";
@@ -14,18 +15,26 @@ import {NavLink, Redirect} from "react-router-dom";
 import total from "../../totalStyle.module.css";
 import searchIcon from "../../assets/images/search.png";
 import {setPagePlayers} from "../../Redux/toolkit/playersReducer";
+import SelectComponent from "../SelectComponent/SelectComponent";
+
 
 const Players = (props: any) => {
-
+    //debugger
     return (
         <>
             {props.playersCount !== 0 ?
                 <div className={s.players}>
                     <div className={total.topElement}>
-                        <div className={total.topElement_search}>
-                            <input type="text" placeholder='Search...'/>
-                            <img src={searchIcon} alt="search"/>
+                        <div className={total.topElement_options}>
+                            <div className={total.topElement_search}>
+                                <input type="text" placeholder='Search...'/>
+                                <img src={searchIcon} alt="search"/>
+                            </div>
+                            <SelectComponent options={props.playersName} isMulti={true}
+                                             closeMenuOnSelect={false}
+                            />
                         </div>
+
                         <NavLink to='/main/addPlayer'
                                  className={`${total.btn} ${total.btn_add} ${total.topElement_btn}`}>
                             <span>Add</span>

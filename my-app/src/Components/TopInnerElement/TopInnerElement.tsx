@@ -12,14 +12,7 @@ const TopInnerElement = (props: any) => {
                 <img src={searchIcon} alt="search"/>
             </div>
 
-            <select>
-                <option disabled value="">Select...</option>
-                <option value="">1</option>
-                <option value="">2</option>
-                <option value="">3</option>
-                <option value="">4</option>
-                <option value="">5</option>
-            </select>
+
 
             <NavLink to='/main/addTeams' className={`${total.btn} ${total.btn_add} ${s.topInner_btn}`}>
                 <span>Add</span>

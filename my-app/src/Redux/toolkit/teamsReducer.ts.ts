@@ -24,6 +24,7 @@ export const SET_SERIAL_TEAM_ID: any = createAction('APP/SRC/REDUX/PLAYERS/SET_S
 
 //Thunk
 export const setTeam = (data: any, getCurrentTeamID: number) => async (dispatch: any) => {
+    debugger
     const promise = await imageAPI.saveImage(data.imageUrl[0])
     if (promise.status === 200) {
         data.imageUrl = promise.data

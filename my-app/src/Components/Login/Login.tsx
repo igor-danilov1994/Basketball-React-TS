@@ -19,7 +19,6 @@ const Login = (props: any) => {
         props.getAuthUserData(data)
     }
 
-
     return (
         <div className={s.login}>
             <div className={s.login_form}>
@@ -28,10 +27,12 @@ const Login = (props: any) => {
                     <div className={s.login_formItem}>
                         <label className={`${total.text_middle14} ${total.text}`}>Login</label>
                         <input name='login' ref={register} type="text"/>
+                      {/*  <input name='login' ref={register({ required: true })} type="text"/>*/}
                         {errors.login && <span>First name is required</span>}
                     </div>
                     <div className={s.login_formItem}>
                         <label className={`${total.text_middle14} ${total.text}`}>Password</label>
+                       {/* <input name='password' ref={register({ required: true })} type="text"/>*/}
                         <input name='password' ref={register} type="text"/>
                         {errors.password && <span>First name is required</span>}
                         <img onClick={() => toggleShowPass(!show)}

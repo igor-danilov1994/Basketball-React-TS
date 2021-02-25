@@ -17,9 +17,11 @@ const Registration = (props: any) => {
     const [show, toggleShowPass] = useState(false)
     const [showThis, toggleShowDoublePass] = useState(false)
 
-    const onSubmit = (data: object) => {
+    const onSubmit = (data: any) => {
         debugger
-        props.getConfirmationAuthUser(data)
+        if (data.password === data.doublePass) {
+            props.getConfirmationAuthUser(data)
+        }
     }
 
     if (props.isRegistered) {
@@ -50,8 +52,8 @@ const Registration = (props: any) => {
                     </div>
                     <div className={s.login_formItem}>
                         <label >Enter your password again</label>
-                        <input name="DoublePass" ref={register({ required: true })} type="text"/>
-                        {errors.DoublePass && <span>First name is required</span>}
+                        <input name="doublePass" ref={register({ required: true })} type="text"/>
+                        {errors.doublePass && <span>First name is required</span>}
                         <img onClick={() => toggleShowDoublePass(!showThis)}
                              src={showThis ? passShow : passHidden} alt='showPass'/>
                     </div>

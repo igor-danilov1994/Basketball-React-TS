@@ -55,5 +55,14 @@
 .properties_data {
   width: 45%;
 }
+.properties_data_calendar {
+  position: relative;
+}
+.properties_data_calendar img {
+  cursor: pointer;
+  position: absolute;
+  right: 12px;
+  top: calc( 100% - 26px);
+}
 
 /*# sourceMappingURL=FormControl.module.css.map */

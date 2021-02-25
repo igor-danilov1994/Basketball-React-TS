@@ -149,19 +149,20 @@ input:focus, select:focus {
   background-color: #F6F6F6;
   padding: 26px 0;
 }
-.topElement select {
-  background: #ffffff;
-  border: 0.5px solid #F6F6F6;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+.topElement_options {
+  display: flex;
+  justify-content: space-between;
+  width: 66%;
 }
 .topElement_search {
   position: relative;
+  max-width: 364px;
+  width: 364px;
 }
 .topElement_search input {
   background: #ffffff;
   border: 0.5px solid #F6F6F6;
+  width: 100%;
 }
 .topElement_search img {
   cursor: pointer;
