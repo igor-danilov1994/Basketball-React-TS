@@ -26,14 +26,13 @@ import {
 } from "../../Redux/toolkit/selectors";
 
 const Main = (props: any) => {
-    //debugger
+
     useEffect(() => {
-        props.getTeams(props.name, props.pageTeam, props.pageSizeTeam)
-        props.getPlayers(props.name, props.pagePlayer, props.pageSizePlayer)
+        //props.getTeams(props.name, props.pageTeam, props.pageSizeTeam)
+        //props.getPlayers(props.name, props.pagePlayer, props.pageSizePlayer)
         props.getPosition()
-        //props.getPlayer()
     }, [])
-//debugger
+
     return (
         <>
             <Header/>
@@ -80,6 +79,6 @@ let mapStateToProps = (state: any) => ({
 
 
 
-export default connect(mapStateToProps, {getTeams, getPlayers, getPosition})(Main)
+export default connect(mapStateToProps, {getPosition})(Main)
 
 

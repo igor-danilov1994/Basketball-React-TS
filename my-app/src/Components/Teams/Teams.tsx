@@ -1,15 +1,21 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import s from './Teams.module.css'
 import TeamsCard from "./TeamsCard/TeamsCard";
 import Pagination from "../Pagination/Pagiation";
 import {getPageSizeTeam, getPageTeam, getTeamsCount, getTeamsData} from "../../Redux/toolkit/selectors";
+import {getTeams} from "../../Redux/toolkit/teamsReducer.ts";
 import {connect} from "react-redux";
 import {NavLink, Redirect} from "react-router-dom";
-import {setPageTeams} from "../../Redux/toolkit/teamsReducer.ts";
+import {setTeamsRequest, setPageTeams, setTeamSerialId} from "../../Redux/toolkit/teamsReducer.ts";
 import searchIcon from "../../assets/images/search.png";
 import total from "../../totalStyle.module.css";
 
 const Teams = (props: any) => {
+
+    useEffect(() => {
+        props.getTeams(props.name, props.pageTeam, props.pageSizeTeam)
+    }, [props.pageTeam, props.pageSizeTeam])
+
     return (
         <>
             {props.teamsCount !== 0 ?
@@ -31,8 +37,10 @@ const Teams = (props: any) => {
 
                     <div className={s.teams_card}>
                         {props.teams.map((teams: any, id: number) =>
-                            <NavLink key={teams.id} to='/main/teamsCardDetails'>
+                            <NavLink key={teams.id} to='/main/teamsCardDetails'
+                                     onClick={() => props.setTeamSerialId(teams.id)}>
                                 <TeamsCard imageUrl={teams.imageUrl}
+                                           teams={teams}
                                            name={teams.name}
                                            foundationYear={teams.foundationYear}
                                            division={teams.division}
@@ -42,8 +50,9 @@ const Teams = (props: any) => {
                         )}
                     </div>
                     <div className={s.teamsPagination}>
-                        <Pagination pageCount={props.teamsCount} setPage={props.setPageTeams}
-                                    page={props.teamsPage} pageSize={props.pageSizeTeam}/>
+                        <Pagination pageCount={props.teamsCount} setRequest={props.setTeamsRequest}
+                            //setPage={props.setPageTeams}
+                        />
                     </div>
                 </div>
                 : <Redirect to="/main/teams_E"/>}
@@ -56,9 +65,9 @@ let mapStateToProps = (state: any) => ({
     state: state,
     teams: getTeamsData(state),
     teamsCount: getTeamsCount(state),
-    teamsPage: getPageTeam(state),
-    pageSizeTeam: getPageSizeTeam(state)
+    pageTeam: getPageTeam(state),
+    pageSizeTeam: getPageSizeTeam(state),
 
 })
 
-export default connect(mapStateToProps, {setPageTeams})(Teams)
+export default connect(mapStateToProps, {getTeams, setTeamsRequest, setTeamSerialId, setPageTeams})(Teams)

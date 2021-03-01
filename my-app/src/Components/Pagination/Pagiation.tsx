@@ -1,16 +1,32 @@
-import React, {useState, CSSProperties} from 'react'
+import React, {useState, CSSProperties, useEffect} from 'react'
 import s from './Pagination.module.css'
 import showCountCard from '../../assets/images/link.png'
 import ReactPaginate from "react-paginate";
 import {connect} from 'react-redux';
+import {
+    getPagePlayer,
+    getPageSizePlayer,
+    getPlayersCount,
+    getUserName
+} from "../../Redux/toolkit/selectors";
+import {getTeams} from "../../Redux/toolkit/teamsReducer.ts";
+import {getPlayers, setPlayersRequest} from "../../Redux/toolkit/playersReducer";
 
 export interface toggleCountCard {
     [Key: string]: CSSProperties;
 }
 
 const Pagination = (props: any) => {
-    const [page, setPage] = useState(props.pageSize)
+
+    const [page, setPage] = useState(props.pagePlayer)
+    const [size, setSize] = useState(props.pageSizePlayer)
     const [select, setPageSelect] = useState(false)
+
+    useEffect(() => {
+        props.setRequest(page, size)
+    }, [page, size])
+
+
 
     const styles: toggleCountCard = {
         setCountCardShow: {
@@ -22,15 +38,15 @@ const Pagination = (props: any) => {
     }
 
     let handlePageClick = (e: any) => {
-        props.setPage(null, e.selected + 1, props.pageSize)
+        setPage(e.selected + 1)
     }
 
     let setCountCard = (e: any,) => {
-        props.setPage(null, null, e.currentTarget.value)
-        setPage(e.currentTarget.value)
+        setSize(e.currentTarget.value)
         setPageSelect(!select)
     }
 
+    //debugger
     return (
         <div className={s.pagination_wrapper}>
             <ReactPaginate
@@ -38,9 +54,9 @@ const Pagination = (props: any) => {
                 nextLabel={''}
                 breakLabel={'...'}
                 breakClassName={`${s.breakMe}`}
-                pageCount={props.pageCount / page}
-                marginPagesDisplayed={2}
-                pageRangeDisplayed={5}
+                pageCount={props.pageCount / size}
+                marginPagesDisplayed={5}
+                pageRangeDisplayed={6}
                 onPageChange={handlePageClick}
                 containerClassName={`${s.pagination}`}
                 //subContainerClassName={'pages pagination'}
@@ -56,7 +72,7 @@ const Pagination = (props: any) => {
                 </ul>
                 <div className={s.pagination_currentCard} onClick={() => setPageSelect(!select)}>
                     <span>
-                        {page}
+                        {size}
                     </span>
                     <img className={select ? `${s.pagination_currentCard_rotate}` : ''}
                          src={showCountCard} alt="icon"/>
@@ -66,6 +82,11 @@ const Pagination = (props: any) => {
     )
 }
 
-let mapStateToProps = (state: any) => ({})
+let mapStateToProps = (state: any) => ({
+    state: state,
+    name: getUserName(state),
+    pagePlayer: getPagePlayer(state),
+    pageSizePlayer: getPageSizePlayer(state),
+})
 
-export default connect(mapStateToProps)(Pagination)
+export default connect(mapStateToProps, {getTeams, getPlayers})(Pagination)

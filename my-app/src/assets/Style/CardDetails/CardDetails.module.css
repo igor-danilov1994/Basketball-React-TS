@@ -5,6 +5,12 @@
   border-bottom-right-radius: 10px;
   color: #ffffff;
 }
+.cardDetails_teams {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  width: 100%;
+}
 .cardDetails_wrapper {
   width: 100%;
 }
@@ -44,6 +50,37 @@
   flex-direction: column;
   align-items: flex-start;
   width: 50%;
+}
+.cardDetails_roster {
+  border: 0.5px solid #9C9C9C;
+  border-radius: 10px;
+  margin-top: 24px;
+  background: #FFFFFF;
+}
+.cardDetails_roster table {
+  width: 100%;
+}
+.cardDetails_roster tr {
+  display: flex;
+  justify-content: space-between;
+  height: 56px;
+  background: #FFFFFF;
+  border-top: 0.5px solid #9C9C9C;
+}
+.cardDetails_roster_info {
+  display: flex;
+  align-items: center;
+}
+.cardDetails_roster_info_img {
+  width: 100%;
+}
+.cardDetails_roster_info_img img {
+  width: 52px;
+}
+.cardDetails_roster_info_descr {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
 }
 
 /*# sourceMappingURL=CardDetails.module.css.map */

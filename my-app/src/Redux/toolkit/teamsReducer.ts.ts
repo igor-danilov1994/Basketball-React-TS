@@ -20,6 +20,8 @@ const initialState = {
 
 const GET_TEAM: any = createAction('APP/SRC/REDUX/PLAYERS/GET_TEAMS')
 const ADD_TEAM: any = createAction('APP/SRC/REDUX/PLAYERS/ADD_TEAM')
+const SET_TEAM_PAGE: any = createAction('APP/SRC/REDUX/PLAYERS/SET_TEAM_PAGE')
+const SET_TEAM_SIZE: any = createAction('APP/SRC/REDUX/PLAYERS/SET_TEAM_SIZE')
 export const SET_SERIAL_TEAM_ID: any = createAction('APP/SRC/REDUX/PLAYERS/SET_SERIAL_TEAM_ID')
 
 //Thunk
@@ -36,8 +38,21 @@ export const setTeam = (data: any, getCurrentTeamID: number) => async (dispatch:
     }
 };
 
+
+export const setTeamsRequest = (pageTeam: number, pageSizeTeam: number) => async (dispatch: any) => {
+    dispatch(SET_TEAM_PAGE(pageTeam))
+    dispatch(SET_TEAM_SIZE(pageSizeTeam))
+};
+
 export const addTeam = (data: any) => async (dispatch: any) => {
     const promise = await teamsAPI.addTeam(data)
+    if (promise.status === 200) {
+        dispatch(ADD_TEAM(promise.data))
+    }
+};
+
+export const getTeam = (id: number) => async (dispatch: any) => {
+    const promise = await teamsAPI.getTeam(id)
     if (promise.status === 200) {
         dispatch(ADD_TEAM(promise.data))
     }
@@ -74,16 +89,21 @@ export const getTeams = (name: string, pageTeam: number, pageSizeTeam: number) =
 
 export default createReducer(initialState, {
     [GET_TEAM]: (state, action) => {
-
         state.data = action.payload.data
         state.count = action.payload.count
         state.pageSizeTeam = action.payload.size
     },
     [ADD_TEAM]: (state, action) => {
-        state.data.push(action.payload)
+        state.data = action.payload
     },
     [SET_SERIAL_TEAM_ID]: (state, action) => {
         state.serialTeamID = action.payload
+    },
+    [SET_TEAM_PAGE]: (state, action) => {
+        state.pageTeam = action.payload
+    },
+    [SET_TEAM_SIZE]: (state, action) => {
+        state.pageSizeTeam = action.payload
     },
 })
 

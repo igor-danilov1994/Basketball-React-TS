@@ -40,7 +40,6 @@ export const playersAPI: any = {
         return promise
     },
     async getPlayer(id: number) {
-
         const promise = await instance.get('/api/Player/Get', {
             params: {
                 id: id
@@ -119,6 +118,14 @@ export const teamsAPI: any = {
                 Name: name,
                 Page: pageTeam,
                 PageSize: pageSizeTeam
+            },
+        })
+        return promise
+    },
+    async getTeam(id: number) {
+        const promise = await instance.get('/api/Team/Get', {
+            params: {
+                id: id
             },
         })
         return promise

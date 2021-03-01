@@ -24,7 +24,10 @@ const initialState = {
 
 const GET_POSITIONS: any = createAction('APP/SRC/REDUX/PLAYERS/GET_POSITIONS')
 const GET_PLAYERS: any = createAction('APP/SRC/REDUX/PLAYERS/GET_PLAYERS')
+const SET_PLAYER: any = createAction('APP/SRC/REDUX/PLAYERS/SET_PLAYER')
 const ADD_PLAYER: any = createAction('APP/SRC/REDUX/PLAYERS/ADD_PLAYER')
+const SET_PLAYER_PAGE: any = createAction('APP/SRC/REDUX/PLAYERS/SET_PLAYER_PAGE')
+const SET_PLAYER_SIZE: any = createAction('APP/SRC/REDUX/PLAYERS/SET_PLAYER_SIZE')
 const SET_SERIAL_PLAYER_ID: any = createAction('APP/SRC/REDUX/PLAYERS/SET_SERIAL_PLAYER_ID')
 
 //Thunk
@@ -35,31 +38,26 @@ export const getPosition = () => async (dispatch: any) => {
     }
 };
 
+export const setPlayersRequest = (pagePlayer: number, pageSizePlayer: number) => async (dispatch: any) => {
+    dispatch(SET_PLAYER_PAGE(pagePlayer))
+    dispatch(SET_PLAYER_SIZE(pageSizePlayer))
+};
+
 export const getPlayers = (name: string, pagePlayer: number, pageSizePlayer: number) => async (dispatch: any) => {
     const promise = await playersAPI.getPlayers(name, pagePlayer, pageSizePlayer)
     if (promise.status === 200) {
+
         dispatch(GET_PLAYERS(promise.data));
     }
 };
 
-export const setPagePlayers = (name: string, pagePlayer: number, pageSizePlayer: number) => async (dispatch: any) => {
-    dispatch(getPlayers(name, pagePlayer, pageSizePlayer))
-};
 
-/*export const getPlayer = (playersID: number) => async (dispatch: any) => {
-    const promise = await playersAPI.getPlayer(playersID)
+export const getPlayer = (ID: number) => async (dispatch: any) => {
+    const promise = await playersAPI.getPlayer(ID)
     if (promise.status === 200) {
-        dispatch(GET_PLAYERS(promise.data));
+        dispatch(SET_PLAYER(promise.data));
     }
-};*/
-
-export const getAge = (birthday: any) => (dispatch: any) => {
-    debugger
-    const FullYear = (birthday.getFullYear())
-    const currentYear = new Date().getFullYear()
-    const age = currentYear - FullYear
-
-}
+};
 
 export const savePlayers = (data: any) => async (dispatch: any) => {
     data.height = Number(data.height)
@@ -70,15 +68,13 @@ export const savePlayers = (data: any) => async (dispatch: any) => {
     const promise = await imageAPI.saveImage(data.avatarUrl[0])
     if (promise.status === 200) {
         data.avatarUrl = promise.data
-        dispatch(addPlayer(data, data.birthday))
+        dispatch(addPlayer(data))
     }
 };
 
-const addPlayer = (data: any, birthday: any) => async (dispatch: any) => {
+const addPlayer = (data: any) => async (dispatch: any) => {
     const promise = await playersAPI.addPlayers(data)
     if (promise.status === 200) {
-        dispatch(getAge(birthday))
-
         dispatch(ADD_PLAYER(promise.data));
     }
 };
@@ -99,15 +95,24 @@ export default createReducer(initialState, {
     },
     [GET_PLAYERS]: (state, action) => {
         state.data = action.payload.data
-        state.count = action.payload.count
+        state.pagePlayer = action.payload.page
         state.pageSizePlayer = action.payload.size
+        state.count = action.payload.count
     },
     [ADD_PLAYER]: (state, action) => {
-        debugger
         state.data.push(action.payload)
     },
     [SET_SERIAL_PLAYER_ID]: (state, action) => {
         state.serialPlayerID = action.payload
+    },
+    [SET_PLAYER_SIZE]: (state, action) => {
+        state.pageSizePlayer = action.payload
+    },
+    [SET_PLAYER_PAGE]: (state, action) => {
+        state.pagePlayer = action.payload
+    },
+    [SET_PLAYER]: (state, action) => {
+        state.data = action.payload
     },
 
 })
