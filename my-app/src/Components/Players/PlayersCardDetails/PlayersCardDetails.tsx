@@ -1,10 +1,9 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     getPlayersData,
     getSerialPlayerID,
     getSerialTeamID,
     getTeamsData,
-    getTeamsNames
 } from '../../../Redux/toolkit/selectors';
 import s from '../../../assets/Style/CardDetails/CardDetails.module.css'
 import total from '../../../totalStyle.module.css'
@@ -15,17 +14,11 @@ import {getTeam} from "../../../Redux/toolkit/teamsReducer.ts";
 
 
 const PlayersCardDetails = (props: any) => {
+    //debugger
+    const [age, setAge] = useState<null | number>(null)
 
-    useEffect(() => {
-        props.getPlayer(props.serialPlayerID)
-        props.getTeam(props.serialTeamsID)
-        return () => {
-            debugger
-        }
-    }, [])
-
-    let dataPlayer = props.players
-    let currentTeamName = props.team.name
+    let dataPlayer = props.players[props.serialPlayerID]
+    let currentTeamName = props.team[props.serialPlayerID].name
     let ROOT_IMAGES: string = 'http://dev.trainee.dex-it.ru'
 
 
@@ -33,22 +26,30 @@ const PlayersCardDetails = (props: any) => {
         props.deletePlayer(props.players.id)
     }
 
-    const getAgePlayer = (birthday: string) => {
-        let currentBirthday: string = birthday.slice(0, 4)
+    const getAgePlayer = () => {
+        let currentBirthday: string = dataPlayer.birthday.slice(0, 4)
         const currentYear = new Date().getFullYear()
-        const age = currentYear - (Number(currentBirthday))
 
-        return age
+        const result = currentYear - (Number(currentBirthday))
+
+        setAge(result)
+        return result
     }
 
-    //let agePlayer =  getAgePlayer(dataPlayer.birthday)
+    if (dataPlayer.birthday && age === null) {
+
+        let age = getAgePlayer()
+
+        setAge(age)
+    }
 
     return (
         <div className={s.cardDetails_wrapper}>
 
-            <BreadCrumbs katigories={'Players'}
-                         delete={deletePlayers}
-                         pathAfterDeletion={'players'} name={dataPlayer.name}/>
+            <BreadCrumbs katigories={'Players'} delete={deletePlayers}
+                         pathAfterDeletion={'players'} name={dataPlayer.name}
+                         editPath={'addPlayer'}
+            />
 
             <div className={s.cardDetails}>
                 <div className={s.cardDetails_img}>
@@ -91,7 +92,7 @@ const PlayersCardDetails = (props: any) => {
                         <div className={s.cardDetails_description_main}>
                             <div className={s.cardDetails_skill}>
                                 <h3 className={total.text_middle}>Age</h3>
-                                <span className={total.text_small}> {} </span>
+                                <span className={total.text_small}> {age} </span>
                             </div>
                         </div>
 

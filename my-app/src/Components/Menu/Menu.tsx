@@ -9,13 +9,15 @@ import {NavLink, Redirect} from 'react-router-dom';
 import {connect} from "react-redux";
 import total from '../../totalStyle.module.css'
 import {signOut} from "../../Redux/toolkit/authReducer";
+import {getPageSizeTeam, getPageTeam, getUserName} from "../../Redux/toolkit/selectors";
+import {getTeams} from "../../Redux/toolkit/teamsReducer.ts";
 
 
 const Menu = (props: any) => {
 
     const [active, setActive] = useState(false)
 
-    const ABC = () => {
+    const toggleActive = () => {
         setActive(!active)
     }
 
@@ -23,15 +25,15 @@ const Menu = (props: any) => {
         <nav className={s.nav}>
             <div className={s.nav_header}>
 
-                <div className={`${s.nav_item} ${s.menu_players}`}>
-                    <NavLink onClick={ABC} to='/main/teams'>
+                <div onClick={toggleActive} className={`${s.nav_item} ${s.menu_players}`}>
+                    <NavLink to='/main/teams'>
                         <img src={active ? teamsShow : teamsHidden} alt="img"/>
                         <span className={total.text_extraSmall}>Teams</span>
                     </NavLink>
                 </div>
 
                 <div className={`${s.nav_item} ${s.menu_players}`}>
-                    <NavLink onClick={ABC} to='/main/players'>
+                    <NavLink onClick={toggleActive} to='/main/players'>
                         <img src={active ? playersHidden : playersShow} alt="img"/>
                         <span className={total.text_extraSmall}>Players</span>
                     </NavLink>
@@ -52,9 +54,11 @@ const Menu = (props: any) => {
 
 
 const mapStateToProps = (state: any) => ({
-    name: state.auth.name
+    name: getUserName(state),
+    pageTeam: getPageTeam(state),
+    pageSizeTeam: getPageSizeTeam(state),
 })
 
-export default connect(mapStateToProps, {signOut})(Menu);
+export default connect(mapStateToProps, {getTeams, signOut})(Menu);
 
 

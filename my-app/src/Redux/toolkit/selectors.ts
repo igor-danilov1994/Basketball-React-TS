@@ -69,7 +69,6 @@ export const getPlayersID = (state: any) => {
 }
 
 export const getSerialPlayerID = (state: any) => {
-    //debugger
     let serialPlayerID = state.players.serialPlayerID
     return serialPlayerID
 }
@@ -110,12 +109,14 @@ export const getPagePlayer = (state: any) => {
 
 export const getPlayersOfCurrentTeam = (state: any) => {
     let arr = state.players.data
-    let serialTeamsID = state.teams.serialTeamID
+    let teamId = state.teams.data[state.teams.serialTeamID].id
 
     let playersOfCurrentTeam: Array<string> = []
-    arr.map((obj: any) => obj.team === 239 ? playersOfCurrentTeam.push(obj) : '')
+    arr.map((obj: any) => obj.team === teamId ? playersOfCurrentTeam.push(obj) : '')
     return playersOfCurrentTeam
 }
+
+
 
 
 

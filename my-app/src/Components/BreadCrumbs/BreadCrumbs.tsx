@@ -5,12 +5,11 @@ import deleteIcon from "../../assets/images/delete-icon.png";
 import {NavLink} from "react-router-dom";
 
 let BreadCrumbs = (props: any) => {
-
     return (
         <div className={total.breadCrumbs}>
             <span> Main / {props.katigories} / {props.name} </span>
             <div className={total.breadCrumbs_img}>
-                <NavLink to={`/main/${props.path}`}>
+                <NavLink to={`/main/${props.editPath}`}>
                     <img src={createIcon} alt="createIcon"/>
                 </NavLink>
                 <NavLink onClick={props.delete} to={`/main/${props.pathAfterDeletion}`}>

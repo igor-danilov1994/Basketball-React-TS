@@ -24,6 +24,7 @@ const initialState = {
 
 const GET_POSITIONS: any = createAction('APP/SRC/REDUX/PLAYERS/GET_POSITIONS')
 const GET_PLAYERS: any = createAction('APP/SRC/REDUX/PLAYERS/GET_PLAYERS')
+const GET_ALL_PLAYERS: any = createAction('APP/SRC/REDUX/PLAYERS/GET_ALL_PLAYERS')
 const SET_PLAYER: any = createAction('APP/SRC/REDUX/PLAYERS/SET_PLAYER')
 const ADD_PLAYER: any = createAction('APP/SRC/REDUX/PLAYERS/ADD_PLAYER')
 const SET_PLAYER_PAGE: any = createAction('APP/SRC/REDUX/PLAYERS/SET_PLAYER_PAGE')
@@ -39,6 +40,7 @@ export const getPosition = () => async (dispatch: any) => {
 };
 
 export const setPlayersRequest = (pagePlayer: number, pageSizePlayer: number) => async (dispatch: any) => {
+
     dispatch(SET_PLAYER_PAGE(pagePlayer))
     dispatch(SET_PLAYER_SIZE(pageSizePlayer))
 };
@@ -46,8 +48,7 @@ export const setPlayersRequest = (pagePlayer: number, pageSizePlayer: number) =>
 export const getPlayers = (name: string, pagePlayer: number, pageSizePlayer: number) => async (dispatch: any) => {
     const promise = await playersAPI.getPlayers(name, pagePlayer, pageSizePlayer)
     if (promise.status === 200) {
-
-        dispatch(GET_PLAYERS(promise.data));
+        dispatch(GET_PLAYERS(promise.data))
     }
 };
 
@@ -95,9 +96,11 @@ export default createReducer(initialState, {
     },
     [GET_PLAYERS]: (state, action) => {
         state.data = action.payload.data
-        state.pagePlayer = action.payload.page
-        state.pageSizePlayer = action.payload.size
         state.count = action.payload.count
+    },
+    [GET_ALL_PLAYERS]: (state, action) => {
+      state.data.push(action.payload.data)
+
     },
     [ADD_PLAYER]: (state, action) => {
         state.data.push(action.payload)

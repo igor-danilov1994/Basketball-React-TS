@@ -11,8 +11,10 @@ import searchIcon from "../../assets/images/search.png";
 import total from "../../totalStyle.module.css";
 
 const Teams = (props: any) => {
+    //debugger
 
     useEffect(() => {
+        //debugger
         props.getTeams(props.name, props.pageTeam, props.pageSizeTeam)
     }, [props.pageTeam, props.pageSizeTeam])
 
@@ -36,22 +38,22 @@ const Teams = (props: any) => {
                     </div>
 
                     <div className={s.teams_card}>
-                        {props.teams.map((teams: any, id: number) =>
+                        {props.teams.map((teams: any, index: number) =>
                             <NavLink key={teams.id} to='/main/teamsCardDetails'
-                                     onClick={() => props.setTeamSerialId(teams.id)}>
-                                <TeamsCard imageUrl={teams.imageUrl}
-                                           teams={teams}
-                                           name={teams.name}
-                                           foundationYear={teams.foundationYear}
-                                           division={teams.division}
-                                           id={id} key={teams.id}
-                                />
+                                     onClick={() => props.setTeamSerialId(index)}
+                            >
+
+                                <TeamsCard team={teams} key={index} index={index}/>
+
                             </NavLink>
                         )}
                     </div>
                     <div className={s.teamsPagination}>
-                        <Pagination pageCount={props.teamsCount} setRequest={props.setTeamsRequest}
-                            //setPage={props.setPageTeams}
+                        <Pagination
+                            page={props.pageTeam}
+                            pageSize={props.pageSizeTeam}
+                            pageCount={props.teamsCount}
+                            setRequest={props.setTeamsRequest}
                         />
                     </div>
                 </div>
@@ -64,8 +66,8 @@ const Teams = (props: any) => {
 let mapStateToProps = (state: any) => ({
     state: state,
     teams: getTeamsData(state),
-    teamsCount: getTeamsCount(state),
     pageTeam: getPageTeam(state),
+    teamsCount: getTeamsCount(state),
     pageSizeTeam: getPageSizeTeam(state),
 
 })

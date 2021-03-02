@@ -17,15 +17,14 @@ export interface toggleCountCard {
 }
 
 const Pagination = (props: any) => {
-
-    const [page, setPage] = useState(props.pagePlayer)
-    const [size, setSize] = useState(props.pageSizePlayer)
+    //debugger
+    const [page, setPage] = useState(props.page)
+    const [size, setSize] = useState(props.pageSize)
     const [select, setPageSelect] = useState(false)
 
     useEffect(() => {
         props.setRequest(page, size)
     }, [page, size])
-
 
 
     const styles: toggleCountCard = {
@@ -83,10 +82,7 @@ const Pagination = (props: any) => {
 }
 
 let mapStateToProps = (state: any) => ({
-    state: state,
     name: getUserName(state),
-    pagePlayer: getPagePlayer(state),
-    pageSizePlayer: getPageSizePlayer(state),
 })
 
 export default connect(mapStateToProps, {getTeams, getPlayers})(Pagination)

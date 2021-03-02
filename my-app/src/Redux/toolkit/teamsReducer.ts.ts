@@ -91,7 +91,6 @@ export default createReducer(initialState, {
     [GET_TEAM]: (state, action) => {
         state.data = action.payload.data
         state.count = action.payload.count
-        state.pageSizeTeam = action.payload.size
     },
     [ADD_TEAM]: (state, action) => {
         state.data = action.payload

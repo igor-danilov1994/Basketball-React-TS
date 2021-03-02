@@ -57,6 +57,9 @@
   margin-top: 24px;
   background: #FFFFFF;
 }
+.cardDetails_roster_aTable {
+  display: flex;
+}
 .cardDetails_roster table {
   width: 100%;
 }
@@ -66,21 +69,27 @@
   height: 56px;
   background: #FFFFFF;
   border-top: 0.5px solid #9C9C9C;
+  padding: 0 32px;
+}
+.cardDetails_roster tr td {
+  display: flex;
+  align-items: center;
+}
+.cardDetails_roster tr td img {
+  width: 52px;
 }
 .cardDetails_roster_info {
   display: flex;
   align-items: center;
-}
-.cardDetails_roster_info_img {
   width: 100%;
-}
-.cardDetails_roster_info_img img {
-  width: 52px;
 }
 .cardDetails_roster_info_descr {
   display: flex;
   flex-direction: column;
   margin-left: 10px;
+}
+.cardDetails_roster_info_descr span {
+  text-align: left;
 }
 
 /*# sourceMappingURL=CardDetails.module.css.map */

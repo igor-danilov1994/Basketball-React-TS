@@ -4,27 +4,25 @@ import s from '../../../assets/Style/CardDetails/CardDetails.module.css'
 import total from '../../../totalStyle.module.css'
 import {connect} from "react-redux";
 import BreadCrumbs from '../../BreadCrumbs/BreadCrumbs';
-import {getTeam, deleteTeam} from "../../../Redux/toolkit/teamsReducer.ts";
+import {getTeams, getTeam, deleteTeam} from "../../../Redux/toolkit/teamsReducer.ts";
 import TeamRoster from './TeamRoster';
 
 const TeamsCardDetails = (props: any) => {
-   let dataTeams = props.teams
+
+    let dataTeams = props.teams[props.serialTeamID]
+    //debugger
 
     let deleteTeam = () => {
-        //props.deleteTeam(dataTeams.id)
+        props.deleteTeam(dataTeams.id)
     }
-
-    useEffect(() => {
-        props.getTeam(props.serialTeamID)
-    }, [])
-
     let ROOT_IMAGES: string = 'http://dev.trainee.dex-it.ru'
+
 
     return (
         <div className={s.cardDetails_teams}>
             <div className={s.cardDetails_wrapper}>
                 <BreadCrumbs katigories={'Teams'}
-                             path={'addTeams'}
+                             editPath={'addTeams'}
                              pathAfterDeletion={'teams'}
                              name={dataTeams.name}
                              delete={deleteTeam}
@@ -68,15 +66,15 @@ const TeamsCardDetails = (props: any) => {
                 </div>
             </div>
 
-            <TeamRoster/>
+            <TeamRoster teamId={dataTeams.id}/>
         </div>
     )
 }
 
 let mapStateToProps = (state: any) => ({
-    players: getPlayersData(state),
+    //players: getPlayersData(state),
     teams: getTeamsData(state),
     serialTeamID: getSerialTeamID(state)
 })
 
-export default connect(mapStateToProps, {getTeam, deleteTeam})(TeamsCardDetails)
+export default connect(mapStateToProps, {getTeams, getTeam, deleteTeam})(TeamsCardDetails)

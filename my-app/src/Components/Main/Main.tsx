@@ -70,8 +70,8 @@ let mapStateToProps = (state: any) => ({
     positions: getCurrentPosition(state),
     players: getPlayersData(state),
     teamsData: getTeamsData(state),
-    serialTeamID: getSerialTeamID(state),
-    serialPlayerID: getSerialPlayerID(state),
+    //serialTeamID: getSerialTeamID(state),
+    //serialPlayerID: getSerialPlayerID(state),
     name: getUserName(state),
     teamsCount: state.teams.count,
 

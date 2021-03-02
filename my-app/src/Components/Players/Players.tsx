@@ -5,31 +5,26 @@ import PlayerCard from "./PlayerCard/PlayersСard";
 import Pagination from "../Pagination/Pagiation";
 import {connect} from "react-redux";
 import {
-    getAvatarUrl, getPagePlayer, getPageSizePlayer,
-    getPlayerName, getPlayersCount,
-    getPlayersID,
+    getPagePlayer, getPageSizePlayer,
+    getPlayersCount,
     getPlayersNames,
-    getPlayersNumber, getTeamsNames, getUserName
+    getTeamsNames, getUserName
 } from '../../Redux/toolkit/selectors';
 import {NavLink, Redirect} from "react-router-dom";
 import total from "../../totalStyle.module.css";
 import searchIcon from "../../assets/images/search.png";
 import {setPlayersRequest, getPlayers, setSerialPlayersID} from "../../Redux/toolkit/playersReducer";
-import {setTeamSerialId} from "../../Redux/toolkit/teamsReducer.ts";
+import {getTeams, setTeamSerialId} from "../../Redux/toolkit/teamsReducer.ts";
 import SelectComponent from "../SelectComponent/SelectComponent";
 
 
 const Players = (props: any) => {
-    //debugger
 
     useEffect(() => {
+        //debugger
         props.getPlayers(props.name, props.pagePlayer, props.pageSizePlayer)
+        props.getTeams(props.name, props.pagePlayer, props.pageSizePlayer)
     }, [props.pagePlayer, props.pageSizePlayer])
-
-    let ABC = (id: number, team: number) => {
-        props.setSerialPlayersID(id)
-        props.setTeamSerialId(team)
-    }
 
     return (
         <>
@@ -54,17 +49,20 @@ const Players = (props: any) => {
                     </div>
                     <div className={s.players_card}>
                         {props.players.map((players: any, index: number) =>
-                            <NavLink key={players.id} onClick={() => ABC(players.id, players.team)}
+                            <NavLink key={players.id} onClick={() => props.setSerialPlayersID(index)}
                                      to='/main/playersCardDetails'>
-                                <PlayerCard key={players.id}
-                                            index={index}
-                                            players={players}
+                                <PlayerCard key={index} index={index}
+                                            player={players}
 
                                 />
                             </NavLink>
                         )}
                     </div>
-                    <Pagination pageCount={props.playersCount} setRequest={props.setPlayersRequest}/>
+                    <Pagination
+                        page={props.pagePlayer}
+                        pageSize={props.pageSizePlayer}
+                        pageCount={props.playersCount}
+                        setRequest={props.setPlayersRequest}/>
                 </div>
                 : <Redirect to="/main/players_E"/>
             }
@@ -76,16 +74,10 @@ const Players = (props: any) => {
 const mapStateToProps = (state: any) => ({
     name: getUserName(state),
     playersCount: getPlayersCount(state),
-    playersPage: getPagePlayer(state),
-    avatar: getAvatarUrl(state),
-    playersID: getPlayersID(state),
-    number: getPlayersNumber(state),
-    playersName: getPlayersNames(state),
-    avatarUrl: getAvatarUrl(state),
-    playerName: getPlayerName(state),
-    teams: getTeamsNames(state),
     pagePlayer: getPagePlayer(state),
+    playersName: getPlayersNames(state),
+    teamsName: getTeamsNames(state),
     pageSizePlayer: getPageSizePlayer(state),
 })
-export default connect(mapStateToProps, {setPlayersRequest, getPlayers, setSerialPlayersID, setTeamSerialId})(Players)
+export default connect(mapStateToProps, {getTeams, setPlayersRequest, getPlayers, setSerialPlayersID, setTeamSerialId})(Players)
 
