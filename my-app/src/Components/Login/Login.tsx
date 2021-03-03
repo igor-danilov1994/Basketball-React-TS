@@ -26,17 +26,26 @@ const Login = (props: any) => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className={s.login_formItem}>
                         <label className={`${total.text_middle14} ${total.text}`}>Login</label>
-                        <input name='login' ref={register} type="text"/>
-                      {/*  <input name='login' ref={register({ required: true })} type="text"/>*/}
-                        {errors.login && <span>First name is required</span>}
+                          <input name='login' ref={register({ required: true })} type="text"/>
+                        {errors.login &&
+                            <span className={s.login_formItem_error}>Login is required</span>}
+                        {props.signInError &&
+                        <span className={s.login_formItem_error}>Wrong login or password</span>}
                     </div>
                     <div className={s.login_formItem}>
                         <label className={`${total.text_middle14} ${total.text}`}>Password</label>
-                       {/* <input name='password' ref={register({ required: true })} type="text"/>*/}
-                        <input name='password' ref={register} type="text"/>
-                        {errors.password && <span>First name is required</span>}
-                        <img onClick={() => toggleShowPass(!show)}
-                             src={show ? passShow : passHidden} alt='showPass'/>
+
+                        <div className={s.login_formItem_pass}>
+                            <input name='password' ref={register({required: true})}
+                                   type={show ? 'text' : 'password'}/>
+                            <img onClick={() => toggleShowPass(!show)}
+                                 src={show ? passShow : passHidden} alt='showPass'/>
+                        </div>
+                        {errors.password &&
+                            <span className={s.login_formItem_error}>Password required</span>}
+                        {props.signInError &&
+                            <span className={s.login_formItem_error}>Wrong login or password</span>}
+
                     </div>
                     <button className={`${total.btn} ${total.btn_add}`}>Sign In</button>
                     <span className={`${total.text_middle14} ${total.text}`}> Not a member yet?
@@ -53,7 +62,7 @@ const Login = (props: any) => {
 }
 
 const mapStateToProps = (state: any) => ({
-    showPass: state.auth.showPass
+    signInError: state.auth.signInError
 })
 
 const LoginContainer = connect(mapStateToProps, {getAuthUserData})(Login);

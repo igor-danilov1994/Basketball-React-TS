@@ -40,7 +40,6 @@ export const getPosition = () => async (dispatch: any) => {
 };
 
 export const setPlayersRequest = (pagePlayer: number, pageSizePlayer: number) => async (dispatch: any) => {
-
     dispatch(SET_PLAYER_PAGE(pagePlayer))
     dispatch(SET_PLAYER_SIZE(pageSizePlayer))
 };
@@ -79,8 +78,8 @@ const addPlayer = (data: any) => async (dispatch: any) => {
         dispatch(ADD_PLAYER(promise.data));
     }
 };
-export const deletePlayer = (getCurrentPlayersID: number) => async (dispatch: any) => {
-    const promise = await playersAPI.deletePlayers(getCurrentPlayersID)
+export const deletePlayer = (id: number) => async (dispatch: any) => {
+    const promise = await playersAPI.deletePlayers(id)
     if (promise.status === 200) {
         //dispatch(ADD_PLAYER(promise.data));
     }

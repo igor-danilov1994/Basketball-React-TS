@@ -23,7 +23,7 @@ const PlayersCardDetails = (props: any) => {
 
 
     let deletePlayers = () => {
-        props.deletePlayer(props.players.id)
+        props.deletePlayer(dataPlayer.id)
     }
 
     const getAgePlayer = () => {

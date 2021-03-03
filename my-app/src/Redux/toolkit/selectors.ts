@@ -28,6 +28,17 @@ export const getTeamsNames = createSelector(getTeamsData, (data) => {
     return names
 })
 
+export const getTeamsForId = (state: any) => {
+    let names: Array<string> = []
+    let teams = state.teams.data
+    let serialTeamID = state.teams.serialTeamID
+    teams.map((obj: any) => obj.id === serialTeamID ? names.push(obj) : '')
+
+    //console.log(names)
+    return names
+}
+
+
 export const getTeamsId = (state: any) => {
     let id: Array<number> = []
     state.teams.data.map((obj: any) => id.push(obj.id))

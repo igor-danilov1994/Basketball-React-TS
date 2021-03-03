@@ -9,26 +9,39 @@ const initialState = {
     isRegistered: false as boolean,
     name: null as string | null,
     token: null as string | null,
+    signUpError: false,
+    signInError: false,
 };
 
 const SIGN_IN: any = createAction('APP/SRC/REDUX/AUTH/SIGN_IN')
+const SIGN_IN_ERROR: any = createAction('APP/SRC/REDUX/AUTH/SIGN_IN_ERROR')
 const SIGN_UP: any = createAction('APP/SRC/REDUX/AUTH/SIGN_UP')
+const SIGN_UP_ERROR: any = createAction('APP/SRC/REDUX/AUTH/SIGN_UP_ERROR')
 export const SIGN_OUT: any = createAction('APP/SRC/REDUX/AUTH/SIGN_OUT')
 
 //Thunk
 export const getConfirmationAuthUser = (data: object) => async (dispatch: any) => {
-    let response = await authAPI.signUp(data)
-    if (response.status === 200) {
-        dispatch(SIGN_UP(response.data));
+    try {
+        let response = await authAPI.signUp(data)
+        if (response.status === 200) {
+            dispatch(SIGN_UP(response.data));
+        }
+    } catch (error) {
+        dispatch( SIGN_UP_ERROR() );
     }
+
 };
 
 export const getAuthUserData = (data: object) => async (dispatch: any) => {
-    let response = await authAPI.signIn(data)
-    if (response.status === 200) {
-        localStorage.removeItem(('token'))
-        localStorage.setItem('token', response.data.token )
-        dispatch(SIGN_IN(response.data))
+    try {
+        let response = await authAPI.signIn(data)
+        if (response.status === 200) {
+            localStorage.removeItem(('token'))
+            localStorage.setItem('token', response.data.token)
+            dispatch(SIGN_IN(response.data))
+        }
+    } catch (error) {
+        dispatch( SIGN_IN_ERROR() )
     }
 };
 
@@ -45,6 +58,12 @@ export default createReducer(initialState, {
     },
     [SIGN_UP]: (state, action) => {
         state.isRegistered = true
+    },
+    [SIGN_UP_ERROR]: (state, action) => {
+        state.signUpError = true
+    },
+    [SIGN_IN_ERROR]: (state, action) => {
+        state.signInError = true
     },
     [SIGN_OUT]: (state) => {
         state.isAuth = false

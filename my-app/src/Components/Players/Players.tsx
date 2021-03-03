@@ -6,9 +6,7 @@ import Pagination from "../Pagination/Pagiation";
 import {connect} from "react-redux";
 import {
     getPagePlayer, getPageSizePlayer,
-    getPlayersCount,
-    getPlayersNames,
-    getTeamsNames, getUserName
+    getPlayersCount, getPlayersData, getPlayersNames, getUserName
 } from '../../Redux/toolkit/selectors';
 import {NavLink, Redirect} from "react-router-dom";
 import total from "../../totalStyle.module.css";
@@ -18,10 +16,19 @@ import {getTeams, setTeamSerialId} from "../../Redux/toolkit/teamsReducer.ts";
 import SelectComponent from "../SelectComponent/SelectComponent";
 
 
-const Players = (props: any) => {
+type PropsType = {
+    name: string
+    players: Array<any>
+    playersName: Array<string>
+    playersCount: number
+    pagePlayer: number
+    pageSizePlayer: number
+}
 
+const Players: React.FC<PropsType> = (props: any) => {
+    debugger
     useEffect(() => {
-        //debugger
+        debugger
         props.getPlayers(props.name, props.pagePlayer, props.pageSizePlayer)
         props.getTeams(props.name, props.pagePlayer, props.pageSizePlayer)
     }, [props.pagePlayer, props.pageSizePlayer])
@@ -52,7 +59,7 @@ const Players = (props: any) => {
                             <NavLink key={players.id} onClick={() => props.setSerialPlayersID(index)}
                                      to='/main/playersCardDetails'>
                                 <PlayerCard key={index} index={index}
-                                            player={players}
+                                            player={players} teamId={players.team}
 
                                 />
                             </NavLink>
@@ -73,10 +80,10 @@ const Players = (props: any) => {
 
 const mapStateToProps = (state: any) => ({
     name: getUserName(state),
+    players: getPlayersData(state),
+    playersName: getPlayersNames(state),
     playersCount: getPlayersCount(state),
     pagePlayer: getPagePlayer(state),
-    playersName: getPlayersNames(state),
-    teamsName: getTeamsNames(state),
     pageSizePlayer: getPageSizePlayer(state),
 })
 export default connect(mapStateToProps, {getTeams, setPlayersRequest, getPlayers, setSerialPlayersID, setTeamSerialId})(Players)

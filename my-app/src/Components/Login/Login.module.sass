@@ -19,28 +19,37 @@
       width: 100%
       margin-bottom: 24px
     span
-      color: #303030
       a
         color: #E4163A
         margin-left: 5px
   &_formItem
+    position: relative
     display: flex
     flex-direction: column
-    position: relative
     text-align: left
     margin-bottom: 24px
     label
       margin-bottom: 8px
-    span
+    input
+      width: 100%
+    &_error
       position: absolute
       bottom: -22px
       color: red
-    img
-      position: absolute
-      right: 5px
-      bottom: 5px
-      padding: 5px
-      cursor: pointer
+    &_pass
+      width: 100%
+      position: relative
+      display: flex
+      align-items: center
+      img
+        position: absolute
+        right: 10px
+        cursor: pointer
+    &_policy
+      display: flex
+      margin-bottom: 24px
+      label
+        margin-left: 10px
   &_img
     padding: 0 114px
 

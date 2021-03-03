@@ -3,21 +3,15 @@ import s from './Pagination.module.css'
 import showCountCard from '../../assets/images/link.png'
 import ReactPaginate from "react-paginate";
 import {connect} from 'react-redux';
-import {
-    getPagePlayer,
-    getPageSizePlayer,
-    getPlayersCount,
-    getUserName
-} from "../../Redux/toolkit/selectors";
+import {getUserName} from "../../Redux/toolkit/selectors";
 import {getTeams} from "../../Redux/toolkit/teamsReducer.ts";
-import {getPlayers, setPlayersRequest} from "../../Redux/toolkit/playersReducer";
+import {getPlayers} from "../../Redux/toolkit/playersReducer";
 
 export interface toggleCountCard {
     [Key: string]: CSSProperties;
 }
 
 const Pagination = (props: any) => {
-    //debugger
     const [page, setPage] = useState(props.page)
     const [size, setSize] = useState(props.pageSize)
     const [select, setPageSelect] = useState(false)
@@ -45,7 +39,6 @@ const Pagination = (props: any) => {
         setPageSelect(!select)
     }
 
-    //debugger
     return (
         <div className={s.pagination_wrapper}>
             <ReactPaginate
@@ -58,7 +51,6 @@ const Pagination = (props: any) => {
                 pageRangeDisplayed={6}
                 onPageChange={handlePageClick}
                 containerClassName={`${s.pagination}`}
-                //subContainerClassName={'pages pagination'}
                 activeClassName={`${s.active}`}
             />
 

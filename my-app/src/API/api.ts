@@ -71,10 +71,10 @@ export const playersAPI: any = {
         })
         return promise
     },
-    async deletePlayers(getCurrentPlayersID: number) {
+    async deletePlayers(id: number) {
         const promise = await instance.delete('/api/Player/Delete', {
             params: {
-                'id': getCurrentPlayersID
+                'id': id
             }
         })
         return promise

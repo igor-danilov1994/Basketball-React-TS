@@ -22,34 +22,45 @@
   width: 100%;
   margin-bottom: 24px;
 }
-.login_form span {
-  color: #303030;
-}
 .login_form span a {
   color: #E4163A;
   margin-left: 5px;
 }
 .login_formItem {
+  position: relative;
   display: flex;
   flex-direction: column;
-  position: relative;
   text-align: left;
   margin-bottom: 24px;
 }
 .login_formItem label {
   margin-bottom: 8px;
 }
-.login_formItem span {
+.login_formItem input {
+  width: 100%;
+}
+.login_formItem_error {
   position: absolute;
   bottom: -22px;
   color: red;
 }
-.login_formItem img {
+.login_formItem_pass {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.login_formItem_pass img {
   position: absolute;
-  right: 5px;
-  bottom: 5px;
-  padding: 5px;
+  right: 10px;
   cursor: pointer;
+}
+.login_formItem_policy {
+  display: flex;
+  margin-bottom: 24px;
+}
+.login_formItem_policy label {
+  margin-left: 10px;
 }
 .login_img {
   padding: 0 114px;

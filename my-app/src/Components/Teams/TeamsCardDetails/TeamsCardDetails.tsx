@@ -8,7 +8,6 @@ import {getTeams, getTeam, deleteTeam} from "../../../Redux/toolkit/teamsReducer
 import TeamRoster from './TeamRoster';
 
 const TeamsCardDetails = (props: any) => {
-
     let dataTeams = props.teams[props.serialTeamID]
     //debugger
 

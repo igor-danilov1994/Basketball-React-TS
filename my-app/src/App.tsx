@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css'
-import {Redirect, Route} from "react-router-dom";
+import {Redirect, Route, Switch} from "react-router-dom";
 import Registration from "./Components/Registration/Registration";
 import LoginContainer from "./Components/Login/Login";
 import {compose} from "redux";
@@ -11,6 +11,7 @@ import {connect} from 'react-redux';
 function App(props: any) {
     return (
         <div className="app">
+            <Route path='' render={() => <Redirect to="/signIn"/>}/>
             {
                 props.isAuth ? <Redirect to="/main/"/>
                 : <Route exact path='/signIn' render={() => <LoginContainer/>}/>

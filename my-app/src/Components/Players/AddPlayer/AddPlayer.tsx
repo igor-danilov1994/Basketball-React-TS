@@ -11,7 +11,6 @@ import {savePlayers} from '../../../Redux/toolkit/playersReducer';
 import {getPlayerName, getTeamsId, getTeamsNames} from '../../../Redux/toolkit/selectors';
 import CalendarComponent from './Calendar/CalendarComponent';
 
-//let birthday: string
 
 const AddPlayer = (props: any) => {
 
@@ -27,7 +26,6 @@ const AddPlayer = (props: any) => {
         let month = (date.getMonth() + 1)
         let FullYear = (date.getFullYear())
         let dayLast = date.getDate()
-
         let birthday: string = `${dayLast}.${month}.${FullYear}`
 
         onChangeBirthday(birthday)
@@ -139,7 +137,7 @@ const AddPlayer = (props: any) => {
 }
 
 const mapStateToProps = (state: any) => ({
-        state: state,
+        positions: state.players.positions,
         teamsId: getTeamsId(state),
         playersName: getPlayerName(state),
         teamsName: getTeamsNames(state)

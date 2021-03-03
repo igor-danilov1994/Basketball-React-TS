@@ -1,12 +1,25 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import s from "../../../assets/Style/CardLayout/CardLayout.module.css";
 import {connect} from "react-redux";
-import {getTeamsNames} from "../../../Redux/toolkit/selectors";
+import {getTeamsForId, getTeamsNames} from "../../../Redux/toolkit/selectors";
+import {setTeamSerialId} from "../../../Redux/toolkit/teamsReducer.ts";
 
 const ROOT_IMAGES: string = 'http://dev.trainee.dex-it.ru'
 
 const PlayerCard = (props: any) => {
-    //debugger
+
+    const [nameTeam, setNameTeam] = useState('')
+
+    useEffect(() => {
+        //console.log(props.teamId)
+        props.setTeamSerialId(props.teamId)
+    }, [])
+
+
+    if (props.teamName.length > 0 && nameTeam === '') {
+        setNameTeam(props.teamName[0].name)
+    }
+
     return (
         <div className={s.cardLayout}>
             <div className={`${s.cardLayout_image} ${s.cardLayout_face}`}>
@@ -16,15 +29,16 @@ const PlayerCard = (props: any) => {
                     <span>{props.player.name}
                         <span>#{props.player.number}</span>
                     </span>
-                <span>{props.teamName[props.index]}</span>
+                {/*<span>{props.teamName[props.index]}</span> */}
+                <span>{nameTeam}</span>
             </div>
         </div>
     )
 }
 
 const mapStateToProps = (state: any) => ({
-    teamName: getTeamsNames(state)
+    teamName: getTeamsForId(state)
 })
 
 
-export default connect(mapStateToProps, {})(PlayerCard)
+export default connect(mapStateToProps, {setTeamSerialId})(PlayerCard)
