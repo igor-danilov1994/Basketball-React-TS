@@ -7,7 +7,6 @@ const rootReducer = combineReducers({
     auth: authReducer,
     players: playersReducer,
     teams: teamsReducer,
-
 })
 
 export const store = configureStore({

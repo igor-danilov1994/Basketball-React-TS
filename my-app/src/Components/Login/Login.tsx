@@ -9,14 +9,18 @@ import {useForm} from 'react-hook-form'
 import {connect} from 'react-redux'
 import {getAuthUserData} from "../../Redux/toolkit/authReducer";
 
+type LoginPropsType = {
+    signInError?: boolean
+    getAuthUserData: (data: object) => void
+}
 
-const Login = (props: any) => {
+const Login: React.FC<LoginPropsType> = ({signInError, getAuthUserData }) => {
 
     const {register, handleSubmit, errors} = useForm()
     const [show, toggleShowPass] = useState(false)
 
     const onSubmit = (data: object) => {
-        props.getAuthUserData(data)
+        getAuthUserData(data)
     }
 
     return (
@@ -26,25 +30,24 @@ const Login = (props: any) => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className={s.login_formItem}>
                         <label className={`${total.text_middle14} ${total.text}`}>Login</label>
-                          <input name='login' ref={register({ required: true })} type="text"/>
+                        <input name='login' ref={register({required: false})} type="text"/>
                         {errors.login &&
-                            <span className={s.login_formItem_error}>Login is required</span>}
-                        {props.signInError &&
-                        <span className={s.login_formItem_error}>Wrong login or password</span>}
+                        <span className={s.login_formItem_error}>Login is required</span>}
+                        {signInError &&
+                        <span className={s.login_formItem_error}>Wrong login or password. Please, try again</span>}
                     </div>
                     <div className={s.login_formItem}>
                         <label className={`${total.text_middle14} ${total.text}`}>Password</label>
 
                         <div className={s.login_formItem_pass}>
-                            <input name='password' ref={register({required: true})}
-                                   type={show ? 'text' : 'password'}/>
+                            <input name='password' ref={register({required: false})} type={show ? 'text' : 'password'}/>
                             <img onClick={() => toggleShowPass(!show)}
                                  src={show ? passShow : passHidden} alt='showPass'/>
                         </div>
                         {errors.password &&
-                            <span className={s.login_formItem_error}>Password required</span>}
-                        {props.signInError &&
-                            <span className={s.login_formItem_error}>Wrong login or password</span>}
+                        <span className={s.login_formItem_error}>Password required</span>}
+                        {signInError &&
+                        <span className={s.login_formItem_error}>Wrong login or password. Please, try again.</span>}
 
                     </div>
                     <button className={`${total.btn} ${total.btn_add}`}>Sign In</button>
@@ -61,11 +64,6 @@ const Login = (props: any) => {
     )
 }
 
-const mapStateToProps = (state: any) => ({
-    signInError: state.auth.signInError
-})
 
-const LoginContainer = connect(mapStateToProps, {getAuthUserData})(Login);
-
-export default LoginContainer
+export default connect(null, {getAuthUserData})(Login)
 

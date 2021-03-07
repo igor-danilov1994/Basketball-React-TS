@@ -1,12 +1,11 @@
 import {createAction, createReducer} from "@reduxjs/toolkit";
 import {authAPI} from "../../API/api";
-import {isBoolean} from "util";
 
 export type InitialStateType = typeof initialState
 
 const initialState = {
-    isAuth: false as boolean,
-    isRegistered: false as boolean,
+    isAuth: false,
+    isRegistered: false,
     name: null as string | null,
     token: null as string | null,
     signUpError: false,
@@ -27,7 +26,7 @@ export const getConfirmationAuthUser = (data: object) => async (dispatch: any) =
             dispatch(SIGN_UP(response.data));
         }
     } catch (error) {
-        dispatch( SIGN_UP_ERROR() );
+        dispatch(SIGN_UP_ERROR());
     }
 
 };
@@ -36,17 +35,14 @@ export const getAuthUserData = (data: object) => async (dispatch: any) => {
     try {
         let response = await authAPI.signIn(data)
         if (response.status === 200) {
-            localStorage.removeItem(('token'))
-            localStorage.setItem('token', response.data.token)
             dispatch(SIGN_IN(response.data))
         }
     } catch (error) {
-        dispatch( SIGN_IN_ERROR() )
+        dispatch(SIGN_IN_ERROR())
     }
 };
 
-export const signOut = () => async (dispatch: any) => {
-    //localStorage.removeItem(('token'))
+export const signOut = () => (dispatch: any) => {
     dispatch(SIGN_OUT())
 };
 
@@ -55,6 +51,7 @@ export default createReducer(initialState, {
         state.isAuth = true
         state.name = action.payload.name
         state.token = action.payload.token
+        //localStorage.setItem('token', action.payload.token)
     },
     [SIGN_UP]: (state, action) => {
         state.isRegistered = true
@@ -69,6 +66,7 @@ export default createReducer(initialState, {
         state.isAuth = false
         state.token = null
         state.name = null
+        localStorage.removeItem('token')
     },
 })
 

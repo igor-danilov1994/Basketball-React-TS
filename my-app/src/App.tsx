@@ -1,8 +1,8 @@
 import React from 'react'
 import './App.css'
-import {Redirect, Route, Switch} from "react-router-dom";
+import {Redirect, Route} from "react-router-dom";
 import Registration from "./Components/Registration/Registration";
-import LoginContainer from "./Components/Login/Login";
+import Login from "./Components/Login/Login";
 import {compose} from "redux";
 import Main from './Components/Main/Main';
 import {connect} from 'react-redux';
@@ -12,9 +12,8 @@ function App(props: any) {
     return (
         <div className="app">
             <Route path='' render={() => <Redirect to="/signIn"/>}/>
-            {
-                props.isAuth ? <Redirect to="/main/"/>
-                : <Route exact path='/signIn' render={() => <LoginContainer/>}/>
+            {props.isAuth ? <Redirect to="/main/"/>
+                : <Route exact path='/signIn' render={() => <Login/>}/>
             }
             <Route exact path='/signUp' render={() => <Registration/>}/>
 
@@ -24,7 +23,7 @@ function App(props: any) {
 }
 
 const mapStateToProps = (state: any) => ({
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
 })
 
 export default compose(connect(mapStateToProps)(App))

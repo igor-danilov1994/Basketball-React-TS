@@ -11,14 +11,22 @@ export interface toggleCountCard {
     [Key: string]: CSSProperties;
 }
 
-const Pagination = (props: any) => {
-    const [page, setPage] = useState(props.page)
-    const [size, setSize] = useState(props.pageSize)
+type PaginationPropsType = {
+    page: number
+    pageSize: number
+    setRequest: (currentPage: number, size: number) => void
+    pageCount: number
+}
+
+const Pagination: React.FC <PaginationPropsType> = ({page, pageSize, setRequest, pageCount} ) => {
+
+    const [currentPage, setCurrentPage] = useState(page)
+    const [size, setSize] = useState(pageSize)
     const [select, setPageSelect] = useState(false)
 
     useEffect(() => {
-        props.setRequest(page, size)
-    }, [page, size])
+        setRequest(currentPage, size)
+    }, [currentPage, size])
 
 
     const styles: toggleCountCard = {
@@ -31,7 +39,7 @@ const Pagination = (props: any) => {
     }
 
     let handlePageClick = (e: any) => {
-        setPage(e.selected + 1)
+        setCurrentPage(e.selected + 1)
     }
 
     let setCountCard = (e: any,) => {
@@ -46,7 +54,7 @@ const Pagination = (props: any) => {
                 nextLabel={''}
                 breakLabel={'...'}
                 breakClassName={`${s.breakMe}`}
-                pageCount={props.pageCount / size}
+                pageCount={pageCount / size}
                 marginPagesDisplayed={5}
                 pageRangeDisplayed={6}
                 onPageChange={handlePageClick}

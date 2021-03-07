@@ -12,30 +12,35 @@ import {NavLink, Redirect} from "react-router-dom";
 import total from "../../totalStyle.module.css";
 import searchIcon from "../../assets/images/search.png";
 import {setPlayersRequest, getPlayers, setSerialPlayersID} from "../../Redux/toolkit/playersReducer";
-import {getTeams, setTeamSerialId} from "../../Redux/toolkit/teamsReducer.ts";
+import {getTeams} from "../../Redux/toolkit/teamsReducer.ts";
 import SelectComponent from "../SelectComponent/SelectComponent";
 
-
-type PropsType = {
+type PlayersPropsType = {
     name: string
-    players: Array<any>
-    playersName: Array<string>
-    playersCount: number
     pagePlayer: number
     pageSizePlayer: number
+    playersCount: number
+    playersName: Array<string>
+    getPlayers: (name: string, pagePlayer: number, pageSizePlayer: number) => void
+    getTeams: (name: string, pagePlayer: number, pageSizePlayer: number) => void
+    setSerialPlayersID: (index: number) => void
+    setPlayersRequest: (pagePlayer: number, pageSizePlayer: number) => void
+    players: Array<any>
 }
 
-const Players: React.FC<PropsType> = (props: any) => {
-    debugger
+const Players: React.FC<PlayersPropsType> = (
+    {name, pagePlayer, getPlayers, players,
+        pageSizePlayer, playersCount, playersName
+    }) => {
+
     useEffect(() => {
-        debugger
-        props.getPlayers(props.name, props.pagePlayer, props.pageSizePlayer)
-        props.getTeams(props.name, props.pagePlayer, props.pageSizePlayer)
-    }, [props.pagePlayer, props.pageSizePlayer])
+        getPlayers(name, pagePlayer, pageSizePlayer)
+        getTeams(name, pagePlayer, pageSizePlayer)
+    }, [pagePlayer, pageSizePlayer])
 
     return (
         <>
-            {props.playersCount !== 0 ?
+            {playersCount !== 0 ?
                 <div className={s.players}>
                     <div className={total.topElement}>
                         <div className={total.topElement_options}>
@@ -43,7 +48,7 @@ const Players: React.FC<PropsType> = (props: any) => {
                                 <input type="text" placeholder='Search...'/>
                                 <img src={searchIcon} alt="search"/>
                             </div>
-                            <SelectComponent options={props.playersName} isMulti={true}
+                            <SelectComponent options={playersName} isMulti={true}
                                              closeMenuOnSelect={false}
                             />
                         </div>
@@ -55,8 +60,8 @@ const Players: React.FC<PropsType> = (props: any) => {
                         </NavLink>
                     </div>
                     <div className={s.players_card}>
-                        {props.players.map((players: any, index: number) =>
-                            <NavLink key={players.id} onClick={() => props.setSerialPlayersID(index)}
+                        {players.map((players: any, index: number) =>
+                            <NavLink key={players.id} onClick={() => setSerialPlayersID(index)}
                                      to='/main/playersCardDetails'>
                                 <PlayerCard key={index} index={index}
                                             player={players} teamId={players.team}
@@ -66,10 +71,10 @@ const Players: React.FC<PropsType> = (props: any) => {
                         )}
                     </div>
                     <Pagination
-                        page={props.pagePlayer}
-                        pageSize={props.pageSizePlayer}
-                        pageCount={props.playersCount}
-                        setRequest={props.setPlayersRequest}/>
+                        page={pagePlayer}
+                        pageSize={pageSizePlayer}
+                        pageCount={playersCount}
+                        setRequest={setPlayersRequest}/>
                 </div>
                 : <Redirect to="/main/players_E"/>
             }
@@ -86,5 +91,9 @@ const mapStateToProps = (state: any) => ({
     pagePlayer: getPagePlayer(state),
     pageSizePlayer: getPageSizePlayer(state),
 })
-export default connect(mapStateToProps, {getTeams, setPlayersRequest, getPlayers, setSerialPlayersID, setTeamSerialId})(Players)
+
+export default connect(mapStateToProps, {
+    getTeams, setPlayersRequest, getPlayers,
+    setSerialPlayersID
+})(Players)
 

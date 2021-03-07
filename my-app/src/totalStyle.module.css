@@ -84,7 +84,7 @@ select option {
 
 input, select {
   outline: none;
-  padding: 8px 12px;
+  padding: 12px;
   background: #F6F6F6;
   border-radius: 4px;
   border: none;

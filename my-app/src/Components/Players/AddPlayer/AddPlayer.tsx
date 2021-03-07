@@ -33,6 +33,7 @@ const AddPlayer = (props: any) => {
     }
 
     const onSubmit = (data: any) => {
+        debugger
         data.birthday = birthdayData
         props.savePlayers(data)
     }
@@ -51,7 +52,7 @@ const AddPlayer = (props: any) => {
                 <div className={f.add_form_img} onClick={() => setActiveImgLoading(!activeImgLoading)}>
                     <AddImages/>
                     <input className={activeImgLoading ? `${f.active}` : ""}
-                           name='avatarUrl' ref={register}
+                           name='avatarUrl' ref={register({ required: true })}
                            accept="image/*"
                            type="file"/>
                 </div>
@@ -59,7 +60,7 @@ const AddPlayer = (props: any) => {
                     <div>
                         <div className={f.add_form_data}>
                             <label className={total.text}>Name</label>
-                            <input name='name' ref={register} type="text"/>
+                            <input name='name' ref={register({ required: true })} type="text"/>
                         </div>
                         <div className={f.add_form_data}>
                             <label className={total.text}>Position</label>
@@ -69,12 +70,8 @@ const AddPlayer = (props: any) => {
                                     className={activeRotatePosition ? `${total.select_imgRotateOn}` : `${total.select_imgRotateOff}`}
                                     src={arrowImg} alt="arrow"/>
 
-                                {/* <SelectComponent name="position" ref={register}
-                                                 options={props.positions} isMulti={false}
-                                                 closeMenuOnSelect={true}
-                                />
-*/}
-                                <select name="position" ref={register}>
+
+                                <select name="position" ref={register({ required: true })}>
                                     {props.positions.map((p: any) =>
                                         <option key={p} value={p}>{p}</option>
                                     )}
@@ -87,7 +84,7 @@ const AddPlayer = (props: any) => {
                                 <img
                                     className={activeRotateTeam ? `${total.select_imgRotateOn}` : `${total.select_imgRotateOff}`}
                                     src={arrowImg} alt="arrow"/>
-                                <select name="team" ref={register}>
+                                <select name="team" ref={register({ required: true })}>
                                     {props.teamsName.map((names: any, id: number) =>
                                         <option key={props.teamsId[id]}
                                                 value={props.teamsId[id]}>
@@ -101,11 +98,11 @@ const AddPlayer = (props: any) => {
                             <div className={f.properties_options}>
                                 <div className={`${f.properties_data} ${f.add_form_data}`}>
                                     <label>Height (cm)</label>
-                                    <input name='height' ref={register} type="text"/>
+                                    <input name='height' ref={register({ required: true })} type="text"/>
                                 </div>
                                 <div className={`${f.properties_data} ${f.add_form_data}`}>
                                     <label>Weight (kg)</label>
-                                    <input name='weight' ref={register} type="text"/>
+                                    <input name='weight' ref={register({ required: true })} type="text"/>
                                 </div>
                             </div>
                             <div className={f.properties_options}>
@@ -113,7 +110,7 @@ const AddPlayer = (props: any) => {
                                     <label>Birthday</label>
                                     <div className={`${f.properties_data_calendar}`}>
                                         <input placeholder='dd.mm.yy' value={birthday} onChange={setBirthday}
-                                               name='birthday' ref={register} type="text"/>
+                                               name='birthday' ref={register({ required: true })} type="text"/>
 
                                         <img onClick={() => setShowCalendar(!showCalendar)} src={calendar}
                                              alt="calendar"/>
@@ -124,7 +121,7 @@ const AddPlayer = (props: any) => {
                                 </div>
                                 <div className={`${f.properties_data} ${f.add_form_data}`}>
                                     <label>Number</label>
-                                    <input name='number' ref={register} type="text"/>
+                                    <input name='number' ref={register({ required: true })} type="text"/>
                                 </div>
                             </div>
                         </div>

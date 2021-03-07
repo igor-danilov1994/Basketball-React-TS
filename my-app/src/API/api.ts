@@ -1,54 +1,67 @@
 import axios from "axios";
+import {fstat} from "fs";
 
-let token = localStorage.getItem('token')
 const instance = axios.create({
     baseURL: 'http://dev.trainee.dex-it.ru',
     headers: {
-        "Authorization": `Bearer ${token}`,
         'Content-Type': 'application/json',
         'accept': 'application/json',
     },
 });
 
-export const authAPI: any = {
-    async signUp(data: any) {
+type authAPI = {
+    signUp: (data: any) => any
+    signIn: (data: any) => any
+}
+
+export const authAPI: authAPI = {
+    async signUp(data) {
         const promise = await instance.post("/api/Auth/SignUp", {
-            "userName": data.userName, //name
-            "login": data.login, //login
-            "password": data.password //pass
-        })
-        return promise
-    },
-    async signIn(data: any) {
-        const promise = await instance.post("/api/Auth/SignIn", {
+            "userName": data.userName,
             "login": data.login,
             "password": data.password
         })
         return promise
+    },
+    async signIn(data) {
+        const promise = await instance.post("/api/Auth/SignIn", {
+            "login": data.login,
+            "password": data.password
+        })
+        localStorage.setItem('token', promise.data.token)
+        instance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
+        return promise
     }
 }
 
-export const Echo: any = {
+export const Echo: object = {
     echo() {
         return instance.get("/api/Echo/Ping")
     }
 }
 
-export const playersAPI: any = {
+type playersAPI = {
+    getPositions: () => any
+    getPlayer: (id: number) => any
+    getPlayers: (name: string, pagePlayer: number, pageSizePlayer: number) => any
+    addPlayers: (data: any) => any
+    deletePlayers: (id: number) => any
+}
+
+export const playersAPI: playersAPI = {
     async getPositions() {
         const promise = await instance.get('/api/Player/GetPositions')
         return promise
     },
-    async getPlayer(id: number) {
+    async getPlayer(id) {
         const promise = await instance.get('/api/Player/Get', {
             params: {
                 id: id
             }
         })
-
         return promise
     },
-    async getPlayers(name: string, pagePlayer: number, pageSizePlayer: number) {
+    async getPlayers(name, pagePlayer, pageSizePlayer) {
         const promise = await instance.get('/api/Player/GetPlayers', {
             params: {
                 Name: name,
@@ -58,7 +71,7 @@ export const playersAPI: any = {
         })
         return promise
     },
-    async addPlayers(data: any) {
+    async addPlayers(data) {
         const promise = await instance.post('/api/Player/Add', {
             "name": data.name,
             "number": data.number,
@@ -71,7 +84,7 @@ export const playersAPI: any = {
         })
         return promise
     },
-    async deletePlayers(id: number) {
+    async deletePlayers(id) {
         const promise = await instance.delete('/api/Player/Delete', {
             params: {
                 'id': id
@@ -80,9 +93,16 @@ export const playersAPI: any = {
         return promise
     }
 }
+type teamsApiType = {
+    addTeam: (data: any) => any
+    updateTeam: (data: any, getCurrentTeamID: number) => any
+    deleteTeam: (getCurrentTeamID: number) => any
+    getTeams: (name: string, pageTeam: number, pageSizeTeam: number) => any
+    getTeam: (id: number) => any
+}
 
-export const teamsAPI: any = {
-    async addTeam(data: any) {
+export const teamsAPI: teamsApiType = {
+    async addTeam(data) {
         const promise = await instance.post('/api/Team/Add', {
             "name": data.name,
             "foundationYear": data.foundationYear,
@@ -92,7 +112,7 @@ export const teamsAPI: any = {
         })
         return promise
     },
-    async updateTeam(data: any, getCurrentTeamID: number) {
+    async updateTeam(data, getCurrentTeamID) {
         const promise = await instance.put('/api/Team/Update', {
             "name": data.name,
             "foundationYear": data.foundationYear,
@@ -103,7 +123,7 @@ export const teamsAPI: any = {
         })
         return promise
     },
-    async deleteTeam(getCurrentTeamID: number) {
+    async deleteTeam(getCurrentTeamID) {
         const promise = await instance.delete('/api/Team/Delete', {
             params: {
                 'id': getCurrentTeamID
@@ -112,7 +132,7 @@ export const teamsAPI: any = {
         })
         return promise
     },
-    async getTeams(name: string, pageTeam: number, pageSizeTeam: number) {
+    async getTeams(name, pageTeam, pageSizeTeam) {
         const promise = await instance.get('/api/Team/GetTeams', {
             params: {
                 Name: name,
@@ -122,7 +142,7 @@ export const teamsAPI: any = {
         })
         return promise
     },
-    async getTeam(id: number) {
+    async getTeam(id) {
         const promise = await instance.get('/api/Team/Get', {
             params: {
                 id: id
@@ -132,9 +152,12 @@ export const teamsAPI: any = {
     },
 }
 
+type imageApiType = {
+    saveImage: (img: any) => any
+}
 
-export const imageAPI: any = {
-    async saveImage(img: any) {
+export const imageAPI: imageApiType = {
+    async saveImage(img) {
         const formData = new FormData()
         formData.append("file", img)
         const promise = await instance.post('/api/Image/SaveImage', formData, {
@@ -146,5 +169,3 @@ export const imageAPI: any = {
         return promise
     },
 }
-
-

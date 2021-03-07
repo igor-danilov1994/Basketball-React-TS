@@ -18,7 +18,7 @@ const initialState = {
     count: null as number | null,
     pagePlayer: 1,
     pageSizePlayer: 6,
-    positions: [],
+    positions: [] as Array<string>,
     serialPlayerID: null as number | null,
 };
 

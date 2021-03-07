@@ -8,7 +8,7 @@ import {store} from "./Redux/toolkit/redux-store";
 
 
 let state = store.getState()
-
+console.log('index')
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>

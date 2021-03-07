@@ -14,7 +14,7 @@ import {getTeam} from "../../../Redux/toolkit/teamsReducer.ts";
 
 
 const PlayersCardDetails = (props: any) => {
-    //debugger
+    debugger
     const [age, setAge] = useState<null | number>(null)
 
     let dataPlayer = props.players[props.serialPlayerID]

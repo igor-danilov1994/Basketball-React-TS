@@ -35,7 +35,7 @@ const AddTeams = (props: any) => {
                 <div className={f.add_form_img} onClick={toggleShowImgLoading}>
                     <AddImages/>
                     <input className={activeImgLoading ? `${f.active}` : ""}
-                           name='imageUrl' ref={register}
+                           name='imageUrl' ref={register({ required: true })}
                            accept="image/*"
                            type="file"/>
                 </div>
@@ -43,19 +43,19 @@ const AddTeams = (props: any) => {
                     <div>
                         <div className={f.add_form_data}>
                             <label className={total.text}>Name</label>
-                            <input name='name' ref={register} type="text"/>
+                            <input name='name' ref={register({ required: true })} type="text"/>
                         </div>
                         <div className={f.add_form_data}>
                             <label className={total.text}>Division</label>
-                            <input name='division' ref={register} type="text"/>
+                            <input name='division' ref={register({ required: true })} type="text"/>
                         </div>
                         <div className={f.add_form_data}>
                             <label className={total.text}>Conference</label>
-                            <input name='conference' ref={register} type="text"/>
+                            <input name='conference' ref={register({ required: true })} type="text"/>
                         </div>
                         <div className={f.add_form_data}>
                             <label className={total.text} htmlFor="">Year of foundation</label>
-                            <input name='foundationYear' ref={register} type="text"/>
+                            <input name='foundationYear' ref={register({ required: true })} type="text"/>
                         </div>
                     </div>
                     <Block_Buttons/>

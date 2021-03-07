@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import img from '../Login/images/reg.png'
 import s from '../Login/Login.module.css'
 import total from '../../totalStyle.module.css'
@@ -10,25 +10,37 @@ import {getConfirmationAuthUser} from "../../Redux/toolkit/authReducer";
 import passShow from "../Login/images/passShow.png";
 import passHidden from "../Login/images/passHidden.png";
 
+type onSubmitDataForm = {
+    userName: string
+    login: string
+    password: string
+    doublePass: string
+}
 
-const Registration = (props: any) => {
+type RegistrationPropsType = {
+    getConfirmationAuthUser: (data: onSubmitDataForm) => void
+    isRegistered: boolean
+    signUpError: boolean
+}
+
+const Registration: React.FC<RegistrationPropsType> = (
+    {isRegistered, signUpError, getConfirmationAuthUser}) => {
     const {register, handleSubmit, errors} = useForm();
     const [show, toggleShowPass] = useState(false)
     const [showThis, toggleShowDoublePass] = useState(false)
     const [matchingPasswords, setMatchingPasswords] = useState(false)
 
 
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: onSubmitDataForm) => {
         if (data.password === data.doublePass) {
-            props.getConfirmationAuthUser(data)
+            getConfirmationAuthUser(data)
         } else {
             setMatchingPasswords(true)
         }
     }
-    if (props.isRegistered){
+    if (isRegistered) {
         return <Redirect to="/signIn"/>
     }
-
 
 
     return (
@@ -47,7 +59,7 @@ const Registration = (props: any) => {
                         <input name="login" ref={register({required: true})} type="text"/>
                         {errors.login &&
                         <span className={s.login_formItem_error}>First name is required</span>}
-                        {props.signUpError &&
+                        {signUpError &&
                         <span className={s.login_formItem_error}>User with this login is already registered</span>}
                     </div>
                     <div className={s.login_formItem}>
@@ -93,7 +105,7 @@ const Registration = (props: any) => {
                     </span>
                 </div>
             </div>
-            <div className={s.registration_img}>
+            <div className={s.login_img}>
                 <img alt='img' src={img}/>
             </div>
         </div>
