@@ -1,12 +1,24 @@
-header
+.header
   display: flex
   justify-content: space-between
   padding: 12px 51px
   box-shadow: 0 6px 4px -4px rgba(0, 0, 0, 0.1)
   width: 100%
+  position: relative
+  &_logo
+    display: flex
+    justify-content: center
+    align-items: center
+  &_userInfo
+    display: flex
+    align-items: center
+    span
+      margin-right: 3px
 
-.userInfo
-  display: flex
-  align-items: center
-  &Info span
-    margin-right: 3px
+
+
+@media screen and ( max-width: 850px )
+  .header
+    justify-content: center
+    &_userInfo
+      display: none

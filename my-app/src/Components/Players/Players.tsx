@@ -4,8 +4,10 @@ import s from './Players.module.css'
 import PlayerCard from "./PlayerCard/PlayersСard";
 import Pagination from "../Pagination/Pagiation";
 import {connect} from "react-redux";
-import {getPagePlayer, getPageSizePlayer, getPlayersCount,
-    getPlayersData, getPlayersNames, getUserName} from '../../Redux/toolkit/selectors';
+import {
+    getPagePlayer, getPageSizePlayer, getPlayersCount,
+    getPlayersData, getPlayersNames, getUserName
+} from '../../Redux/toolkit/selectors';
 import {NavLink, Redirect} from "react-router-dom";
 import total from "../../totalStyle.module.css";
 import searchIcon from "../../assets/images/search.png";
@@ -27,7 +29,8 @@ type PlayersPropsType = {
 }
 
 const Players: React.FC<PlayersPropsType> = (
-    {name, pagePlayer, getPlayers, players, setSerialPlayersID, setPlayersRequest,
+    {
+        name, pagePlayer, getPlayers, players, setSerialPlayersID, setPlayersRequest,
         pageSizePlayer, playersCount, playersName
     }) => {
 
@@ -40,15 +43,18 @@ const Players: React.FC<PlayersPropsType> = (
         <>
             {playersCount !== 0 ?
                 <div className={s.players}>
+
                     <div className={total.topElement}>
                         <div className={total.topElement_options}>
                             <div className={total.topElement_search}>
                                 <input type="text" placeholder='Search...'/>
                                 <img src={searchIcon} alt="search"/>
                             </div>
+
                             <SelectComponent options={playersName} isMulti={true}
                                              closeMenuOnSelect={false}
                             />
+
                         </div>
 
                         <NavLink to='/main/addPlayer'
@@ -57,12 +63,12 @@ const Players: React.FC<PlayersPropsType> = (
                             <span>+</span>
                         </NavLink>
                     </div>
+
                     <div className={s.players_card}>
                         {players.map((players: any, index: number) =>
                             <NavLink key={players.id} onClick={() => setSerialPlayersID(index)}
                                      to='/main/playersCardDetails'>
-                                <PlayerCard key={index} index={index}
-                                            player={players} teamId={players.team}
+                                <PlayerCard key={index} player={players} teamId={players.team}
 
                                 />
                             </NavLink>

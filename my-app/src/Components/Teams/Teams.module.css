@@ -10,4 +10,10 @@
   width: 32%;
 }
 
+@media screen and (max-width: 850px) {
+  .teams_card a {
+    width: 48%;
+  }
+}
+
 /*# sourceMappingURL=Teams.module.css.map */

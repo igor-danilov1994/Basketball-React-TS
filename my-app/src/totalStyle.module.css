@@ -146,8 +146,9 @@ input:focus, select:focus {
 .topElement {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: #F6F6F6;
-  padding: 26px 0;
+  margin-bottom: 12px;
 }
 .topElement_options {
   display: flex;
@@ -177,6 +178,36 @@ input:focus, select:focus {
 }
 .topElement_btn span:nth-child(2) {
   margin-left: 8px;
+}
+
+@media screen and (max-width: 1450px) {
+  .topElement_options {
+    width: 80%;
+  }
+}
+@media screen and (max-width: 1150px) {
+  .topElement_options {
+    flex-direction: column;
+  }
+  .topElement_search {
+    margin-bottom: 10px;
+  }
+}
+@media screen and (max-width: 520px) {
+  .topElement {
+    flex-direction: column;
+    width: 100%;
+  }
+  .topElement_search {
+    max-width: 100%;
+    width: 100%;
+  }
+  .topElement_options {
+    width: 100%;
+  }
+  .topElement_btn {
+    width: 100%;
+  }
 }
 
 /*# sourceMappingURL=totalStyle.module.css.map */

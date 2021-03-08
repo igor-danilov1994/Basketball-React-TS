@@ -1,36 +1,45 @@
 import React, {useEffect, useState} from 'react'
-import s from "../../../assets/Style/CardLayout/CardLayout.module.css";
-import {connect} from "react-redux";
-import {getTeamsForId, getTeamsNames} from "../../../Redux/toolkit/selectors";
-import {setTeamSerialId} from "../../../Redux/toolkit/teamsReducer.ts";
+import s from "../../../assets/Style/CardLayout/CardLayout.module.css"
+import total from "../../../totalStyle.module.css"
+import {connect} from "react-redux"
+import {getTeamsForId} from "../../../Redux/toolkit/selectors"
+import {setTeamSerialId} from "../../../Redux/toolkit/teamsReducer.ts"
 
 const ROOT_IMAGES: string = 'http://dev.trainee.dex-it.ru'
 
-const PlayerCard = (props: any) => {
+type PlayerCardPropsType = {
+    teamId: number
+    teamName: Array<any>
+    player: any
+    setTeamSerialId: (teamId: number) => void
+}
+
+const PlayerCard: React.FC<PlayerCardPropsType> = (
+    {setTeamSerialId, teamId, teamName, player,}) => {
 
     const [nameTeam, setNameTeam] = useState('')
 
     useEffect(() => {
-        //console.log(props.teamId)
-        props.setTeamSerialId(props.teamId)
+        setTeamSerialId(teamId)
     }, [])
 
 
-    if (props.teamName.length > 0 && nameTeam === '') {
-        setNameTeam(props.teamName[0].name)
+    if (teamName.length > 0 && nameTeam === '') {
+        setNameTeam(teamName[0].name)
     }
 
     return (
         <div className={s.cardLayout}>
             <div className={`${s.cardLayout_image} ${s.cardLayout_face}`}>
-                <img src={` ${ROOT_IMAGES}${props.player.avatarUrl}`} alt="avatar"/>
+                <img src={` ${ROOT_IMAGES}${player.avatarUrl}`} alt="avatar"/>
             </div>
             <div className={s.cardLayout_description}>
-                    <span>{props.player.name}
-                        <span>#{props.player.number}</span>
+                    <span className={total.text_small}>
+                        {player.name}
+                        <span>#{player.number}</span>
                     </span>
-                {/*<span>{props.teamName[props.index]}</span> */}
-                <span>{nameTeam}</span>
+
+                <span className={total.text_middle14}>{nameTeam}</span>
             </div>
         </div>
     )

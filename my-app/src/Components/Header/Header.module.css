@@ -1,17 +1,31 @@
-header {
+.header {
   display: flex;
   justify-content: space-between;
   padding: 12px 51px;
   box-shadow: 0 6px 4px -4px rgba(0, 0, 0, 0.1);
   width: 100%;
+  position: relative;
 }
-
-.userInfo {
+.header_logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header_userInfo {
   display: flex;
   align-items: center;
 }
-.userInfoInfo span {
+.header_userInfo span {
   margin-right: 3px;
+}
+
+@media screen and (max-width: 850px) {
+  .header {
+    justify-content: center;
+  }
+  .header_userInfo {
+    display: none;
+  }
 }
 
 /*# sourceMappingURL=Header.module.css.map */

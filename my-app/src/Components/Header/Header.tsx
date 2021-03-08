@@ -1,25 +1,32 @@
-import React from 'react'
+import React, {useState} from 'react'
 import logo from './images/logo.png'
 import userAvatar from './images/profile.png'
 import s from './Header.module.css'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
+import {getUserName} from "../../Redux/toolkit/selectors";
 
+type HeaderPropsType = {
+    name: string
+}
 
-const Header = (props: any) => {
+const Header: React.FC<HeaderPropsType> = ({name}) => {
+
     return (
         <header className={s.header}>
-            <div>
+            <div className={s.header_logo}>
                 <img src={logo} alt="logo"/>
             </div>
-            <div className={s.userInfo}>
-                <span> {props.name} </span>
+            <div className={s.header_userInfo}>
+                <span> {name} </span>
                 <img src={userAvatar} alt="userAvatar"/>
             </div>
+
         </header>
     )
 }
+
 const mapStateToProps = (state: any) => ({
-    name: state.auth.name
+    name: getUserName(state)
 })
 
 

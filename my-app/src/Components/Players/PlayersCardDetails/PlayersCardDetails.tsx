@@ -14,13 +14,11 @@ import {getTeam} from "../../../Redux/toolkit/teamsReducer.ts";
 
 
 const PlayersCardDetails = (props: any) => {
-    debugger
     const [age, setAge] = useState<null | number>(null)
 
     let dataPlayer = props.players[props.serialPlayerID]
     let currentTeamName = props.team[props.serialPlayerID].name
     let ROOT_IMAGES: string = 'http://dev.trainee.dex-it.ru'
-
 
     let deletePlayers = () => {
         props.deletePlayer(dataPlayer.id)
@@ -52,8 +50,8 @@ const PlayersCardDetails = (props: any) => {
             />
 
             <div className={s.cardDetails}>
-                <div className={s.cardDetails_img}>
-                    <img src={`${ROOT_IMAGES}${dataPlayer.avatarUrl}`} alt="img"/>
+                <div style={{alignItems: "flex-end"}} className={s.cardDetails_img}>
+                    <img style={{width: "100%"}} src={`${ROOT_IMAGES}${dataPlayer.avatarUrl}`} alt="img"/>
                 </div>
                 <div className={s.cardDetails_info}>
                     <h1 className={total.text_big}>

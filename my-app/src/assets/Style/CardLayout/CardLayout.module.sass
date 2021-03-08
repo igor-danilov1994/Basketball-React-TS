@@ -5,29 +5,44 @@
   align-items: center
   background: linear-gradient(121.57deg, #707070 1.62%, #393939 81.02%)
   border-radius: 4px
-  margin-bottom: 24px
+  margin: 12px 0
   &_image
-    //padding: 65px 0
     display: flex
     justify-content: center
     align-items: center
     img
+      width: 100%
       padding: 65px 0
   &_description
     display: flex
     flex-direction: column
     justify-content: center
     align-items: center
-    padding: 17px 60px
+    padding: 17px 0
     background: #303030
     border-radius: 0 0 4px 4px
     color: #ffffff
     width: 100%
     span
       margin: 6px 0
+      font-size: 18px
+      line-height: 22px
+      color: #FFFFFF
       span
         color: red
         margin-left: 5px
+    span:nth-child(2)
+      color: #9C9C9C
   &_face
     img
       padding: 95px 0 0 0
+
+
+@media screen and ( max-width: 1140px )
+  .cardLayout
+    &_image
+      img
+        padding: 35px 0
+    &_face
+      img
+        padding: 55px 0 0 0

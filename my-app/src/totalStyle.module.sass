@@ -41,10 +41,12 @@ a
   border-radius: 4px
   outline: none
   cursor: pointer
+
   &_cancel
     color: $LightGrey
     background: #ffffff
     border: 1px solid #9C9C9C
+
     &:hover
       background: $LightestGrey
 
@@ -53,6 +55,7 @@ a
     color: #ffffff
     background: $Red
     border: none
+
     &:hover
       background-color: $LightRed
 
@@ -65,6 +68,7 @@ select
   border: none
   outline: none
   cursor: pointer
+
   option
     border: 0.5px solid #D1D1D1
     border-radius: 4px
@@ -74,12 +78,16 @@ select
   width: 100%
   display: flex
   align-items: center
+
   select
     height: 40px
+
   &_imgRotateOn
     transform: rotate(180deg)
+
   &_imgRotateOff
     transform: rotate(90deg)
+
   img
     right: 8px
     position: absolute
@@ -122,21 +130,26 @@ input, select
   //font-family: $Avenir
   font-style: normal
   font-weight: normal
+
   &_big
     font-size: 36px
     line-height: 49px
+
   &_middle
     font-weight: 800
     font-size: 24px
     line-height: 33px
+
   &_middle14
     font-weight: 500
     font-size: 14px
     line-height: 24px
+
   &_small
     font-weight: 500
     font-size: 18px
     line-height: 25px
+
   &_extraSmall
     font-weight: 500
     font-size: 12px
@@ -145,8 +158,9 @@ input, select
 .topElement
   display: flex
   justify-content: space-between
+  align-items: center
   background-color: $LightestGrey1
-  padding: 26px 0
+  margin-bottom: 12px
   &_options
     display: flex
     justify-content: space-between
@@ -170,3 +184,27 @@ input, select
     padding: 8px 24px
     span:nth-child(2)
       margin-left: 8px
+
+@media screen and (max-width: 1450px)
+  .topElement
+    &_options
+      width: 80%
+@media screen and (max-width: 1150px)
+  .topElement
+    &_options
+      flex-direction: column
+    &_search
+      margin-bottom: 10px
+
+@media screen and (max-width: 520px)
+  .topElement
+    flex-direction: column
+    width: 100%
+    &_search
+      max-width: 100%
+      width: 100%
+    &_options
+      width: 100%
+    &_btn
+      width: 100%
+

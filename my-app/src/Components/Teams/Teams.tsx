@@ -53,9 +53,7 @@ const Teams: React.FC <TeamsPropsType> = (
                             <NavLink key={teams.id} to='/main/teamsCardDetails'
                                      onClick={() => setTeamSerialId(index)}
                             >
-
-                                <TeamsCard team={teams} key={index} index={index}/>
-
+                                <TeamsCard team={teams} key={index}/>
                             </NavLink>
                         )}
                     </div>
