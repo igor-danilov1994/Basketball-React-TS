@@ -4,10 +4,8 @@ import s from './Players.module.css'
 import PlayerCard from "./PlayerCard/PlayersСard";
 import Pagination from "../Pagination/Pagiation";
 import {connect} from "react-redux";
-import {
-    getPagePlayer, getPageSizePlayer,
-    getPlayersCount, getPlayersData, getPlayersNames, getUserName
-} from '../../Redux/toolkit/selectors';
+import {getPagePlayer, getPageSizePlayer, getPlayersCount,
+    getPlayersData, getPlayersNames, getUserName} from '../../Redux/toolkit/selectors';
 import {NavLink, Redirect} from "react-router-dom";
 import total from "../../totalStyle.module.css";
 import searchIcon from "../../assets/images/search.png";
@@ -29,7 +27,7 @@ type PlayersPropsType = {
 }
 
 const Players: React.FC<PlayersPropsType> = (
-    {name, pagePlayer, getPlayers, players,
+    {name, pagePlayer, getPlayers, players, setSerialPlayersID, setPlayersRequest,
         pageSizePlayer, playersCount, playersName
     }) => {
 

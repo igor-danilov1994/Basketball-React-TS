@@ -33,7 +33,6 @@ const AddPlayer = (props: any) => {
     }
 
     const onSubmit = (data: any) => {
-        debugger
         data.birthday = birthdayData
         props.savePlayers(data)
     }

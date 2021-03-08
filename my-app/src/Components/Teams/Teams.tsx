@@ -18,10 +18,11 @@ type TeamsPropsType = {
     teamsCount: number
     teams: Array<any>
     setTeamSerialId: (index: number) => void
+    setTeamsRequest: (pageTeam: number, pageSizeTeam: number) => void
 }
 
 const Teams: React.FC <TeamsPropsType> = (
-    {getTeams, name, pageTeam, pageSizeTeam, teamsCount, teams}) => {
+    {getTeams, name, pageTeam, pageSizeTeam, teamsCount, teams, setTeamSerialId, setTeamsRequest}) => {
 
 
     useEffect(() => {
