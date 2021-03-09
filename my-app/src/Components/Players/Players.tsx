@@ -1,13 +1,9 @@
 import React, {useEffect} from 'react'
-
-import s from './Players.module.css'
 import PlayerCard from "./PlayerCard/PlayersСard";
 import Pagination from "../Pagination/Pagiation";
 import {connect} from "react-redux";
-import {
-    getPagePlayer, getPageSizePlayer, getPlayersCount,
-    getPlayersData, getPlayersNames, getUserName
-} from '../../Redux/toolkit/selectors';
+import {getPagePlayer, getPageSizePlayer, getPlayersCount, getPlayersData,
+    getPlayersNames, getUserName} from '../../Redux/toolkit/selectors';
 import {NavLink, Redirect} from "react-router-dom";
 import total from "../../totalStyle.module.css";
 import searchIcon from "../../assets/images/search.png";
@@ -42,7 +38,7 @@ const Players: React.FC<PlayersPropsType> = (
     return (
         <>
             {playersCount !== 0 ?
-                <div className={s.players}>
+                <div className={total.mainBlock}>
 
                     <div className={total.topElement}>
                         <div className={total.topElement_options}>
@@ -64,7 +60,7 @@ const Players: React.FC<PlayersPropsType> = (
                         </NavLink>
                     </div>
 
-                    <div className={s.players_card}>
+                    <div className={total.mainBlock_card}>
                         {players.map((players: any, index: number) =>
                             <NavLink key={players.id} onClick={() => setSerialPlayersID(index)}
                                      to='/main/playersCardDetails'>

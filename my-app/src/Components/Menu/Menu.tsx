@@ -30,39 +30,38 @@ const Menu: React.FC<MenuPropsType> = ({signOut}) => {
                 <span></span>
                 <span></span>
             </div>
-            {showMenu &&
-            <nav className={s.nav}>
-                <div className={s.nav_header}>
-                    <div onClick={toggleActive} className={`${s.nav_item}`}>
-                        <NavLink to='/main/teams'>
-                            <img src={active ? teamsShow : teamsHidden} alt="img"/>
-                            <span className={total.text_extraSmall}>Teams</span>
-                        </NavLink>
-                    </div>
 
-                    <div className={`${s.nav_item} ${s.menu_players}`}>
-                        <NavLink onClick={toggleActive} to='/main/players'>
-                            <img src={active ? playersHidden : playersShow} alt="img"/>
-                            <span className={total.text_extraSmall}>Players</span>
+            {showMenu && <>
+                <div className={total.gradient}></div>
+                <nav className={s.nav}>
+                    <div className={s.nav_header}>
+                        <div onClick={toggleActive} className={`${s.nav_item}`}>
+                            <NavLink to='/main/teams'>
+                                <img src={active ? teamsShow : teamsHidden} alt="img"/>
+                                <span className={total.text_extraSmall}>Teams</span>
+                            </NavLink>
+                        </div>
+
+                        <div className={`${s.nav_item} ${s.menu_players}`}>
+                            <NavLink onClick={toggleActive} to='/main/players'>
+                                <img src={active ? playersHidden : playersShow} alt="img"/>
+                                <span className={total.text_extraSmall}>Players</span>
+                            </NavLink>
+                        </div>
+                    </div>
+                    <div className={s.nav_footer}>
+                        <NavLink to='/signIn' onClick={() => signOut()}>
+                            <img src={inputIcon} alt="iconImg"/>
+                            <span className={total.text_extraSmall}>Sign out</span>
                         </NavLink>
                     </div>
-                </div>
-                <div className={s.nav_footer}>
-                    <NavLink to='/signIn' onClick={() => signOut()}>
-                        <img src={inputIcon} alt="iconImg"/>
-                        <span className={total.text_extraSmall}>Sign out</span>
-                    </NavLink>
-                </div>
-            </nav>}
+                </nav>
+            </>}
         </>
     )
 }
 
 
-export default connect(null,
-{
-    signOut
-}
-)(Menu)
+export default connect(null,{signOut})(Menu)
 
 

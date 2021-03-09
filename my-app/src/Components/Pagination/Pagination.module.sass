@@ -18,6 +18,9 @@ $LightRed: #FF5761
   li
     padding: 10px 15px
     cursor: pointer
+    font-weight: 500
+    font-size: 18px
+    line-height: 25px
     &:first-child, &:last-child
       border: none
       background-image: url("/src/assets/images/link.png")
@@ -64,4 +67,47 @@ $LightRed: #FF5761
       transform: rotate(90deg)
     &_rotate
       transform: rotate(0deg) !important
+
+@media screen and ( max-width: 520px )
+  .pagination
+    li
+      font-size: 12px
+      line-height: 150%
+      &:first-child
+        margin: 0 15px
+      &:last-child
+        margin-left: 15px
+    &_setCountCard
+      li
+        padding: 4px 20px 4px 10px
+        //padding: 0
+    &_currentCard
+      padding: 6px 8px 5px 12px
+      span
+        &:after
+          margin-left: 12px
+      img
+        margin-left: 8.5px
+
+@media screen and ( max-width: 400px )
+  .pagination
+    li
+      &:first-child
+        margin: 0 10px
+      &:last-child
+        margin-left: 10px
+    &_currentCard
+      padding: 5px 6px 5px 8px
+@media screen and ( max-width: 360px )
+  .pagination
+    width: 80%
+    li
+      &:first-child
+        margin: 0 5px
+      &:last-child
+        margin-left: 5px
+    &_currentCard
+      padding: 5px 3px 5px 2px
+
+
 

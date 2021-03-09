@@ -143,6 +143,18 @@ input:focus, select:focus {
   line-height: 150%;
 }
 
+.mainBlock {
+  width: 100%;
+}
+.mainBlock_card {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.mainBlock_card a {
+  width: 32%;
+}
+
 .topElement {
   display: flex;
   justify-content: space-between;
@@ -180,6 +192,16 @@ input:focus, select:focus {
   margin-left: 8px;
 }
 
+.gradient {
+  display: none;
+  width: 100%;
+  height: 100%;
+  background: #414141;
+  opacity: 0.6;
+  position: absolute;
+  z-index: 99;
+}
+
 @media screen and (max-width: 1450px) {
   .topElement_options {
     width: 80%;
@@ -193,10 +215,16 @@ input:focus, select:focus {
     margin-bottom: 10px;
   }
 }
+@media screen and (max-width: 850px) {
+  .mainBlock_card a {
+    width: 48%;
+  }
+}
 @media screen and (max-width: 520px) {
   .topElement {
     flex-direction: column;
     width: 100%;
+    margin-bottom: 0;
   }
   .topElement_search {
     max-width: 100%;
@@ -207,6 +235,14 @@ input:focus, select:focus {
   }
   .topElement_btn {
     width: 100%;
+  }
+
+  .text_small {
+    font-size: 15px;
+  }
+  .text_middle14 {
+    font-size: 13px;
+    line-height: 18px;
   }
 }
 

@@ -18,15 +18,14 @@
     flex-direction: column
     justify-content: center
     align-items: center
-    padding: 17px 0
+    padding: 21px 0
     background: #303030
     border-radius: 0 0 4px 4px
     color: #ffffff
     width: 100%
     span
       margin: 6px 0
-      font-size: 18px
-      line-height: 22px
+      font-weight: 600
       color: #FFFFFF
       span
         color: red
@@ -46,3 +45,26 @@
     &_face
       img
         padding: 55px 0 0 0
+
+@media screen and ( max-width: 600px )
+  .cardLayout
+    &_description
+      padding: 18px
+      span
+        margin: 0
+
+@media screen and ( max-width: 520px )
+  .cardLayout
+    &_description
+      span
+        margin: 0
+    &_image
+      img
+        padding: 15px 0
+    &_face
+      img
+        padding: 10px 0 0 0
+
+@media screen and ( max-width: 400px )
+  .cardLayout
+    margin-bottom: 0

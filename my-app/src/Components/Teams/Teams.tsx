@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react'
-import s from './Teams.module.css'
 import TeamsCard from "./TeamsCard/TeamsCard";
 import Pagination from "../Pagination/Pagiation";
 import {getPageSizeTeam, getPageTeam, getTeamsCount, getTeamsData, getUserName} from "../../Redux/toolkit/selectors";
@@ -32,7 +31,7 @@ const Teams: React.FC <TeamsPropsType> = (
     return (
         <>
             {teamsCount !== 0 ?
-                <div className={s.teams}>
+                <div className={total.mainBlock}>
                     <div className={total.topElement}>
 
                         <div className={total.topElement_search}>
@@ -48,7 +47,7 @@ const Teams: React.FC <TeamsPropsType> = (
 
                     </div>
 
-                    <div className={s.teams_card}>
+                    <div className={total.mainBlock_card}>
                         {teams.map((teams: any, index: number) =>
                             <NavLink key={teams.id} to='/main/teamsCardDetails'
                                      onClick={() => setTeamSerialId(index)}
@@ -57,14 +56,12 @@ const Teams: React.FC <TeamsPropsType> = (
                             </NavLink>
                         )}
                     </div>
-                    <div className={s.teamsPagination}>
-                        <Pagination
-                            page={pageTeam}
-                            pageSize={pageSizeTeam}
-                            pageCount={teamsCount}
-                            setRequest={setTeamsRequest}
-                        />
-                    </div>
+                    <Pagination
+                        page={pageTeam}
+                        pageSize={pageSizeTeam}
+                        pageCount={teamsCount}
+                        setRequest={setTeamsRequest}
+                    />
                 </div>
                 : <Redirect to="/main/teams_E"/>}
         </>

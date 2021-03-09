@@ -41,21 +41,17 @@ a
   border-radius: 4px
   outline: none
   cursor: pointer
-
   &_cancel
     color: $LightGrey
     background: #ffffff
     border: 1px solid #9C9C9C
-
     &:hover
       background: $LightestGrey
-
   &_add
     padding: 8px 0
     color: #ffffff
     background: $Red
     border: none
-
     &:hover
       background-color: $LightRed
 
@@ -68,7 +64,6 @@ select
   border: none
   outline: none
   cursor: pointer
-
   option
     border: 0.5px solid #D1D1D1
     border-radius: 4px
@@ -78,16 +73,12 @@ select
   width: 100%
   display: flex
   align-items: center
-
   select
     height: 40px
-
   &_imgRotateOn
     transform: rotate(180deg)
-
   &_imgRotateOff
     transform: rotate(90deg)
-
   img
     right: 8px
     position: absolute
@@ -130,30 +121,34 @@ input, select
   //font-family: $Avenir
   font-style: normal
   font-weight: normal
-
   &_big
     font-size: 36px
     line-height: 49px
-
   &_middle
     font-weight: 800
     font-size: 24px
     line-height: 33px
-
   &_middle14
     font-weight: 500
     font-size: 14px
     line-height: 24px
-
   &_small
     font-weight: 500
     font-size: 18px
     line-height: 25px
-
   &_extraSmall
     font-weight: 500
     font-size: 12px
     line-height: 150%
+
+.mainBlock
+  width: 100%
+  &_card
+    display: flex
+    justify-content: space-between
+    flex-wrap: wrap
+    a
+      width: 32%
 
 .topElement
   display: flex
@@ -184,6 +179,14 @@ input, select
     padding: 8px 24px
     span:nth-child(2)
       margin-left: 8px
+.gradient
+  display: none
+  width: 100%
+  height: 100%
+  background: #414141
+  opacity: 0.6
+  position: absolute
+  z-index: 99
 
 @media screen and (max-width: 1450px)
   .topElement
@@ -196,10 +199,17 @@ input, select
     &_search
       margin-bottom: 10px
 
+@media screen and ( max-width: 850px )
+  .mainBlock
+    &_card
+      a
+        width: 48%
+
 @media screen and (max-width: 520px)
   .topElement
     flex-direction: column
     width: 100%
+    margin-bottom: 0
     &_search
       max-width: 100%
       width: 100%
@@ -207,4 +217,10 @@ input, select
       width: 100%
     &_btn
       width: 100%
+  .text
+    &_small
+      font-size: 15px
+    &_middle14
+      font-size: 13px
+      line-height: 18px
 
