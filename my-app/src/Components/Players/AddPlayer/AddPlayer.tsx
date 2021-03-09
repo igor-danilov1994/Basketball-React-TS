@@ -14,7 +14,7 @@ import CalendarComponent from './Calendar/CalendarComponent';
 
 const AddPlayer = (props: any) => {
 
-    const {register, handleSubmit} = useForm()
+    const {register, handleSubmit, errors} = useForm()
     const [activeRotatePosition, setActiveRotatePosition] = useState(false)
     const [activeRotateTeam, setActiveRotateTeam] = useState(false)
     const [activeImgLoading, setActiveImgLoading] = useState(false)
@@ -41,7 +41,6 @@ const AddPlayer = (props: any) => {
         onChangeBirthday(e.target.value)
     }
 
-
     return (
         <div className={f.add}>
             <div className={total.breadCrumbs}>
@@ -51,7 +50,7 @@ const AddPlayer = (props: any) => {
                 <div className={f.add_form_img} onClick={() => setActiveImgLoading(!activeImgLoading)}>
                     <AddImages/>
                     <input className={activeImgLoading ? `${f.active}` : ""}
-                           name='avatarUrl' ref={register({ required: true })}
+                           name='avatarUrl' ref={register({required: true})}
                            accept="image/*"
                            type="file"/>
                 </div>
@@ -59,7 +58,9 @@ const AddPlayer = (props: any) => {
                     <div>
                         <div className={f.add_form_data}>
                             <label className={total.text}>Name</label>
-                            <input name='name' ref={register({ required: true })} type="text"/>
+                            <input name='name' ref={register({required: true})} type="text"/>
+                            {errors.name &&
+                            <span className={total.error}>Name is required</span>}
                         </div>
                         <div className={f.add_form_data}>
                             <label className={total.text}>Position</label>
@@ -70,7 +71,7 @@ const AddPlayer = (props: any) => {
                                     src={arrowImg} alt="arrow"/>
 
 
-                                <select name="position" ref={register({ required: true })}>
+                                <select name="position" ref={register({required: true})}>
                                     {props.positions.map((p: any) =>
                                         <option key={p} value={p}>{p}</option>
                                     )}
@@ -83,7 +84,7 @@ const AddPlayer = (props: any) => {
                                 <img
                                     className={activeRotateTeam ? `${total.select_imgRotateOn}` : `${total.select_imgRotateOff}`}
                                     src={arrowImg} alt="arrow"/>
-                                <select name="team" ref={register({ required: true })}>
+                                <select name="team" ref={register({required: true})}>
                                     {props.teamsName.map((names: any, id: number) =>
                                         <option key={props.teamsId[id]}
                                                 value={props.teamsId[id]}>
@@ -97,11 +98,16 @@ const AddPlayer = (props: any) => {
                             <div className={f.properties_options}>
                                 <div className={`${f.properties_data} ${f.add_form_data}`}>
                                     <label>Height (cm)</label>
-                                    <input name='height' ref={register({ required: true })} type="text"/>
+                                    <input name='height' ref={register({required: true})}
+                                           type="text"/>
+                                    {errors.height &&
+                                        <span className={total.error}>Height is required</span>}
                                 </div>
                                 <div className={`${f.properties_data} ${f.add_form_data}`}>
                                     <label>Weight (kg)</label>
-                                    <input name='weight' ref={register({ required: true })} type="text"/>
+                                    <input name='weight' ref={register({required: true})} type="text"/>
+                                    {errors.weight &&
+                                        <span className={total.error}>Weight is required</span>}
                                 </div>
                             </div>
                             <div className={f.properties_options}>
@@ -109,18 +115,22 @@ const AddPlayer = (props: any) => {
                                     <label>Birthday</label>
                                     <div className={`${f.properties_data_calendar}`}>
                                         <input placeholder='dd.mm.yy' value={birthday} onChange={setBirthday}
-                                               name='birthday' ref={register({ required: true })} type="text"/>
+                                               name='birthday' ref={register({required: true})} type="text"/>
 
                                         <img onClick={() => setShowCalendar(!showCalendar)} src={calendar}
                                              alt="calendar"/>
 
-                                        {showCalendar && <CalendarComponent getBirthday={getBirthday}/>}
-
+                                        {showCalendar &&
+                                            <CalendarComponent getBirthday={getBirthday}/>}
                                     </div>
+                                    {errors.birthday &&
+                                        <span className={total.error}>Birthday is required</span>}
                                 </div>
                                 <div className={`${f.properties_data} ${f.add_form_data}`}>
                                     <label>Number</label>
-                                    <input name='number' ref={register({ required: true })} type="text"/>
+                                    <input name='number' ref={register({required: true})} type="text"/>
+                                    {errors.number &&
+                                        <span className={total.error}>Number is required</span>}
                                 </div>
                             </div>
                         </div>

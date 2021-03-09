@@ -32,9 +32,9 @@ const Login: React.FC<LoginPropsType> = ({signInError, getAuthUserData }) => {
                         <label className={`${total.text_middle14} ${total.text}`}>Login</label>
                         <input name='login' ref={register({required: false})} type="text"/>
                         {errors.login &&
-                        <span className={s.login_formItem_error}>Login is required</span>}
+                        <span className={total.error}>Login is required</span>}
                         {signInError &&
-                        <span className={s.login_formItem_error}>Wrong login or password. Please, try again</span>}
+                        <span className={total.error}>Wrong login or password. Please, try again</span>}
                     </div>
                     <div className={s.login_formItem}>
                         <label className={`${total.text_middle14} ${total.text}`}>Password</label>
@@ -45,9 +45,9 @@ const Login: React.FC<LoginPropsType> = ({signInError, getAuthUserData }) => {
                                  src={show ? passShow : passHidden} alt='showPass'/>
                         </div>
                         {errors.password &&
-                        <span className={s.login_formItem_error}>Password required</span>}
+                        <span className={total.error}>Password required</span>}
                         {signInError &&
-                        <span className={s.login_formItem_error}>Wrong login or password. Please, try again.</span>}
+                        <span className={total.error}>Wrong login or password. Please, try again.</span>}
 
                     </div>
                     <button className={`${total.btn} ${total.btn_add}`}>Sign In</button>

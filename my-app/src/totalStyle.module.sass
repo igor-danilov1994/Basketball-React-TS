@@ -91,13 +91,12 @@ input, select
   background: $LightestGrey1
   border-radius: 4px
   border: none
-  //border: solid 1px red
   &:hover
     background: $LightestGrey
-
   &:focus
     background: $LightestGrey1
     box-shadow: 0 0 5px $shadow
+    outline: none
 
 .breadCrumbs
   //font-family: $Avenir
@@ -187,6 +186,16 @@ input, select
   opacity: 0.6
   position: absolute
   z-index: 99
+
+.error
+  position: absolute
+  bottom: -22px
+  font-family: Avenir
+  font-style: normal
+  font-weight: 500
+  font-size: 12px
+  line-height: 24px
+  color: #FF768E
 
 @media screen and (max-width: 1450px)
   .topElement

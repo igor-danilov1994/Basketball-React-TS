@@ -40,11 +40,6 @@
 .login_formItem input {
   width: 100%;
 }
-.login_formItem_error {
-  position: absolute;
-  bottom: -22px;
-  color: red;
-}
 .login_formItem_pass {
   width: 100%;
   position: relative;

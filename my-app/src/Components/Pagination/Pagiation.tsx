@@ -1,5 +1,6 @@
 import React, {useState, CSSProperties, useEffect} from 'react'
 import s from './Pagination.module.css'
+import link from '../../assets/images/link.png'
 import showCountCard from '../../assets/images/link.png'
 import ReactPaginate from "react-paginate";
 import {connect} from 'react-redux';
@@ -50,7 +51,8 @@ const Pagination: React.FC <PaginationPropsType> = ({page, pageSize, setRequest,
     return (
         <div className={s.pagination_wrapper}>
             <ReactPaginate
-                previousLabel={''}
+                disableInitialCallback={false}
+                previousLabel={``}
                 nextLabel={''}
                 breakLabel={'...'}
                 breakClassName={`${s.breakMe}`}

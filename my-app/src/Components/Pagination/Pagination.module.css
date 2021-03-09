@@ -24,7 +24,10 @@
   font-size: 18px;
   line-height: 25px;
 }
-.pagination li:first-child, .pagination li:last-child {
+.pagination li:first-child a, .pagination li:last-child a {
+  display: block;
+  width: 25px;
+  height: 25px;
   border: none;
   background-image: url("/src/assets/images/link.png");
   background-position: center;
@@ -33,7 +36,10 @@
   margin-right: 33px;
   margin-left: 20px;
 }
-.pagination li:last-child {
+.pagination li:first-child a:focus, .pagination li:last-child a:focus {
+  outline: none;
+}
+.pagination li:last-child a {
   transform: rotate(90deg);
 }
 .pagination_selectCountCard {

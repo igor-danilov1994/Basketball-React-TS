@@ -52,15 +52,15 @@ const Registration: React.FC<RegistrationPropsType> = (
                         <label>Name</label>
                         <input name="userName" ref={register({required: true})} type="text"/>
                         {errors.userName &&
-                        <span className={s.login_formItem_error}>First name is required</span>}
+                        <span className={total.error}>First name is required</span>}
                     </div>
                     <div className={s.login_formItem}>
                         <label>Login</label>
                         <input name="login" ref={register({required: true})} type="text"/>
                         {errors.login &&
-                        <span className={s.login_formItem_error}>First name is required</span>}
+                        <span className={total.error}>First name is required</span>}
                         {signUpError &&
-                        <span className={s.login_formItem_error}>User with this login is already registered</span>}
+                        <span className={total.error}>User with this login is already registered</span>}
                     </div>
                     <div className={s.login_formItem}>
                         <label>Password</label>
@@ -73,7 +73,7 @@ const Registration: React.FC<RegistrationPropsType> = (
                         </div>
 
                         {errors.password &&
-                        <span className={s.login_formItem_error}>First name is required</span>}
+                        <span className={total.error}>First name is required</span>}
                     </div>
                     <div className={s.login_formItem}>
                         <label>Enter your password again</label>
@@ -86,9 +86,9 @@ const Registration: React.FC<RegistrationPropsType> = (
                         </div>
 
                         {errors.doublePass &&
-                        <span className={s.login_formItem_error}>Password again is required</span>}
+                        <span className={total.error}>Password again is required</span>}
                         {matchingPasswords &&
-                        <span className={s.login_formItem_error}>Password mismatch</span>}
+                        <span className={total.error}>Password mismatch</span>}
                     </div>
                     <div className={s.login_formItem_policy}>
                         <input id='2' type="checkbox"/>
