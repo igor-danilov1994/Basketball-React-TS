@@ -200,7 +200,6 @@ input:focus, select:focus {
   background: #414141;
   opacity: 0.6;
   position: absolute;
-  z-index: 99;
 }
 
 .error {
@@ -230,6 +229,10 @@ input:focus, select:focus {
 @media screen and (max-width: 850px) {
   .mainBlock_card a {
     width: 48%;
+  }
+
+  .gradient {
+    display: block;
   }
 }
 @media screen and (max-width: 520px) {

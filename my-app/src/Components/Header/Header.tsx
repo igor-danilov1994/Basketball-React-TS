@@ -9,6 +9,7 @@ type HeaderPropsType = {
     name: string
 }
 
+
 const Header: React.FC<HeaderPropsType> = ({name}) => {
 
     return (
@@ -16,11 +17,6 @@ const Header: React.FC<HeaderPropsType> = ({name}) => {
             <div className={s.header_logo}>
                 <img src={logo} alt="logo"/>
             </div>
-            <div className={s.header_userInfo}>
-                <span> {name} </span>
-                <img src={userAvatar} alt="userAvatar"/>
-            </div>
-
         </header>
     )
 }

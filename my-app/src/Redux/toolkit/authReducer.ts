@@ -38,7 +38,7 @@ export const getAuthUserData = (data: object) => async (dispatch: any) => {
             dispatch(SIGN_IN(response.data))
         }
     } catch (error) {
-        dispatch(SIGN_IN_ERROR())
+        dispatch(SIGN_IN_ERROR(true))
     }
 };
 
@@ -60,7 +60,7 @@ export default createReducer(initialState, {
         state.signUpError = true
     },
     [SIGN_IN_ERROR]: (state, action) => {
-        state.signInError = true
+        state.signInError = action.payload
     },
     [SIGN_OUT]: (state) => {
         state.isAuth = false

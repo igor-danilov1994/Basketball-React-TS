@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import s from './menu.module.css'
 import teamsShow from './images/menu_teamsShow.png'
 import teamsHidden from './images/menu_teamsHidden.png'
@@ -9,12 +9,15 @@ import {NavLink} from 'react-router-dom';
 import {connect} from "react-redux";
 import total from '../../totalStyle.module.css'
 import {signOut} from "../../Redux/toolkit/authReducer";
+import userAvatar from "../Header/images/profile.png";
+import {getUserName} from "../../Redux/toolkit/selectors";
 
 type MenuPropsType = {
     signOut: () => void
+    name: string
 }
 
-const Menu: React.FC<MenuPropsType> = ({signOut}) => {
+const Menu: React.FC<MenuPropsType> = ({signOut, name}) => {
 
     const [active, setActive] = useState(false)
     const [showMenu, setShowMenu] = useState(true)
@@ -31,7 +34,12 @@ const Menu: React.FC<MenuPropsType> = ({signOut}) => {
                 <span></span>
             </div>
 
+
             {showMenu && <>
+                <div className={s.nav_userInfo}>
+                    <span> {name} </span>
+                    <img src={userAvatar} alt="userAvatar"/>
+                </div>
                 <div className={total.gradient}></div>
                 <nav className={s.nav}>
                     <div className={s.nav_header}>
@@ -61,7 +69,10 @@ const Menu: React.FC<MenuPropsType> = ({signOut}) => {
     )
 }
 
+let mapStateToProps = (state: any) => ({
+    name: getUserName(state)
+})
 
-export default connect(null,{signOut})(Menu)
+export default connect(mapStateToProps,{signOut})(Menu)
 
 

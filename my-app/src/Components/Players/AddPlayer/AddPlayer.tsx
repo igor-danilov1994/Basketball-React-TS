@@ -101,13 +101,13 @@ const AddPlayer = (props: any) => {
                                     <input name='height' ref={register({required: true})}
                                            type="text"/>
                                     {errors.height &&
-                                        <span className={total.error}>Height is required</span>}
+                                    <span className={total.error}>Height is required</span>}
                                 </div>
                                 <div className={`${f.properties_data} ${f.add_form_data}`}>
                                     <label>Weight (kg)</label>
                                     <input name='weight' ref={register({required: true})} type="text"/>
                                     {errors.weight &&
-                                        <span className={total.error}>Weight is required</span>}
+                                    <span className={total.error}>Weight is required</span>}
                                 </div>
                             </div>
                             <div className={f.properties_options}>
@@ -121,16 +121,16 @@ const AddPlayer = (props: any) => {
                                              alt="calendar"/>
 
                                         {showCalendar &&
-                                            <CalendarComponent getBirthday={getBirthday}/>}
+                                        <CalendarComponent getBirthday={getBirthday}/>}
                                     </div>
                                     {errors.birthday &&
-                                        <span className={total.error}>Birthday is required</span>}
+                                    <span className={total.error}>Birthday is required</span>}
                                 </div>
                                 <div className={`${f.properties_data} ${f.add_form_data}`}>
                                     <label>Number</label>
                                     <input name='number' ref={register({required: true})} type="text"/>
                                     {errors.number &&
-                                        <span className={total.error}>Number is required</span>}
+                                    <span className={total.error}>Number is required</span>}
                                 </div>
                             </div>
                         </div>
