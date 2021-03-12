@@ -1,11 +1,10 @@
 import React, {useState, CSSProperties, useEffect} from 'react'
 import s from './Pagination.module.css'
-import link from '../../assets/images/link.png'
 import showCountCard from '../../assets/images/link.png'
 import ReactPaginate from "react-paginate";
 import {connect} from 'react-redux';
 import {getUserName} from "../../Redux/toolkit/selectors";
-import {getTeams} from "../../Redux/toolkit/teamsReducer.ts";
+import {getTeams} from "../../Redux/toolkit/teamsReducer";
 import {getPlayers} from "../../Redux/toolkit/playersReducer";
 
 export interface toggleCountCard {

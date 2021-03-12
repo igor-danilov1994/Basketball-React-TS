@@ -9,6 +9,7 @@ import {connect} from "react-redux";
 import {getConfirmationAuthUser} from "../../Redux/toolkit/authReducer";
 import passShow from "../Login/images/passShow.png";
 import passHidden from "../Login/images/passHidden.png";
+import ErrorsMessage from "../ErrorsMessage/ErrorsMessage";
 
 type onSubmitDataForm = {
     userName: string
@@ -52,15 +53,15 @@ const Registration: React.FC<RegistrationPropsType> = (
                         <label>Name</label>
                         <input name="userName" ref={register({required: true})} type="text"/>
                         {errors.userName &&
-                        <span className={total.error}>First name is required</span>}
+                        <ErrorsMessage textMessage={'Name is required'}/> }
                     </div>
                     <div className={s.login_formItem}>
                         <label>Login</label>
                         <input name="login" ref={register({required: true})} type="text"/>
                         {errors.login &&
-                        <span className={total.error}>First name is required</span>}
+                        <ErrorsMessage textMessage={'Login is required'}/> }
                         {signUpError &&
-                        <span className={total.error}>User with this login is already registered</span>}
+                        <ErrorsMessage textMessage={'User with this login is already registered'}/> }
                     </div>
                     <div className={s.login_formItem}>
                         <label>Password</label>
@@ -73,7 +74,7 @@ const Registration: React.FC<RegistrationPropsType> = (
                         </div>
 
                         {errors.password &&
-                        <span className={total.error}>First name is required</span>}
+                        <ErrorsMessage textMessage={'Password is registered'}/> }
                     </div>
                     <div className={s.login_formItem}>
                         <label>Enter your password again</label>
@@ -86,9 +87,10 @@ const Registration: React.FC<RegistrationPropsType> = (
                         </div>
 
                         {errors.doublePass &&
-                        <span className={total.error}>Password again is required</span>}
+                        <ErrorsMessage textMessage={'Password again is registered'}/> }
+
                         {matchingPasswords &&
-                        <span className={total.error}>Password mismatch</span>}
+                        <ErrorsMessage textMessage={'Password mismatch'}/> }
                     </div>
                     <div className={s.login_formItem_policy}>
                         <input id='2' type="checkbox"/>

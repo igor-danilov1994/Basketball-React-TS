@@ -2,10 +2,10 @@ import React, {useEffect} from 'react'
 import TeamsCard from "./TeamsCard/TeamsCard";
 import Pagination from "../Pagination/Pagiation";
 import {getPageSizeTeam, getPageTeam, getTeamsCount, getTeamsData, getUserName} from "../../Redux/toolkit/selectors";
-import {getTeams} from "../../Redux/toolkit/teamsReducer.ts";
+import {getTeams} from "../../Redux/toolkit/teamsReducer"
 import {connect} from "react-redux";
 import {NavLink, Redirect} from "react-router-dom";
-import {setTeamsRequest, setPageTeams, setTeamSerialId} from "../../Redux/toolkit/teamsReducer.ts";
+import {setTeamsRequest, setPageTeams, setTeamSerialId} from "../../Redux/toolkit/teamsReducer"
 import searchIcon from "../../assets/images/search.png";
 import total from "../../totalStyle.module.css";
 

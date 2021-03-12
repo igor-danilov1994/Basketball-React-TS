@@ -5,21 +5,39 @@ import AddImages from "../../../assets/FornControl/AddImages/AddImages";
 import Block_Buttons from "../../../assets/FornControl/Blocl_Buttons/Blocl_Buttons";
 import {useForm} from "react-hook-form";
 import {connect} from "react-redux";
-import {setTeam, updateTeam} from "../../../Redux/toolkit/teamsReducer.ts";
+import {setTeam, updateTeam} from "../../../Redux/toolkit/teamsReducer"
+import {getSerialTeamID, getTeamsData, getTeamsNames} from "../../../Redux/toolkit/selectors";
+import ErrorsMessage from "../../ErrorsMessage/ErrorsMessage";
+
+type  typeData = {
+    imageUrl: object
+    name: string
+    division: string
+    conference: string
+    foundationYear: number
+}
+
+type AddTeamsPropsType = {
+    serialTeamID: number
+    teams: Array<any>
+    teamsName: Array<any>
+    setTeam: (data: typeData, getCurrentTeamID: number) => void
+    updateTeam: (data: typeData, getCurrentTeamID: number) => void
+}
+
+const AddTeams: React.FC<AddTeamsPropsType> = ({serialTeamID, teams, setTeam, teamsName,}) => {
 
 
-const AddTeams = (props: any) => {
-    //debugger
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: typeData) => {
         data.foundationYear = Number(data.foundationYear)
         let getCurrentTeamID = null
 
-        if (props.serialTeamID) {
-            getCurrentTeamID = props.teams[props.serialTeamID].id
+        if (serialTeamID) {
+            getCurrentTeamID = teams[serialTeamID].id
         }
-        props.setTeam(data, getCurrentTeamID)
+        setTeam(data, getCurrentTeamID)
     }
-    const {register, handleSubmit} = useForm()
+    const {register, handleSubmit, errors} = useForm()
     const [activeImgLoading, setActiveImgLoading] = useState(false)
 
     let toggleShowImgLoading = () => {
@@ -29,13 +47,13 @@ const AddTeams = (props: any) => {
     return (
         <div className={f.add}>
             <div className={total.breadCrumbs}>
-                Main/Teams/{props.serialTeamID ? props.teamsName : 'NewTeam'}
+                Main/Teams/{serialTeamID ? teamsName : 'NewTeam'}
             </div>
             <div className={f.add_form}>
                 <div className={f.add_form_img} onClick={toggleShowImgLoading}>
                     <AddImages/>
                     <input className={activeImgLoading ? `${f.active}` : ""}
-                           name='imageUrl' ref={register({ required: true })}
+                           name='imageUrl' ref={register({required: true})}
                            accept="image/*"
                            type="file"/>
                 </div>
@@ -43,19 +61,27 @@ const AddTeams = (props: any) => {
                     <div>
                         <div className={f.add_form_data}>
                             <label className={total.text}>Name</label>
-                            <input name='name' ref={register({ required: true })} type="text"/>
+                            <input name='name' ref={register({required: true})} type="text"/>
+                            {errors.name &&
+                            <ErrorsMessage textMessage={'Name is registered'}/> }
                         </div>
                         <div className={f.add_form_data}>
                             <label className={total.text}>Division</label>
-                            <input name='division' ref={register({ required: true })} type="text"/>
+                            <input name='division' ref={register({required: true})} type="text"/>
+                            {errors.division &&
+                            <ErrorsMessage textMessage={'Division is registered'}/> }
                         </div>
                         <div className={f.add_form_data}>
                             <label className={total.text}>Conference</label>
-                            <input name='conference' ref={register({ required: true })} type="text"/>
+                            <input name='conference' ref={register({required: true})} type="text"/>
+                            {errors.conference &&
+                            <ErrorsMessage textMessage={'Conference is registered'}/> }
                         </div>
                         <div className={f.add_form_data}>
                             <label className={total.text} htmlFor="">Year of foundation</label>
-                            <input name='foundationYear' ref={register({ required: true })} type="text"/>
+                            <input name='foundationYear' ref={register({required: true})} type="text"/>
+                            {errors.foundationYear &&
+                            <ErrorsMessage textMessage={'Year of foundation is registered'}/> }
                         </div>
                     </div>
                     <Block_Buttons/>
@@ -65,9 +91,10 @@ const AddTeams = (props: any) => {
     )
 }
 
-const mapStateToProps = (state: any) => ({
-    //teams: state.teams
+let mapStateToProps = (state: any) => ({
+    serialTeamID: getSerialTeamID(state),
+    teams: getTeamsData(state),
+    teamsName: getTeamsNames(state),
 })
 
-
-export default connect(mapStateToProps, {setTeam, updateTeam})(AddTeams);
+export default connect(mapStateToProps, {setTeam, updateTeam})(AddTeams)

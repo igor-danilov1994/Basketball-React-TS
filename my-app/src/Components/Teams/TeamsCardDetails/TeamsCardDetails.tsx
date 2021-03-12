@@ -1,18 +1,27 @@
-import React, {useEffect} from 'react';
-import {getPlayersData, getSerialTeamID, getTeamsData} from '../../../Redux/toolkit/selectors';
+import React from 'react';
+import {getSerialTeamID, getTeamsData} from '../../../Redux/toolkit/selectors';
 import s from '../../../assets/Style/CardDetails/CardDetails.module.css'
 import total from '../../../totalStyle.module.css'
 import {connect} from "react-redux";
 import BreadCrumbs from '../../BreadCrumbs/BreadCrumbs';
-import {getTeams, getTeam, deleteTeam} from "../../../Redux/toolkit/teamsReducer.ts";
+import {getTeams, getTeam, deleteTeam} from "../../../Redux/toolkit/teamsReducer"
 import TeamRoster from './TeamRoster';
 
-const TeamsCardDetails = (props: any) => {
-    let dataTeams = props.teams[props.serialTeamID]
-    //debugger
+type TeamsCardDetailsPropsType = {
+    teams: Array<any>
+    serialTeamID: number
+    deleteTeam: (getCurrentTeamID: number) => void
+}
 
-    let deleteTeam = () => {
-        props.deleteTeam(dataTeams.id)
+const TeamsCardDetails: React.FC <TeamsCardDetailsPropsType> = (
+    {teams, serialTeamID, deleteTeam}) => {
+
+    let dataTeams = teams[serialTeamID]
+
+    let getCurrentTeamID: number = dataTeams.id
+
+    let deleteTeams = () => {
+        deleteTeam(getCurrentTeamID)
     }
     let ROOT_IMAGES: string = 'http://dev.trainee.dex-it.ru'
 
@@ -24,7 +33,7 @@ const TeamsCardDetails = (props: any) => {
                              editPath={'addTeams'}
                              pathAfterDeletion={'teams'}
                              name={dataTeams.name}
-                             delete={deleteTeam}
+                             deleteItem={deleteTeams}
                 />
 
                 <div className={s.cardDetails}>
@@ -40,8 +49,8 @@ const TeamsCardDetails = (props: any) => {
                                 <div className={s.cardDetails_skill}>
                                     <h3 className={total.text_middle}>Year of foundation</h3>
                                     <span className={total.text_small}>
-                                {dataTeams.foundationYear}
-                            </span>
+                                        {dataTeams.foundationYear}
+                                    </span>
                                 </div>
 
                                 <div className={s.cardDetails_skill}>

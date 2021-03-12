@@ -200,6 +200,7 @@ input:focus, select:focus {
   background: #414141;
   opacity: 0.6;
   position: absolute;
+  z-index: 9;
 }
 
 .error {
@@ -252,6 +253,10 @@ input:focus, select:focus {
     width: 100%;
   }
 
+  .text_big {
+    font-size: 17px;
+    line-height: 25px;
+  }
   .text_small {
     font-size: 15px;
   }

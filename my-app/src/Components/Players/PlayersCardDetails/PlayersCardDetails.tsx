@@ -10,7 +10,7 @@ import total from '../../../totalStyle.module.css'
 import {connect} from "react-redux";
 import BreadCrumbs from "../../BreadCrumbs/BreadCrumbs";
 import {deletePlayer, getPlayer} from "../../../Redux/toolkit/playersReducer";
-import {getTeam} from "../../../Redux/toolkit/teamsReducer.ts";
+import {getTeam} from "../../../Redux/toolkit/teamsReducer";
 
 
 const PlayersCardDetails = (props: any) => {
@@ -44,7 +44,7 @@ const PlayersCardDetails = (props: any) => {
     return (
         <div className={s.cardDetails_wrapper}>
 
-            <BreadCrumbs katigories={'Players'} delete={deletePlayers}
+            <BreadCrumbs katigories={'Players'} deleteItem={deletePlayers}
                          pathAfterDeletion={'players'} name={dataPlayer.name}
                          editPath={'addPlayer'}
             />

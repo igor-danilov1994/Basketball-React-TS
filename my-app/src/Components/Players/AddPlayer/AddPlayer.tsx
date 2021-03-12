@@ -10,6 +10,7 @@ import calendar from '../images/calendar.png'
 import {savePlayers} from '../../../Redux/toolkit/playersReducer';
 import {getPlayerName, getTeamsId, getTeamsNames} from '../../../Redux/toolkit/selectors';
 import CalendarComponent from './Calendar/CalendarComponent';
+import ErrorsMessage from "../../ErrorsMessage/ErrorsMessage";
 
 
 const AddPlayer = (props: any) => {
@@ -60,7 +61,7 @@ const AddPlayer = (props: any) => {
                             <label className={total.text}>Name</label>
                             <input name='name' ref={register({required: true})} type="text"/>
                             {errors.name &&
-                            <span className={total.error}>Name is required</span>}
+                            <ErrorsMessage textMessage={'Name is required'}/>}
                         </div>
                         <div className={f.add_form_data}>
                             <label className={total.text}>Position</label>
@@ -100,14 +101,16 @@ const AddPlayer = (props: any) => {
                                     <label>Height (cm)</label>
                                     <input name='height' ref={register({required: true})}
                                            type="text"/>
+
                                     {errors.height &&
-                                    <span className={total.error}>Height is required</span>}
+                                    <ErrorsMessage textMessage={'Height is required'}/>}
                                 </div>
                                 <div className={`${f.properties_data} ${f.add_form_data}`}>
                                     <label>Weight (kg)</label>
                                     <input name='weight' ref={register({required: true})} type="text"/>
+
                                     {errors.weight &&
-                                    <span className={total.error}>Weight is required</span>}
+                                    <ErrorsMessage textMessage={'Weight is required'}/>}
                                 </div>
                             </div>
                             <div className={f.properties_options}>
@@ -124,13 +127,13 @@ const AddPlayer = (props: any) => {
                                         <CalendarComponent getBirthday={getBirthday}/>}
                                     </div>
                                     {errors.birthday &&
-                                    <span className={total.error}>Birthday is required</span>}
+                                    <ErrorsMessage textMessage={'Birthday is required'}/>}
                                 </div>
                                 <div className={`${f.properties_data} ${f.add_form_data}`}>
                                     <label>Number</label>
                                     <input name='number' ref={register({required: true})} type="text"/>
                                     {errors.number &&
-                                    <span className={total.error}>Number is required</span>}
+                                    <ErrorsMessage textMessage={'Number is required'}/>}
                                 </div>
                             </div>
                         </div>

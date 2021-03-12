@@ -1,7 +1,7 @@
-import {combineReducers, configureStore} from '@reduxjs/toolkit';
-import authReducer from "./authReducer";
-import playersReducer from "./playersReducer";
-import teamsReducer from "./teamsReducer.ts";
+import {combineReducers, configureStore} from '@reduxjs/toolkit'
+import authReducer from "./authReducer"
+import playersReducer from "./playersReducer"
+import teamsReducer from "./teamsReducer"
 
 const rootReducer = combineReducers({
     auth: authReducer,

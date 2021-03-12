@@ -8,7 +8,7 @@ import {NavLink, Redirect} from "react-router-dom";
 import total from "../../totalStyle.module.css";
 import searchIcon from "../../assets/images/search.png";
 import {setPlayersRequest, getPlayers, setSerialPlayersID} from "../../Redux/toolkit/playersReducer";
-import {getTeams} from "../../Redux/toolkit/teamsReducer.ts";
+import {getTeams} from "../../Redux/toolkit/teamsReducer";
 import SelectComponent from "../SelectComponent/SelectComponent";
 
 type PlayersPropsType = {

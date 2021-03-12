@@ -3,7 +3,7 @@ import s from "../../../assets/Style/CardLayout/CardLayout.module.css"
 import total from "../../../totalStyle.module.css"
 import {connect} from "react-redux"
 import {getTeamsForId} from "../../../Redux/toolkit/selectors"
-import {setTeamSerialId} from "../../../Redux/toolkit/teamsReducer.ts"
+import {setTeamSerialId} from "../../../Redux/toolkit/teamsReducer"
 
 const ROOT_IMAGES: string = 'http://dev.trainee.dex-it.ru'
 

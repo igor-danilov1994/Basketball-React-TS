@@ -1,16 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {
-    getPagePlayer,
-    getPageSizePlayer,
-    getPlayersCount,
-    getPlayersOfCurrentTeam,
-    getUserName
-} from '../../../Redux/toolkit/selectors';
+import {getPagePlayer, getPageSizePlayer, getPlayersCount,
+    getPlayersOfCurrentTeam, getUserName} from '../../../Redux/toolkit/selectors';
 import s from '../../../assets/Style/CardDetails/CardDetails.module.css'
 import total from '../../../totalStyle.module.css'
 import {connect} from "react-redux";
 import {setPlayersRequest, getPlayers} from "../../../Redux/toolkit/playersReducer";
-import {setTeamSerialId} from "../../../Redux/toolkit/teamsReducer.ts";
+import {setTeamSerialId} from "../../../Redux/toolkit/teamsReducer";
 
 const TeamRoster = (props: any) => {
 
@@ -52,9 +47,6 @@ const TeamRoster = (props: any) => {
                     <td>
                         <span className={total.text_middle14}>Age</span>
                     </td>
-                    <td>
-                        <span className={total.text__middle14}>Team</span>
-                    </td>
                 </tr>
                 </thead>
                 <tbody>
@@ -86,10 +78,6 @@ const TeamRoster = (props: any) => {
                         <td>
                             <span className={total.text_middle14}>{getAgePlayer(player.birthday)}</span>
                         </td>
-                        <td>
-                            <span className={total.text_middle14}>{player.team}</span>
-                        </td>
-
                     </tr>
                 )}
                 </tbody>
@@ -104,7 +92,6 @@ let mapStateToProps = (state: any) => ({
     pagePlayer: getPagePlayer(state),
     pageSizePlayer: getPageSizePlayer(state),
     playersOfCurrentTeam: getPlayersOfCurrentTeam(state),
-    //serialTeamsID: getSerialTeamID(state)
 })
 
 

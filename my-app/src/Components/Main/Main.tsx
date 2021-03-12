@@ -29,19 +29,19 @@ const Main = (props: any) => {
 
                     {props.teamsCount > 1 ? <Redirect to="/main/players"/> : <Redirect to="/main/teams"/>}
 
-                       {/* <Route path='' render={() => <Redirect to="/main/players"/>}/>*/}
+                    {/* <Route path='' render={() => <Redirect to="/main/players"/>}/>*/}
 
 
-                        <Route path='/main/teams' render={() => <Teams/>}/>
-                        <Route path='/main/teams_E' render={() => <TeamsEmpty/>}/>
-                        <Route path='/main/teamsCardDetails' render={() => < TeamsCardDetails/>}/>
-                        <Route path='/main/addTeams' render={() => < AddTeams/>}/>
+                    <Route path='/main/teams' render={() => <Teams/>}/>
+                    <Route path='/main/teams_E' render={() => <TeamsEmpty/>}/>
+                    <Route path='/main/teamsCardDetails' render={() => < TeamsCardDetails/>}/>
+                    <Route path='/main/addTeams' render={() => < AddTeams/>}/>
 
-                        <Route  path='/main/players' render={() => <Players/>}/>
-                        <Route path='/main/players_E' render={() => <PlayersEmpty/>}/>
-                        <Route path='/main/playersCardDetails' render={() => < PlayersCardDetails/>}/>
-                        <Route path='/main/addPlayer' render={() => <AddPlayer/>}/>
-                        {/*<Route path='*' render={() => <div> page 404 NOT FOUND</div>}/>*/}
+                    <Route path='/main/players' render={() => <Players/>}/>
+                    <Route path='/main/players_E' render={() => <PlayersEmpty/>}/>
+                    <Route path='/main/playersCardDetails' render={() => < PlayersCardDetails/>}/>
+                    <Route path='/main/addPlayer' render={() => <AddPlayer/>}/>
+                    {/*<Route path='*' render={() => <div> page 404 NOT FOUND</div>}/>*/}
 
                 </div>
             </div>

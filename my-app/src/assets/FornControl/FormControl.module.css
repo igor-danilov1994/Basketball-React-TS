@@ -7,10 +7,10 @@
 }
 .add_form {
   display: flex;
+  justify-content: space-between;
   padding: 48px 73px;
 }
 .add_form form {
-  margin-left: 136px;
   width: 37%;
 }
 .add_form_data {
@@ -33,6 +33,7 @@
 .add_form_img {
   display: flex;
   flex-direction: column;
+  width: 385px;
 }
 .add_form_img .active {
   display: block;
@@ -65,6 +66,41 @@
   position: absolute;
   right: 12px;
   top: calc( 100% - 26px);
+}
+
+@media screen and (max-width: 1110px) {
+  .add_form {
+    padding: 20px 50px;
+  }
+}
+@media screen and (max-width: 980px) {
+  .add_form {
+    padding: 10px 20px;
+  }
+}
+@media screen and (max-width: 880px) {
+  .add_form_img {
+    width: 350px;
+  }
+}
+@media screen and (max-width: 680px) {
+  .add_form_img {
+    width: 60%;
+  }
+}
+@media screen and (max-width: 480px) {
+  .add_form {
+    flex-direction: column;
+  }
+  .add_form form {
+    width: 100%;
+  }
+  .add_form_img {
+    width: 185px;
+    height: 144px;
+    align-self: center;
+    margin-bottom: 48px;
+  }
 }
 
 /*# sourceMappingURL=FormControl.module.css.map */

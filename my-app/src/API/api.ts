@@ -1,5 +1,4 @@
-import axios from "axios";
-import {fstat} from "fs";
+import axios from "axios"
 
 const instance = axios.create({
     baseURL: 'http://dev.trainee.dex-it.ru',

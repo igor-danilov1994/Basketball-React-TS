@@ -11,15 +11,13 @@
     width: 100%
   &_wrapper
     width: 100%
+    align-self: flex-start
   &_info
+    display: flex
+    flex-direction: column
     padding: 65px 0
-    margin-left: 56px
-    width: 60%
+    width: 50%
     h1
-      font-style: normal
-      font-weight: 800
-      font-size: 36px
-      line-height: 49px
       text-align: left
       span
         color: red
@@ -27,9 +25,9 @@
     display: flex
     justify-content: center
     align-items: center
-    width: 70%
+    width: 50%
     img
-      width: 70%
+      width: 50%
   &_description
     display: flex
     flex-direction: column
@@ -49,7 +47,6 @@
     background: #FFFFFF
     &_aTable
       display: flex
-      //border: solid 1px red
     table
       width: 100%
     tr
@@ -62,18 +59,48 @@
       td
         display: flex
         align-items: center
-        //justify-content: center
-        //border: solid 0.1px red
         img
           width: 52px
     &_info
       display: flex
       align-items: center
       width: 100%
-      //border: solid 0.5px red
       &_descr
         display: flex
         flex-direction: column
         margin-left: 10px
         span
           text-align: left
+
+@media screen and (max-width: 1450px)
+  .cardDetails
+    &_skill
+      margin-bottom: 0
+@media screen and (max-width: 1100px)
+  .cardDetails
+    &_info
+      padding: 10px 0
+@media screen and (max-width: 660px)
+  .cardDetails
+    flex-direction: column
+    &_img, &_info
+      width: 100%
+    &_info h1
+      text-align: center
+    &_description
+      &_main
+        flex-direction: column
+        width: 100%
+    &_skill
+      align-items: center
+      width: 100%
+    &_roster
+      tr
+        justify-content: flex-start
+      thead tr td
+        &:nth-child(3),  &:nth-child(4), &:nth-child(5)
+          display: none
+      tbody tr td
+        &:nth-child(4),  &:nth-child(5), &:nth-child(6), &:nth-child(7)
+          display: none
+

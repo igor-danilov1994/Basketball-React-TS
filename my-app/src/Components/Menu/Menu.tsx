@@ -34,7 +34,6 @@ const Menu: React.FC<MenuPropsType> = ({signOut, name}) => {
                 <span></span>
             </div>
 
-
             {showMenu && <>
                 <div className={s.nav_userInfo}>
                     <span> {name} </span>
