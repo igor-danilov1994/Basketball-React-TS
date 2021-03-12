@@ -42,7 +42,7 @@ const Login: React.FC<LoginPropsType> = ({signInError, getAuthUserData}) => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className={s.login_formItem}>
                         <label className={`${total.text_middle14} ${total.text}`}>Login</label>
-                        <input name='login' ref={register({required: false})} type="text"/>
+                        <input name='login' ref={register({required: true})} type="text"/>
                         {errors.login &&
                         <ErrorsMessage textMessage={'Login is required'}/> }
 
@@ -54,7 +54,7 @@ const Login: React.FC<LoginPropsType> = ({signInError, getAuthUserData}) => {
                         <label className={`${total.text_middle14} ${total.text}`}>Password</label>
 
                         <div className={s.login_formItem_pass}>
-                            <input name='password' ref={register({required: false})} type={show ? 'text' : 'password'}/>
+                            <input name='password' ref={register({required: true})} type={show ? 'text' : 'password'}/>
                             <img onClick={() => toggleShowPass(!show)}
                                  src={show ? passShow : passHidden} alt='showPass'/>
                         </div>
