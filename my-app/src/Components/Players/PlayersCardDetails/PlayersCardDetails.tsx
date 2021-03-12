@@ -1,27 +1,34 @@
-import React, {useEffect, useState} from 'react';
-import {
-    getPlayersData,
-    getSerialPlayerID,
-    getSerialTeamID,
-    getTeamsData,
-} from '../../../Redux/toolkit/selectors';
+import React, {useState} from 'react';
+import {getPlayersData, getSerialPlayerID, getTeamsData,} from '../../../Redux/toolkit/selectors';
 import s from '../../../assets/Style/CardDetails/CardDetails.module.css'
 import total from '../../../totalStyle.module.css'
 import {connect} from "react-redux";
 import BreadCrumbs from "../../BreadCrumbs/BreadCrumbs";
-import {deletePlayer, getPlayer} from "../../../Redux/toolkit/playersReducer";
-import {getTeam} from "../../../Redux/toolkit/teamsReducer";
+import {deletePlayer} from "../../../Redux/toolkit/playersReducer";
+import {AppStateType} from "../../../Redux/toolkit/redux-store";
 
+type MapStatePropsType = {
+    serialPlayerID: number | null
+    players: Array<any>
+    team: Array<any>
+}
+type MapDispatchPropsType = {
+    deletePlayer: (id: number) => void
+}
 
-const PlayersCardDetails = (props: any) => {
+type PlayersCardDetailsPropsType = MapDispatchPropsType & MapStatePropsType
+
+const PlayersCardDetails: React.FC <PlayersCardDetailsPropsType> = (
+    {serialPlayerID, players, team, deletePlayer,   }) => {
+
     const [age, setAge] = useState<null | number>(null)
 
-    let dataPlayer = props.players[props.serialPlayerID]
-    let currentTeamName = props.team[props.serialPlayerID].name
+    let dataPlayer = players[serialPlayerID!]
+    let currentTeamName = team[serialPlayerID!].name
     let ROOT_IMAGES: string = 'http://dev.trainee.dex-it.ru'
 
     let deletePlayers = () => {
-        props.deletePlayer(dataPlayer.id)
+        deletePlayer(dataPlayer.id)
     }
 
     const getAgePlayer = () => {
@@ -101,13 +108,10 @@ const PlayersCardDetails = (props: any) => {
     )
 }
 
-let mapStateToProps = (state: any) => ({
-    //player: state.players.data,
+let mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     players: getPlayersData(state),
-    //teams: getTeamsNames(state),
     team: getTeamsData(state),
-    serialPlayerID: getSerialPlayerID(state),
-    serialTeamsID: getSerialTeamID(state)
+    serialPlayerID: getSerialPlayerID(state)
 })
 
-export default connect(mapStateToProps, {getTeam, getPlayer, deletePlayer})(PlayersCardDetails)
+export default connect(mapStateToProps, {deletePlayer})(PlayersCardDetails)

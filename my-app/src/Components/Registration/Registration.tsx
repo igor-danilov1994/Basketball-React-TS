@@ -10,29 +10,36 @@ import {getConfirmationAuthUser} from "../../Redux/toolkit/authReducer";
 import passShow from "../Login/images/passShow.png";
 import passHidden from "../Login/images/passHidden.png";
 import ErrorsMessage from "../ErrorsMessage/ErrorsMessage";
+import {AppStateType} from "../../Redux/toolkit/redux-store";
 
-type onSubmitDataForm = {
+type onSubmitDataFormType = {
     userName: string
     login: string
     password: string
     doublePass: string
 }
 
-type RegistrationPropsType = {
-    getConfirmationAuthUser: (data: onSubmitDataForm) => void
+type MapDispatchPropsType = {
+    getConfirmationAuthUser: (data: onSubmitDataFormType) => void
+}
+
+type MapStatePropsType = {
     isRegistered: boolean
     signUpError: boolean
 }
 
+type RegistrationPropsType = MapDispatchPropsType & MapStatePropsType
+
 const Registration: React.FC<RegistrationPropsType> = (
     {isRegistered, signUpError, getConfirmationAuthUser}) => {
+
     const {register, handleSubmit, errors} = useForm();
     const [show, toggleShowPass] = useState(false)
     const [showThis, toggleShowDoublePass] = useState(false)
     const [matchingPasswords, setMatchingPasswords] = useState(false)
 
 
-    const onSubmit = (data: onSubmitDataForm) => {
+    const onSubmit = (data: onSubmitDataFormType) => {
         if (data.password === data.doublePass) {
             getConfirmationAuthUser(data)
         } else {
@@ -114,7 +121,7 @@ const Registration: React.FC<RegistrationPropsType> = (
     )
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     isRegistered: state.auth.isRegistered,
     signUpError: state.auth.signUpError,
 })

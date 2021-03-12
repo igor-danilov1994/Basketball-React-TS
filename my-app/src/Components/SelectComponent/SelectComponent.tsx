@@ -5,22 +5,24 @@ import makeAnimated from "react-select/animated";
 
 const animatedComponents = makeAnimated();
 
-const SelectComponent = (props: any) => {
 
-    let options
-    if (props.options[0] != null) {
-        //debugger
-        options = props.options.map((obj: any, id: number) => ({value: obj, label: obj}))
+type SelectComponentPropsType =  {
+    options: Array<any>
+}
 
-       // options = props.options.map((obj: any, id: number) => ({value: obj.id, label: obj.name}))
+const SelectComponent: React.FC <SelectComponentPropsType> = ({options}) => {
+
+    let currentOptions
+
+    if (options[0] != null) {
+        currentOptions = options.map((obj: any, id: number) => ({value: obj, label: obj}))
     }
-    //debugger
 
     return (
-        <Select options={options}
-                closeMenuOnSelect={props.closeMenuOnSelect}
+        <Select options={currentOptions}
+                closeMenuOnSelect={false}
                 components={animatedComponents}
-                isMulti={props.isMulti}
+                isMulti={true}
                 name="select"
                 className={`${s.select}`}
                 classNamePrefix={`${s.select}`}

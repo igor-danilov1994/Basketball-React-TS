@@ -3,16 +3,20 @@ import './App.css'
 import {Redirect, Route} from "react-router-dom";
 import Registration from "./Components/Registration/Registration";
 import Login from "./Components/Login/Login";
-import {compose} from "redux";
 import Main from './Components/Main/Main';
 import {connect} from 'react-redux';
+import {AppStateType} from "./Redux/toolkit/redux-store";
 
 
-function App(props: any) {
+type AppPropsType = {
+    isAuth: boolean
+}
+
+const App: React.FC <AppPropsType> = ({isAuth}) => {
     return (
         <div className="app">
             <Route path='' render={() => <Redirect to="/signIn"/>}/>
-            {props.isAuth ? <Redirect to="/main/"/>
+            {isAuth ? <Redirect to="/main/"/>
                 : <Route exact path='/signIn' render={() => <Login/>}/>
             }
             <Route exact path='/signUp' render={() => <Registration/>}/>
@@ -22,10 +26,11 @@ function App(props: any) {
     )
 }
 
-const mapStateToProps = (state: any) => ({
-    isAuth: state.auth.isAuth,
+const mapStateToProps = (state: AppStateType) => ({
+    isAuth: state.auth.isAuth
 })
 
-export default compose(connect(mapStateToProps)(App))
+
+export default connect(mapStateToProps)(App)
 
 

@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import '../../App.css'
-import {Redirect, Route, Switch} from "react-router-dom";
+import {Redirect, Route} from "react-router-dom";
 import Header from '../Header/Header';
 import Menu from "../Menu/Menu";
 import Teams from "../Teams/Teams";
@@ -14,10 +14,15 @@ import PlayersCardDetails from '../Players/PlayersCardDetails/PlayersCardDetails
 import {connect} from "react-redux";
 import {getPosition} from "../../Redux/toolkit/playersReducer";
 
+type MainPropsType = {
+    getPosition: () => void
+    teamsCount: number
+}
 
-const Main = (props: any) => {
+const Main: React.FC <MainPropsType> = ({getPosition, teamsCount }) => {
+
     useEffect(() => {
-        props.getPosition()
+        getPosition()
     }, [])
 
     return (
@@ -27,10 +32,7 @@ const Main = (props: any) => {
                 <Menu/>
                 <div className="main">
 
-                    {props.teamsCount > 1 ? <Redirect to="/main/players"/> : <Redirect to="/main/teams"/>}
-
-                    {/* <Route path='' render={() => <Redirect to="/main/players"/>}/>*/}
-
+                    {teamsCount > 1 ? <Redirect to="/main/players"/> : <Redirect to="/main/teams"/>}
 
                     <Route path='/main/teams' render={() => <Teams/>}/>
                     <Route path='/main/teams_E' render={() => <TeamsEmpty/>}/>

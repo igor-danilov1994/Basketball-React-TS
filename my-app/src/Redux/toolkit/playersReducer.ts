@@ -57,9 +57,20 @@ export const getPlayer = (ID: number) => async (dispatch: any) => {
     if (promise.status === 200) {
         dispatch(SET_PLAYER(promise.data));
     }
-};
+}
 
-export const savePlayers = (data: any) => async (dispatch: any) => {
+type PlayersDataType = {
+    name: string
+    position: string
+    team: string | number
+    height: string | number
+    weight: string | number
+    birthday: string
+    number: string | number
+    avatarUrl: string
+}
+
+export const savePlayers = (data: PlayersDataType) => async (dispatch: any) => {
     data.height = Number(data.height)
     data.number = Number(data.number)
     data.weight = Number(data.weight)
@@ -72,7 +83,7 @@ export const savePlayers = (data: any) => async (dispatch: any) => {
     }
 };
 
-const addPlayer = (data: any) => async (dispatch: any) => {
+const addPlayer = (data: PlayersDataType) => async (dispatch: any) => {
     const promise = await playersAPI.addPlayers(data)
     if (promise.status === 200) {
         dispatch(ADD_PLAYER(promise.data));

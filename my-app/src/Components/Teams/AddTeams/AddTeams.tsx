@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import {setTeam, updateTeam} from "../../../Redux/toolkit/teamsReducer"
 import {getSerialTeamID, getTeamsData, getTeamsNames} from "../../../Redux/toolkit/selectors";
 import ErrorsMessage from "../../ErrorsMessage/ErrorsMessage";
+import {AppStateType} from "../../../Redux/toolkit/redux-store";
 
 type  typeData = {
     imageUrl: object
@@ -17,13 +18,17 @@ type  typeData = {
     foundationYear: number
 }
 
-type AddTeamsPropsType = {
-    serialTeamID: number
+type mapStatePropsType = {
+    serialTeamID: number | null
     teams: Array<any>
     teamsName: Array<any>
+}
+type mapDispatchPropsType = {
     setTeam: (data: typeData, getCurrentTeamID: number) => void
     updateTeam: (data: typeData, getCurrentTeamID: number) => void
 }
+
+type AddTeamsPropsType = mapStatePropsType & mapDispatchPropsType
 
 const AddTeams: React.FC<AddTeamsPropsType> = ({serialTeamID, teams, setTeam, teamsName,}) => {
 
@@ -91,10 +96,11 @@ const AddTeams: React.FC<AddTeamsPropsType> = ({serialTeamID, teams, setTeam, te
     )
 }
 
-let mapStateToProps = (state: any) => ({
+let mapStateToProps = (state: AppStateType): mapStatePropsType => ({
     serialTeamID: getSerialTeamID(state),
     teams: getTeamsData(state),
     teamsName: getTeamsNames(state),
 })
+
 
 export default connect(mapStateToProps, {setTeam, updateTeam})(AddTeams)

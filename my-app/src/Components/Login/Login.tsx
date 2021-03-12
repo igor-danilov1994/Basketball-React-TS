@@ -9,18 +9,29 @@ import {useForm} from 'react-hook-form'
 import {connect} from 'react-redux'
 import {getAuthUserData} from "../../Redux/toolkit/authReducer";
 import ErrorsMessage from "../ErrorsMessage/ErrorsMessage";
+import {AppStateType} from "../../Redux/toolkit/redux-store";
 
-type LoginPropsType = {
-    signInError?: boolean
-    getAuthUserData: (data: object) => void
+
+type DataType = {
+    login: string
+    password: string
 }
+
+type MapStatePropsType = {
+    signInError: boolean
+}
+type MapDispatchPropsType = {
+    getAuthUserData: (data: DataType) => void
+}
+
+type LoginPropsType = MapStatePropsType & MapDispatchPropsType
 
 const Login: React.FC<LoginPropsType> = ({signInError, getAuthUserData}) => {
 
     const {register, handleSubmit, errors} = useForm()
     const [show, toggleShowPass] = useState(false)
 
-    const onSubmit = (data: object) => {
+    const onSubmit = (data: DataType) => {
         getAuthUserData(data)
     }
 
@@ -31,7 +42,7 @@ const Login: React.FC<LoginPropsType> = ({signInError, getAuthUserData}) => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className={s.login_formItem}>
                         <label className={`${total.text_middle14} ${total.text}`}>Login</label>
-                        <input name='login' ref={register({required: true})} type="text"/>
+                        <input name='login' ref={register({required: false})} type="text"/>
                         {errors.login &&
                         <ErrorsMessage textMessage={'Login is required'}/> }
 
@@ -43,7 +54,7 @@ const Login: React.FC<LoginPropsType> = ({signInError, getAuthUserData}) => {
                         <label className={`${total.text_middle14} ${total.text}`}>Password</label>
 
                         <div className={s.login_formItem_pass}>
-                            <input name='password' ref={register({required: true})} type={show ? 'text' : 'password'}/>
+                            <input name='password' ref={register({required: false})} type={show ? 'text' : 'password'}/>
                             <img onClick={() => toggleShowPass(!show)}
                                  src={show ? passShow : passHidden} alt='showPass'/>
                         </div>
@@ -67,7 +78,7 @@ const Login: React.FC<LoginPropsType> = ({signInError, getAuthUserData}) => {
     )
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     signInError: state.auth.signInError
 })
 

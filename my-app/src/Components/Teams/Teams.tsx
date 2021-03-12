@@ -8,24 +8,30 @@ import {NavLink, Redirect} from "react-router-dom";
 import {setTeamsRequest, setPageTeams, setTeamSerialId} from "../../Redux/toolkit/teamsReducer"
 import searchIcon from "../../assets/images/search.png";
 import total from "../../totalStyle.module.css";
+import {AppStateType} from "../../Redux/toolkit/redux-store";
 
-type TeamsPropsType = {
-    name: string
+
+type MapStatePropsType = {
+    name: string | null
     pageTeam: number
     pageSizeTeam: number
-    getTeams: (name: string, pageTeam: number, pageSizeTeam: number ) => void
-    teamsCount: number
+    teamsCount: any
     teams: Array<any>
+}
+type MapDispatchPropsType = {
+    getTeams: (name: string, pageTeam: number, pageSizeTeam: number ) => void
     setTeamSerialId: (index: number) => void
     setTeamsRequest: (pageTeam: number, pageSizeTeam: number) => void
 }
+
+type TeamsPropsType = MapStatePropsType & MapDispatchPropsType
 
 const Teams: React.FC <TeamsPropsType> = (
     {getTeams, name, pageTeam, pageSizeTeam, teamsCount, teams, setTeamSerialId, setTeamsRequest}) => {
 
 
     useEffect(() => {
-        getTeams(name, pageTeam, pageSizeTeam)
+        getTeams(name!, pageTeam, pageSizeTeam)
     }, [pageTeam, pageSizeTeam])
 
     return (
@@ -69,13 +75,12 @@ const Teams: React.FC <TeamsPropsType> = (
 }
 
 
-let mapStateToProps = (state: any) => ({
+let mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     name: getUserName(state),
     teams: getTeamsData(state),
     pageTeam: getPageTeam(state),
     teamsCount: getTeamsCount(state),
     pageSizeTeam: getPageSizeTeam(state),
-
 })
 
 export default connect(mapStateToProps, {getTeams, setTeamsRequest, setTeamSerialId, setPageTeams})(Teams)

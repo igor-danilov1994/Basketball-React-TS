@@ -1,6 +1,5 @@
 import React from 'react'
-import s from "../../../assets/Style/CardLayout/CardLayout.module.css";
-import {connect} from "react-redux";
+import s from "../../../assets/Style/CardLayout/CardLayout.module.css"
 
 const ROOT_IMAGES: string = 'http://dev.trainee.dex-it.ru'
 
@@ -27,8 +26,7 @@ const TeamsCard: React.FC <TeamsCardPropsType> = ({team}) => {
                 <span>Year of foundation: {team.foundationYear}</span>
             </div>
         </div>
-
     )
 }
 
-export default connect()(TeamsCard)
+export default TeamsCard

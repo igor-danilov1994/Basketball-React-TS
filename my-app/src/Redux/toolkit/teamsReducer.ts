@@ -18,16 +18,6 @@ const initialState = {
     serialTeamID: null as number | null,
 }
 
-type getTeamPayloadType = {
-    data: any
-    count: number
-}
-
-type GetTeamType = {
-    type: typeof GET_TEAM
-    action: getTeamPayloadType
-}
-
 const GET_TEAM: any = createAction('APP/SRC/REDUX/PLAYERS/GET_TEAMS')
 const ADD_TEAM: any = createAction('APP/SRC/REDUX/PLAYERS/ADD_TEAM')
 const SET_TEAM_PAGE: any = createAction('APP/SRC/REDUX/PLAYERS/SET_TEAM_PAGE')
@@ -109,7 +99,7 @@ export default createReducer(initialState, {
         state.count = action.payload.count
     },
     [ADD_TEAM]: (state, action) => {
-        state.data = action.payload
+        //state.data = action.payload
     },
     [SET_SERIAL_TEAM_ID]: (state, action) => {
         state.serialTeamID = action.payload

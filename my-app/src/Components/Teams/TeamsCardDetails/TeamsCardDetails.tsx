@@ -6,25 +6,27 @@ import {connect} from "react-redux";
 import BreadCrumbs from '../../BreadCrumbs/BreadCrumbs';
 import {getTeams, getTeam, deleteTeam} from "../../../Redux/toolkit/teamsReducer"
 import TeamRoster from './TeamRoster';
+import {AppStateType} from "../../../Redux/toolkit/redux-store";
 
-type TeamsCardDetailsPropsType = {
+type MapStatePropsType = {
     teams: Array<any>
-    serialTeamID: number
-    deleteTeam: (getCurrentTeamID: number) => void
+    serialTeamID: number | null
 }
 
-const TeamsCardDetails: React.FC <TeamsCardDetailsPropsType> = (
-    {teams, serialTeamID, deleteTeam}) => {
+type MapDispatchPropsType = {
+    deleteTeam: (getCurrentTeamID: number) => void
+}
+type TeamsCardDetailsPropsType = MapStatePropsType & MapDispatchPropsType
 
-    let dataTeams = teams[serialTeamID]
+const TeamsCardDetails: React.FC<TeamsCardDetailsPropsType> = ({teams, serialTeamID, deleteTeam}) => {
 
+    let dataTeams = teams[serialTeamID!]
     let getCurrentTeamID: number = dataTeams.id
 
     let deleteTeams = () => {
         deleteTeam(getCurrentTeamID)
     }
     let ROOT_IMAGES: string = 'http://dev.trainee.dex-it.ru'
-
 
     return (
         <div className={s.cardDetails_teams}>
@@ -79,8 +81,7 @@ const TeamsCardDetails: React.FC <TeamsCardDetailsPropsType> = (
     )
 }
 
-let mapStateToProps = (state: any) => ({
-    //players: getPlayersData(state),
+let mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     teams: getTeamsData(state),
     serialTeamID: getSerialTeamID(state)
 })

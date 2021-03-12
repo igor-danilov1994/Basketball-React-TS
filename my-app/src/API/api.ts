@@ -8,12 +8,22 @@ const instance = axios.create({
     },
 });
 
-type authAPI = {
-    signUp: (data: any) => any
-    signIn: (data: any) => any
+type signUpDataType = {
+    userName: string
+    login: string
+    password: string
+}
+type signInDataType = {
+    login: string
+    password: string
 }
 
-export const authAPI: authAPI = {
+type authApiType = {
+    signUp: (data: signUpDataType) => any
+    signIn: (data: signInDataType) => any
+}
+
+export const authAPI: authApiType = {
     async signUp(data) {
         const promise = await instance.post("/api/Auth/SignUp", {
             "userName": data.userName,
@@ -39,15 +49,26 @@ export const Echo: object = {
     }
 }
 
-type playersAPI = {
+type addPlayersDataType = {
+    name: string
+    position: string
+    team: string | number
+    height: string | number
+    weight: string | number
+    birthday: string
+    number: string | number
+    avatarUrl: string
+}
+
+type playersApiType = {
     getPositions: () => any
     getPlayer: (id: number) => any
     getPlayers: (name: string, pagePlayer: number, pageSizePlayer: number) => any
-    addPlayers: (data: any) => any
+    addPlayers: (data: addPlayersDataType) => any
     deletePlayers: (id: number) => any
 }
 
-export const playersAPI: playersAPI = {
+export const playersAPI: playersApiType = {
     async getPositions() {
         const promise = await instance.get('/api/Player/GetPositions')
         return promise
@@ -92,9 +113,25 @@ export const playersAPI: playersAPI = {
         return promise
     }
 }
+type addTeamDataType = {
+    name: string
+    foundationYear: string
+    division: string
+    conference: string
+    imageUrl: string
+}
+type updateTeamDataType = {
+    name: string
+    foundationYear: string
+    division: string
+    conference: string
+    imageUrl: string
+    id: number
+}
+
 type teamsApiType = {
-    addTeam: (data: any) => any
-    updateTeam: (data: any, getCurrentTeamID: number) => any
+    addTeam: (data: addTeamDataType) => any
+    updateTeam: (data: updateTeamDataType, getCurrentTeamID: number) => any
     deleteTeam: (getCurrentTeamID: number) => any
     getTeams: (name: string, pageTeam: number, pageSizeTeam: number) => any
     getTeam: (id: number) => any

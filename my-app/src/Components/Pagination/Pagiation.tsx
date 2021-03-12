@@ -3,22 +3,25 @@ import s from './Pagination.module.css'
 import showCountCard from '../../assets/images/link.png'
 import ReactPaginate from "react-paginate";
 import {connect} from 'react-redux';
-import {getUserName} from "../../Redux/toolkit/selectors";
 import {getTeams} from "../../Redux/toolkit/teamsReducer";
 import {getPlayers} from "../../Redux/toolkit/playersReducer";
 
 export interface toggleCountCard {
     [Key: string]: CSSProperties;
 }
-
-type PaginationPropsType = {
-    page: number
-    pageSize: number
+type MapDispatchPropsType = {
     setRequest: (currentPage: number, size: number) => void
-    pageCount: number
 }
 
-const Pagination: React.FC <PaginationPropsType> = ({page, pageSize, setRequest, pageCount} ) => {
+type OwnPropsType = {
+    page: number
+    pageSize: number
+    pageCount: number
+}
+type PaginationPropsType = MapDispatchPropsType & OwnPropsType
+
+
+    const Pagination: React.FC <PaginationPropsType> = ({page, pageSize, setRequest, pageCount} ) => {
 
     const [currentPage, setCurrentPage] = useState(page)
     const [size, setSize] = useState(pageSize)
@@ -82,8 +85,4 @@ const Pagination: React.FC <PaginationPropsType> = ({page, pageSize, setRequest,
     )
 }
 
-let mapStateToProps = (state: any) => ({
-    name: getUserName(state),
-})
-
-export default connect(mapStateToProps, {getTeams, getPlayers})(Pagination)
+export default connect(null, {getTeams, getPlayers})(Pagination)

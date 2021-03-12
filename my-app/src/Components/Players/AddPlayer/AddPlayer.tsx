@@ -8,12 +8,37 @@ import {connect} from "react-redux";
 import arrowImg from '../../../assets/images/link.png'
 import calendar from '../images/calendar.png'
 import {savePlayers} from '../../../Redux/toolkit/playersReducer';
-import {getPlayerName, getTeamsId, getTeamsNames} from '../../../Redux/toolkit/selectors';
+import {getTeamsId, getTeamsNames} from '../../../Redux/toolkit/selectors';
 import CalendarComponent from './Calendar/CalendarComponent';
 import ErrorsMessage from "../../ErrorsMessage/ErrorsMessage";
+import {AppStateType} from "../../../Redux/toolkit/redux-store";
 
+type Data = {
+    avatarUrl: string
+    name: string
+    position: string
+    team: string
+    height: string
+    weight: string
+    birthday: string
+    number: string
+}
 
-const AddPlayer = (props: any) => {
+type mapDispatchPropsType = {
+    savePlayers: (data: Data) => void
+
+}
+
+type mapStatePropsType = {
+    positions: Array<string>
+    teamsName: Array<any>
+    teamsId: Array<any>
+}
+
+type AddPlayerPropeType = mapDispatchPropsType & mapStatePropsType
+
+const AddPlayer: React.FC <AddPlayerPropeType> = (
+    {positions, savePlayers, teamsName, teamsId}) => {
 
     const {register, handleSubmit, errors} = useForm()
     const [activeRotatePosition, setActiveRotatePosition] = useState(false)
@@ -33,9 +58,9 @@ const AddPlayer = (props: any) => {
         onChangeBirthdayData(date)
     }
 
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: Data) => {
         data.birthday = birthdayData
-        props.savePlayers(data)
+        savePlayers(data)
     }
 
     let setBirthday = (e: any) => {
@@ -73,7 +98,7 @@ const AddPlayer = (props: any) => {
 
 
                                 <select name="position" ref={register({required: true})}>
-                                    {props.positions.map((p: any) =>
+                                    {positions.map((p: any) =>
                                         <option key={p} value={p}>{p}</option>
                                     )}
                                 </select>
@@ -86,9 +111,9 @@ const AddPlayer = (props: any) => {
                                     className={activeRotateTeam ? `${total.select_imgRotateOn}` : `${total.select_imgRotateOff}`}
                                     src={arrowImg} alt="arrow"/>
                                 <select name="team" ref={register({required: true})}>
-                                    {props.teamsName.map((names: any, id: number) =>
-                                        <option key={props.teamsId[id]}
-                                                value={props.teamsId[id]}>
+                                    {teamsName.map((names: any, id: number) =>
+                                        <option key={teamsId[id]}
+                                                value={teamsId[id]}>
                                             {names}
                                         </option>
                                     )}
@@ -145,10 +170,9 @@ const AddPlayer = (props: any) => {
     )
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: AppStateType) : mapStatePropsType => ({
         positions: state.players.positions,
         teamsId: getTeamsId(state),
-        playersName: getPlayerName(state),
         teamsName: getTeamsNames(state)
     }
 )

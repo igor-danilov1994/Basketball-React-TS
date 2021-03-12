@@ -4,15 +4,24 @@ import total from "../../../totalStyle.module.css"
 import {connect} from "react-redux"
 import {getTeamsForId} from "../../../Redux/toolkit/selectors"
 import {setTeamSerialId} from "../../../Redux/toolkit/teamsReducer"
+import {AppStateType} from "../../../Redux/toolkit/redux-store";
 
 const ROOT_IMAGES: string = 'http://dev.trainee.dex-it.ru'
 
-type PlayerCardPropsType = {
-    teamId: number
+type MapStatePropsType = {
     teamName: Array<any>
-    player: any
+}
+type MapDispatchPropsType = {
     setTeamSerialId: (teamId: number) => void
 }
+
+type OwnPlayerCardPropsType = {
+    teamId: number
+    player: any
+}
+
+
+type PlayerCardPropsType = MapStatePropsType & OwnPlayerCardPropsType & MapDispatchPropsType
 
 const PlayerCard: React.FC<PlayerCardPropsType> = (
     {setTeamSerialId, teamId, teamName, player,}) => {
@@ -45,7 +54,7 @@ const PlayerCard: React.FC<PlayerCardPropsType> = (
     )
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     teamName: getTeamsForId(state)
 })
 

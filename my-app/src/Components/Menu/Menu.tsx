@@ -11,10 +11,11 @@ import total from '../../totalStyle.module.css'
 import {signOut} from "../../Redux/toolkit/authReducer";
 import userAvatar from "../Header/images/profile.png";
 import {getUserName} from "../../Redux/toolkit/selectors";
+import {AppStateType} from '../../Redux/toolkit/redux-store'
 
 type MenuPropsType = {
     signOut: () => void
-    name: string
+    name: string | null
 }
 
 const Menu: React.FC<MenuPropsType> = ({signOut, name}) => {
@@ -57,7 +58,7 @@ const Menu: React.FC<MenuPropsType> = ({signOut, name}) => {
                         </div>
                     </div>
                     <div className={s.nav_footer}>
-                        <NavLink to='/signIn' onClick={() => signOut()}>
+                        <NavLink to='/signIn' onClick={ () => signOut()  }>
                             <img src={inputIcon} alt="iconImg"/>
                             <span className={total.text_extraSmall}>Sign out</span>
                         </NavLink>
@@ -68,10 +69,10 @@ const Menu: React.FC<MenuPropsType> = ({signOut, name}) => {
     )
 }
 
-let mapStateToProps = (state: any) => ({
+let mapStateToProps = (state: AppStateType) => ({
     name: getUserName(state)
 })
 
-export default connect(mapStateToProps,{signOut})(Menu)
+export default connect(mapStateToProps, {signOut})(Menu)
 
 

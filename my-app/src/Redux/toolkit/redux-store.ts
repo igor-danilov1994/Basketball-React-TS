@@ -9,6 +9,14 @@ const rootReducer = combineReducers({
     teams: teamsReducer,
 })
 
+type RootReducerType = typeof rootReducer
+
+export type AppStateType = ReturnType<RootReducerType>
+
+
+
+
+
 export const store = configureStore({
     reducer: rootReducer,
 })

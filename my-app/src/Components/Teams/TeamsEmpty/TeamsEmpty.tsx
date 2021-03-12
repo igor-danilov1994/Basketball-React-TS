@@ -2,13 +2,11 @@ import React from 'react';
 import CardEmpty from "../../CardEmpty/CardEmpty";
 import img from '../images/TeamsEmpty.png';
 
-let patch = '/main/addTeams'
-let teams = 'teams'
 
-const TeamsEmpty = (props: any) => {
+const TeamsEmpty = () => {
     return (
-        <CardEmpty descr={teams} patch={patch} img={img} />
+        <CardEmpty descr={'teams'} patch={'/main/addTeams'} img={img} />
     )
 }
 
-export default TeamsEmpty;
+export default TeamsEmpty

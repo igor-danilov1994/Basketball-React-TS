@@ -2,12 +2,9 @@ import React from 'react'
 import img from "../images/PlayersEmpty.png";
 import CardEmpty from "../../CardEmpty/CardEmpty";
 
-let patch = '/main/addPlayer'
-let players = 'players'
-
-const PlayersEmpty = (props: any) => {
+const PlayersEmpty = () => {
     return (
-        <CardEmpty descr={players} patch={patch} img={img} />
+        <CardEmpty descr={'players'} patch={'/main/addPlayer'} img={img} />
     )
 }
 

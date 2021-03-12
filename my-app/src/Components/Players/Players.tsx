@@ -3,37 +3,46 @@ import PlayerCard from "./PlayerCard/PlayersСard";
 import Pagination from "../Pagination/Pagiation";
 import {connect} from "react-redux";
 import {getPagePlayer, getPageSizePlayer, getPlayersCount, getPlayersData,
-    getPlayersNames, getUserName} from '../../Redux/toolkit/selectors';
+    getPlayersNames, getUserName
+} from '../../Redux/toolkit/selectors';
 import {NavLink, Redirect} from "react-router-dom";
 import total from "../../totalStyle.module.css";
 import searchIcon from "../../assets/images/search.png";
-import {setPlayersRequest, getPlayers, setSerialPlayersID} from "../../Redux/toolkit/playersReducer";
+import {setPlayersRequest, getPlayers, setSerialPlayersID}
+    from "../../Redux/toolkit/playersReducer";
 import {getTeams} from "../../Redux/toolkit/teamsReducer";
 import SelectComponent from "../SelectComponent/SelectComponent";
+import {AppStateType} from "../../Redux/toolkit/redux-store";
 
-type PlayersPropsType = {
-    name: string
+type MapStatePropsType = {
+    userName: string | null
     pagePlayer: number
     pageSizePlayer: number
-    playersCount: number
+    playersCount: any
     playersName: Array<string>
+    players: Array<any>
+}
+
+type MapDispatchPropsType = {
     getPlayers: (name: string, pagePlayer: number, pageSizePlayer: number) => void
     getTeams: (name: string, pagePlayer: number, pageSizePlayer: number) => void
     setSerialPlayersID: (index: number) => void
     setPlayersRequest: (pagePlayer: number, pageSizePlayer: number) => void
-    players: Array<any>
 }
+
+type PlayersPropsType = MapStatePropsType & MapDispatchPropsType
 
 const Players: React.FC<PlayersPropsType> = (
     {
-        name, pagePlayer, getPlayers, players, setSerialPlayersID, setPlayersRequest,
+        userName, pagePlayer, getPlayers, players, setSerialPlayersID, setPlayersRequest,
         pageSizePlayer, playersCount, playersName
     }) => {
 
     useEffect(() => {
-        getPlayers(name, pagePlayer, pageSizePlayer)
-        getTeams(name, pagePlayer, pageSizePlayer)
+        getPlayers(userName!, pagePlayer, pageSizePlayer)
+        getTeams(userName!, pagePlayer, pageSizePlayer)
     }, [pagePlayer, pageSizePlayer])
+
 
     return (
         <>
@@ -47,8 +56,8 @@ const Players: React.FC<PlayersPropsType> = (
                                 <img src={searchIcon} alt="search"/>
                             </div>
 
-                            <SelectComponent options={playersName} isMulti={true}
-                                             closeMenuOnSelect={false}
+                            <SelectComponent options={playersName}
+
                             />
 
                         </div>
@@ -83,8 +92,8 @@ const Players: React.FC<PlayersPropsType> = (
 }
 
 
-const mapStateToProps = (state: any) => ({
-    name: getUserName(state),
+const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
+    userName: getUserName(state),
     players: getPlayersData(state),
     playersName: getPlayersNames(state),
     playersCount: getPlayersCount(state),
@@ -92,8 +101,6 @@ const mapStateToProps = (state: any) => ({
     pageSizePlayer: getPageSizePlayer(state),
 })
 
-export default connect(mapStateToProps, {
-    getTeams, setPlayersRequest, getPlayers,
-    setSerialPlayersID
-})(Players)
+
+export default connect(mapStateToProps, {getTeams, setPlayersRequest, getPlayers, setSerialPlayersID})(Players)
 

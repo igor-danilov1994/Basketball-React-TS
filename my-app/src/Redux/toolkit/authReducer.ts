@@ -18,8 +18,15 @@ const SIGN_UP: any = createAction('APP/SRC/REDUX/AUTH/SIGN_UP')
 const SIGN_UP_ERROR: any = createAction('APP/SRC/REDUX/AUTH/SIGN_UP_ERROR')
 export const SIGN_OUT: any = createAction('APP/SRC/REDUX/AUTH/SIGN_OUT')
 
+
+type signUpDataType = {
+    userName: string
+    login: string
+    password: string
+}
+
 //Thunk
-export const getConfirmationAuthUser = (data: object) => async (dispatch: any) => {
+export const getConfirmationAuthUser = (data: signUpDataType) => async (dispatch: any) => {
     try {
         let response = await authAPI.signUp(data)
         if (response.status === 200) {
@@ -31,7 +38,12 @@ export const getConfirmationAuthUser = (data: object) => async (dispatch: any) =
 
 };
 
-export const getAuthUserData = (data: object) => async (dispatch: any) => {
+type getAuthUserDataType = {
+    login: string
+    password: string
+}
+
+export const getAuthUserData = (data: getAuthUserDataType) => async (dispatch: any) => {
     try {
         let response = await authAPI.signIn(data)
         if (response.status === 200) {
@@ -51,7 +63,6 @@ export default createReducer(initialState, {
         state.isAuth = true
         state.name = action.payload.name
         state.token = action.payload.token
-        //localStorage.setItem('token', action.payload.token)
     },
     [SIGN_UP]: (state, action) => {
         state.isRegistered = true
