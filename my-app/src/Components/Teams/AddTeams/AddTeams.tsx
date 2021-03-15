@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import f from "../../../assets/FornControl/FormControl.module.css";
 import total from "../../../totalStyle.module.css";
 import AddImages from "../../../assets/FornControl/AddImages/AddImages";
@@ -32,6 +32,13 @@ type AddTeamsPropsType = mapStatePropsType & mapDispatchPropsType
 
 const AddTeams: React.FC<AddTeamsPropsType> = ({serialTeamID, teams, setTeam, teamsName,}) => {
 
+    const [inputElement, setInputElement] = useState()
+
+    useEffect(() => {
+        let inputElement = document.getElementById("img")
+        // @ts-ignore
+        setInputElement(inputElement)
+    }, [])
 
     const onSubmit = (data: typeData) => {
         data.foundationYear = Number(data.foundationYear)
@@ -43,10 +50,10 @@ const AddTeams: React.FC<AddTeamsPropsType> = ({serialTeamID, teams, setTeam, te
         setTeam(data, getCurrentTeamID)
     }
     const {register, handleSubmit, errors} = useForm()
-    const [activeImgLoading, setActiveImgLoading] = useState(false)
 
-    let toggleShowImgLoading = () => {
-        setActiveImgLoading(!activeImgLoading)
+    let handleClick = () => {
+        // @ts-ignore
+        inputElement.click()
     }
 
     return (
@@ -55,10 +62,9 @@ const AddTeams: React.FC<AddTeamsPropsType> = ({serialTeamID, teams, setTeam, te
                 Main/Teams/{serialTeamID ? teamsName : 'NewTeam'}
             </div>
             <div className={f.add_form}>
-                <div className={f.add_form_img} onClick={toggleShowImgLoading}>
+                <div className={f.add_form_img} onClick={handleClick}>
                     <AddImages/>
-                    <input className={activeImgLoading ? `${f.active}` : ""}
-                           name='imageUrl' ref={register({required: true})}
+                    <input style={{display: "none"}} id={"img"} name='imageUrl' ref={register({required: true})}
                            accept="image/*"
                            type="file"/>
                 </div>
@@ -68,25 +74,25 @@ const AddTeams: React.FC<AddTeamsPropsType> = ({serialTeamID, teams, setTeam, te
                             <label className={total.text}>Name</label>
                             <input name='name' ref={register({required: true})} type="text"/>
                             {errors.name &&
-                            <ErrorsMessage textMessage={'Name is registered'}/> }
+                            <ErrorsMessage textMessage={'Name is registered'}/>}
                         </div>
                         <div className={f.add_form_data}>
                             <label className={total.text}>Division</label>
                             <input name='division' ref={register({required: true})} type="text"/>
                             {errors.division &&
-                            <ErrorsMessage textMessage={'Division is registered'}/> }
+                            <ErrorsMessage textMessage={'Division is registered'}/>}
                         </div>
                         <div className={f.add_form_data}>
                             <label className={total.text}>Conference</label>
                             <input name='conference' ref={register({required: true})} type="text"/>
                             {errors.conference &&
-                            <ErrorsMessage textMessage={'Conference is registered'}/> }
+                            <ErrorsMessage textMessage={'Conference is registered'}/>}
                         </div>
                         <div className={f.add_form_data}>
                             <label className={total.text} htmlFor="">Year of foundation</label>
                             <input name='foundationYear' ref={register({required: true})} type="text"/>
                             {errors.foundationYear &&
-                            <ErrorsMessage textMessage={'Year of foundation is registered'}/> }
+                            <ErrorsMessage textMessage={'Year of foundation is registered'}/>}
                         </div>
                     </div>
                     <Block_Buttons/>

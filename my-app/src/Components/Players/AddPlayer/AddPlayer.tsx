@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import f from "../../../assets/FornControl/FormControl.module.css";
 import total from "../../../totalStyle.module.css";
 import AddImages from "../../../assets/FornControl/AddImages/AddImages";
@@ -37,16 +37,16 @@ type mapStatePropsType = {
 
 type AddPlayerPropeType = mapDispatchPropsType & mapStatePropsType
 
-const AddPlayer: React.FC <AddPlayerPropeType> = (
+const AddPlayer: React.FC<AddPlayerPropeType> = (
     {positions, savePlayers, teamsName, teamsId}) => {
 
     const {register, handleSubmit, errors} = useForm()
     const [activeRotatePosition, setActiveRotatePosition] = useState(false)
     const [activeRotateTeam, setActiveRotateTeam] = useState(false)
-    const [activeImgLoading, setActiveImgLoading] = useState(false)
     const [showCalendar, setShowCalendar] = useState(false)
     const [birthday, onChangeBirthday] = useState('');
     const [birthdayData, onChangeBirthdayData] = useState('');
+    const [inputElement, setInputElement] = useState()
 
     let getBirthday = (date: any) => {
         let month = (date.getMonth() + 1)
@@ -57,6 +57,11 @@ const AddPlayer: React.FC <AddPlayerPropeType> = (
         onChangeBirthday(birthday)
         onChangeBirthdayData(date)
     }
+    useEffect(() => {
+        let inputElement = document.getElementById("img")
+        // @ts-ignore
+        setInputElement(inputElement)
+    }, [])
 
     const onSubmit = (data: Data) => {
         data.birthday = birthdayData
@@ -67,16 +72,20 @@ const AddPlayer: React.FC <AddPlayerPropeType> = (
         onChangeBirthday(e.target.value)
     }
 
+    let handleClick = () => {
+        // @ts-ignore
+        inputElement.click()
+    }
+
     return (
         <div className={f.add}>
             <div className={total.breadCrumbs}>
                 Main/Players/NamePlayers
             </div>
             <div className={f.add_form}>
-                <div className={f.add_form_img} onClick={() => setActiveImgLoading(!activeImgLoading)}>
+                <div className={f.add_form_img} onClick={ handleClick }>
                     <AddImages/>
-                    <input className={activeImgLoading ? `${f.active}` : ""}
-                           name='avatarUrl' ref={register({required: true})}
+                    <input style={{display: "none"}} id={"img"} name='avatarUrl' ref={register({required: true})}
                            accept="image/*"
                            type="file"/>
                 </div>
@@ -84,7 +93,7 @@ const AddPlayer: React.FC <AddPlayerPropeType> = (
                     <div>
                         <div className={f.add_form_data}>
                             <label className={total.text}>Name</label>
-                            <input name='name' ref={register({required: true})} type="text"/>
+                            <input name='name' ref={ register({required: true}) } type="text"/>
                             {errors.name &&
                             <ErrorsMessage textMessage={'Name is required'}/>}
                         </div>
@@ -170,7 +179,7 @@ const AddPlayer: React.FC <AddPlayerPropeType> = (
     )
 }
 
-const mapStateToProps = (state: AppStateType) : mapStatePropsType => ({
+const mapStateToProps = (state: AppStateType): mapStatePropsType => ({
         positions: state.players.positions,
         teamsId: getTeamsId(state),
         teamsName: getTeamsNames(state)

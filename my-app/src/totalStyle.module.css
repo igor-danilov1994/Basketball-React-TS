@@ -20,7 +20,7 @@ a {
 }
 
 .btn {
-  font-family: Avenir;
+  font-family: Metropolis-Regular;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -45,6 +45,16 @@ a {
 }
 .btn_add:hover {
   background-color: #FF5761;
+}
+.btn_pressed {
+  background: #C60E2E;
+}
+.btn_disabled {
+  background: #F6F6F6;
+  color: #D1D1D1;
+}
+.btn_disabled:hover {
+  background: #F6F6F6;
 }
 
 select {
@@ -99,6 +109,7 @@ input:focus, select:focus {
 }
 
 .breadCrumbs {
+  font-family: Metropolis-Regular;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;

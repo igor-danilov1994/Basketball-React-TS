@@ -38,7 +38,7 @@ const Login: React.FC<LoginPropsType> = ({signInError, getAuthUserData}) => {
     return (
         <div className={s.login}>
             <div className={s.login_form}>
-                <h1>Sign In</h1>
+                <h1 className={total.text}>Sign In</h1>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className={s.login_formItem}>
                         <label className={`${total.text_middle14} ${total.text}`}>Login</label>

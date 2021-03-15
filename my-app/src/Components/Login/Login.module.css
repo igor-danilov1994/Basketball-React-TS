@@ -54,6 +54,7 @@
 .login_formItem_policy {
   display: flex;
   margin-bottom: 24px;
+  position: relative;
 }
 .login_formItem_policy label {
   margin-left: 10px;

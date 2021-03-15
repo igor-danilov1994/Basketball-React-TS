@@ -37,9 +37,11 @@ const Registration: React.FC<RegistrationPropsType> = (
     const [show, toggleShowPass] = useState(false)
     const [showThis, toggleShowDoublePass] = useState(false)
     const [matchingPasswords, setMatchingPasswords] = useState(false)
+    const [changePolicy, setChangePolicy] = useState(true)
 
 
     const onSubmit = (data: onSubmitDataFormType) => {
+        debugger
         if (data.password === data.doublePass) {
             getConfirmationAuthUser(data)
         } else {
@@ -50,7 +52,6 @@ const Registration: React.FC<RegistrationPropsType> = (
         return <Redirect to="/signIn"/>
     }
 
-
     return (
         <div className={s.login}>
             <div className={s.login_form}>
@@ -60,15 +61,15 @@ const Registration: React.FC<RegistrationPropsType> = (
                         <label>Name</label>
                         <input name="userName" ref={register({required: true})} type="text"/>
                         {errors.userName &&
-                        <ErrorsMessage textMessage={'Name is required'}/> }
+                        <ErrorsMessage textMessage={'Name is required'}/>}
                     </div>
                     <div className={s.login_formItem}>
                         <label>Login</label>
                         <input name="login" ref={register({required: true})} type="text"/>
                         {errors.login &&
-                        <ErrorsMessage textMessage={'Login is required'}/> }
+                        <ErrorsMessage textMessage={'Login is required'}/>}
                         {signUpError &&
-                        <ErrorsMessage textMessage={'User with this login is already registered'}/> }
+                        <ErrorsMessage textMessage={'User with this login is already registered'}/>}
                     </div>
                     <div className={s.login_formItem}>
                         <label>Password</label>
@@ -81,7 +82,7 @@ const Registration: React.FC<RegistrationPropsType> = (
                         </div>
 
                         {errors.password &&
-                        <ErrorsMessage textMessage={'Password is registered'}/> }
+                        <ErrorsMessage textMessage={'Password is registered'}/>}
                     </div>
                     <div className={s.login_formItem}>
                         <label>Enter your password again</label>
@@ -94,16 +95,24 @@ const Registration: React.FC<RegistrationPropsType> = (
                         </div>
 
                         {errors.doublePass &&
-                        <ErrorsMessage textMessage={'Password again is registered'}/> }
+                        <ErrorsMessage textMessage={'Password again is registered'}/>}
 
                         {matchingPasswords &&
-                        <ErrorsMessage textMessage={'Password mismatch'}/> }
+                        <ErrorsMessage textMessage={'Password mismatch'}/>}
                     </div>
                     <div className={s.login_formItem_policy}>
-                        <input id='2' type="checkbox"/>
-                        <label htmlFor="2">I accept the agreement</label>
+                        <input name={"policy"} ref={register({required: true})} id="policy"
+                               onClick={() => setChangePolicy(!changePolicy)} type="checkbox"/>
+                        <label htmlFor="policy">I accept the agreement</label>
+
+                        {errors.policy &&
+                        <ErrorsMessage textMessage={'Confirm the terms of the agreement'}/>}
+
                     </div>
-                    <button className={`${total.btn} ${total.btn_add}`}>Sign Up</button>
+                    <button disabled={changePolicy}
+                            className={`${total.btn} ${total.btn_add} ${changePolicy? total.btn_disabled : ""} `}>
+                        Sign Up
+                    </button>
                 </form>
 
                 <div>
