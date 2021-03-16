@@ -14,7 +14,7 @@ import ErrorsMessage from "../../ErrorsMessage/ErrorsMessage";
 import {AppStateType} from "../../../Redux/toolkit/redux-store";
 
 type Data = {
-    avatarUrl: string
+    avatarUrl: any
     name: string
     position: string
     team: string
@@ -26,7 +26,6 @@ type Data = {
 
 type mapDispatchPropsType = {
     savePlayers: (data: Data) => void
-
 }
 
 type mapStatePropsType = {
@@ -46,7 +45,7 @@ const AddPlayer: React.FC<AddPlayerPropeType> = (
     const [showCalendar, setShowCalendar] = useState(false)
     const [birthday, onChangeBirthday] = useState('');
     const [birthdayData, onChangeBirthdayData] = useState('');
-    const [inputElement, setInputElement] = useState()
+    const [imgAvatar, setImg] = useState()
 
     let getBirthday = (date: any) => {
         let month = (date.getMonth() + 1)
@@ -57,13 +56,9 @@ const AddPlayer: React.FC<AddPlayerPropeType> = (
         onChangeBirthday(birthday)
         onChangeBirthdayData(date)
     }
-    useEffect(() => {
-        let inputElement = document.getElementById("img")
-        // @ts-ignore
-        setInputElement(inputElement)
-    }, [])
 
     const onSubmit = (data: Data) => {
+        data.avatarUrl = imgAvatar![0]
         data.birthday = birthdayData
         savePlayers(data)
     }
@@ -72,28 +67,22 @@ const AddPlayer: React.FC<AddPlayerPropeType> = (
         onChangeBirthday(e.target.value)
     }
 
-    let handleClick = () => {
-        // @ts-ignore
-        inputElement.click()
-    }
-
     return (
         <div className={f.add}>
             <div className={total.breadCrumbs}>
                 Main/Players/NamePlayers
             </div>
             <div className={f.add_form}>
-                <div className={f.add_form_img} onClick={ handleClick }>
-                    <AddImages/>
-                    <input style={{display: "none"}} id={"img"} name='avatarUrl' ref={register({required: true})}
-                           accept="image/*"
-                           type="file"/>
+                <div className={f.add_form_img}>
+
+                    <AddImages setImg={setImg}/>
+
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div>
                         <div className={f.add_form_data}>
                             <label className={total.text}>Name</label>
-                            <input name='name' ref={ register({required: true}) } type="text"/>
+                            <input name='name' ref={register({required: true})} type="text"/>
                             {errors.name &&
                             <ErrorsMessage textMessage={'Name is required'}/>}
                         </div>
@@ -106,7 +95,7 @@ const AddPlayer: React.FC<AddPlayerPropeType> = (
                                     src={arrowImg} alt="arrow"/>
 
 
-                                <select name="position" ref={register({required: true})}>
+                                <select name="position" ref={register({required: false})}>
                                     {positions.map((p: any) =>
                                         <option key={p} value={p}>{p}</option>
                                     )}
@@ -119,7 +108,7 @@ const AddPlayer: React.FC<AddPlayerPropeType> = (
                                 <img
                                     className={activeRotateTeam ? `${total.select_imgRotateOn}` : `${total.select_imgRotateOff}`}
                                     src={arrowImg} alt="arrow"/>
-                                <select name="team" ref={register({required: true})}>
+                                <select name="team" ref={register({required: false})}>
                                     {teamsName.map((names: any, id: number) =>
                                         <option key={teamsId[id]}
                                                 value={teamsId[id]}>

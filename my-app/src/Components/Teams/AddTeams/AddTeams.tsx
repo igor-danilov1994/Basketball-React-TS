@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import f from "../../../assets/FornControl/FormControl.module.css";
 import total from "../../../totalStyle.module.css";
 import AddImages from "../../../assets/FornControl/AddImages/AddImages";
@@ -11,7 +11,7 @@ import ErrorsMessage from "../../ErrorsMessage/ErrorsMessage";
 import {AppStateType} from "../../../Redux/toolkit/redux-store";
 
 type  typeData = {
-    imageUrl: object
+    imageUrl: any
     name: string
     division: string
     conference: string
@@ -32,15 +32,10 @@ type AddTeamsPropsType = mapStatePropsType & mapDispatchPropsType
 
 const AddTeams: React.FC<AddTeamsPropsType> = ({serialTeamID, teams, setTeam, teamsName,}) => {
 
-    const [inputElement, setInputElement] = useState()
-
-    useEffect(() => {
-        let inputElement = document.getElementById("img")
-        // @ts-ignore
-        setInputElement(inputElement)
-    }, [])
+    const [img, setImg] = useState()
 
     const onSubmit = (data: typeData) => {
+        data.imageUrl = img![0]
         data.foundationYear = Number(data.foundationYear)
         let getCurrentTeamID = null
 
@@ -51,22 +46,16 @@ const AddTeams: React.FC<AddTeamsPropsType> = ({serialTeamID, teams, setTeam, te
     }
     const {register, handleSubmit, errors} = useForm()
 
-    let handleClick = () => {
-        // @ts-ignore
-        inputElement.click()
-    }
-
     return (
         <div className={f.add}>
             <div className={total.breadCrumbs}>
                 Main/Teams/{serialTeamID ? teamsName : 'NewTeam'}
             </div>
             <div className={f.add_form}>
-                <div className={f.add_form_img} onClick={handleClick}>
-                    <AddImages/>
-                    <input style={{display: "none"}} id={"img"} name='imageUrl' ref={register({required: true})}
-                           accept="image/*"
-                           type="file"/>
+                <div className={f.add_form_img}>
+
+                    <AddImages setImg={setImg}/>
+
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div>

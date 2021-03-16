@@ -75,8 +75,7 @@ export const savePlayers = (data: PlayersDataType) => async (dispatch: any) => {
     data.number = Number(data.number)
     data.weight = Number(data.weight)
     data.team = Number(data.team)
-
-    const promise = await imageAPI.saveImage(data.avatarUrl[0])
+    const promise = await imageAPI.saveImage(data.avatarUrl)
     if (promise.status === 200) {
         data.avatarUrl = promise.data
         dispatch(addPlayer(data))
@@ -109,7 +108,7 @@ export default createReducer(initialState, {
         state.count = action.payload.count
     },
     [GET_ALL_PLAYERS]: (state, action) => {
-      state.data.push(action.payload.data)
+        state.data.push(action.payload.data)
 
     },
     [ADD_PLAYER]: (state, action) => {
